@@ -47,6 +47,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         return UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let statusView = TaskDetailViewController(task: tasks[indexPath.row])
+        self.navigationController?.pushViewController(statusView, animated: true)
+    }
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
             (action, sourceView, completionHandler) in
@@ -70,7 +75,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var entryLabel = UILabel()
     var tableView = UITableView()
     var entryField = UITextField()
-    var addButton = UIButton()
+    var addButton = TDLButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +98,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         titleLabel.text = "To Do List"
         addButton.setTitle("+", for: .normal)
-        addButton.backgroundColor = .blue
         entryLabel.text = "Task:"
         entryField.borderStyle = .line
         

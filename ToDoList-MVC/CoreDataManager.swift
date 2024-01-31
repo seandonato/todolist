@@ -74,4 +74,28 @@ class CoreDataManager {
         }
         return tasks
     }
+    func updateTask(_ task: Task) -> Bool? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+          return false
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "ManagedTask", in: managedContext)!
+
+        let managedTask = NSManagedObject(entity: entity, insertInto: managedContext)
+        managedTask.setValue(task.name, forKeyPath: "name")
+        var uuid = NSUUID()
+        managedTask.setValue(uuid, forKeyPath: "uuid")
+        managedTask.setValue("ready", forKeyPath: "status")
+
+        do {
+          try managedContext.save()
+            return true
+        } catch let error as NSError {
+          print("Could not save. \(error), \(error.userInfo)")
+            return false
+        }
+
+        return true
+                
+    }
 }
