@@ -52,5 +52,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BC15E212-16BB-4AE5-A5FF-A5BFF6C8535F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoList-MVC/Services/CoreDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "updateTaskStatus(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0C1EE1AD-B954-4AD2-B7BB-6133DD3F3844"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoList-MVC/StatusPicker.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "statusTransition(sender:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0C1EE1AD-B954-4AD2-B7BB-6133DD3F3844 - ab9395f2dc0ea14b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in ToDoList_MVC.StatusPicker.statusTransition(sender: ToDoList_MVC.MyTapGesture) -&gt; ()"
+                  moduleName = "ToDoList-MVC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seandonato/Downloads/ToDoList-MVC/ToDoList-MVC/StatusPicker.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "147"
+                  endingLineNumber = "147"
+                  offsetFromSymbolStart = "180">
+               </Location>
+               <Location
+                  uuid = "0C1EE1AD-B954-4AD2-B7BB-6133DD3F3844 - ab9395f2dc0ea14b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in ToDoList_MVC.StatusPicker.statusTransition(sender: ToDoList_MVC.MyTapGesture) -&gt; ()"
+                  moduleName = "ToDoList-MVC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seandonato/Downloads/ToDoList-MVC/ToDoList-MVC/StatusPicker.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "147"
+                  endingLineNumber = "147"
+                  offsetFromSymbolStart = "324">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

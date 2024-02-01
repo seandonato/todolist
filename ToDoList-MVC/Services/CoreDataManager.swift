@@ -74,28 +74,85 @@ class CoreDataManager {
         }
         return tasks
     }
-    func updateTask(_ task: Task) -> Bool? {
+    
+    func updateTaskStatus(_ task: Task,_ status: TaskStatus) -> Bool? {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
           return false
         }
         let managedContext = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "ManagedTask", in: managedContext)!
+        let taskID = task.uuid
+        let foodsFetch = NSFetchRequest<NSManagedObject>(entityName: "ManagedTask")
 
-        let managedTask = NSManagedObject(entity: entity, insertInto: managedContext)
-        managedTask.setValue(task.name, forKeyPath: "name")
-        var uuid = NSUUID()
-        managedTask.setValue(uuid, forKeyPath: "uuid")
-        managedTask.setValue("ready", forKeyPath: "status")
+        foodsFetch.predicate = NSPredicate(format: "uuid == %@", taskID as CVarArg)
 
-        do {
-          try managedContext.save()
-            return true
-        } catch let error as NSError {
-          print("Could not save. \(error), \(error.userInfo)")
-            return false
+        do{
+             let fetchResults = try managedContext.fetch(foodsFetch)
+            
+                if fetchResults.count != 0{
+                    
+                    var managedObject = fetchResults[0]
+                    switch status{
+                        case .blocked:
+                            managedObject.setValue("blocked", forKey: "status")
+                        case .done:
+                            managedObject.setValue("done", forKey: "status")
+                        case .inProgress:
+                            managedObject.setValue("in progress", forKey: "status")
+                        case .ready:
+                            managedObject.setValue("ready", forKey: "status")
+
+                    }
+                    do {
+                      try managedContext.save()
+                        return true
+                    } catch let error as NSError {
+                      print("Could not save. \(error), \(error.userInfo)")
+                        return false
+                    }
+
+                }
+            
+        }catch{
+            
         }
 
         return true
                 
     }
+    
+    func deleteTask(_ task: Task) -> Bool? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+          return false
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let taskID = task.uuid
+        let foodsFetch = NSFetchRequest<NSManagedObject>(entityName: "ManagedTask")
+
+        foodsFetch.predicate = NSPredicate(format: "uuid == %@", taskID as CVarArg)
+
+        do{
+             let fetchResults = try managedContext.fetch(foodsFetch)
+            
+                if fetchResults.count != 0{
+                    let managedObject = fetchResults[0]
+                    managedContext.delete(managedObject)
+                  
+                    do {
+                      try managedContext.save()
+                        return true
+                    } catch let error as NSError {
+                      print("Could not save. \(error), \(error.userInfo)")
+                        return false
+                    }
+
+                }
+            
+        }catch{
+            
+        }
+
+        return true
+                
+    }
+
 }

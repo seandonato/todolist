@@ -115,7 +115,6 @@
 			children = (
 				A9A070C82B69F0E6005DB5E1 /* Model */,
 				A925446229BBBD9D00F38E7C /* AppDelegate.swift */,
-				A925449929BBCBCE00F38E7C /* CoreDataManager.swift */,
 				A9A070C92B69F0F3005DB5E1 /* Services */,
 				A925446429BBBD9D00F38E7C /* SceneDelegate.swift */,
 				A925446629BBBD9D00F38E7C /* ViewController.swift */,
@@ -160,6 +159,7 @@
 		A9A070C92B69F0F3005DB5E1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A925449929BBCBCE00F38E7C /* CoreDataManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";

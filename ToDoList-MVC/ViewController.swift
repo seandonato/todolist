@@ -21,12 +21,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.statusLabel.text = task.status
             if task.status == "ready"{
                 cell.statusLabel.backgroundColor = .green
+                cell.statusLabel.textColor = .black
 
             }else if task.status == "done"{
                 cell.statusLabel.backgroundColor = .blue
+                cell.statusLabel.textColor = .black
 
             }else if task.status == "blocked"{
                 cell.statusLabel.backgroundColor = .red
+                cell.statusLabel.textColor = .white
+
+            }else if task.status == "in progress"{
+
+                cell.statusLabel.backgroundColor = UIColor(hex: "#c548fa")
+                cell.statusLabel.textColor = .white
 
             }
      
@@ -57,6 +65,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             (action, sourceView, completionHandler) in
             
             let t = self.tasks[(indexPath as NSIndexPath).row] as Task
+            CoreDataManager().deleteTask(t)
             self.deleteTask(name: t.name)
             // Delete the book and associated records
             //self.swipeDeleteAction(book: book, indexPath: indexPath)
@@ -164,6 +173,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let tasks = tasks.filter { task in
             return task.name != name
         }
+        getTasks()
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        getTasks()
     }
 }
 

@@ -8,7 +8,14 @@
 import Foundation
 import UIKit
 
-class TaskDetailViewController: UIViewController{
+protocol StatusPickerDelegate: NSObject{
+    func changeStatus(status:TaskStatus)
+}
+class TaskDetailViewController: UIViewController,StatusPickerDelegate{
+    func changeStatus(status: TaskStatus) {
+        CoreDataManager().updateTaskStatus(self.task, status)
+    }
+    
     
     let task : Task
     
@@ -28,6 +35,7 @@ class TaskDetailViewController: UIViewController{
         let statusPicker = StatusPicker()
         self.view.addSubview(statusPicker)
         statusPicker.translatesAutoresizingMaskIntoConstraints = false
+        statusPicker.delegate = self
         NSLayoutConstraint.activate([
             statusPicker.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 100),
             statusPicker.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 16),

@@ -16,7 +16,7 @@ class StatusPicker: UIView,UIGestureRecognizerDelegate {
         // Drawing code
     }
     */
-
+    weak var delegate : StatusPickerDelegate?
     let readyLabel : UILabel = UILabel()
     let inProgressLabel : UILabel = UILabel()
     let blockedLabel : UILabel = UILabel()
@@ -69,35 +69,35 @@ class StatusPicker: UIView,UIGestureRecognizerDelegate {
             yellowView.heightAnchor.constraint(equalToConstant: readyLabel.frame.height)
         ])
         
-        yellowView.backgroundColor = .yellow
+        yellowView.backgroundColor = .green
         currentView = yellowView
-        var readyGesture = MyTapGesture(target: self, action: #selector(statusTransition), statusView: yellowView)
+        var readyGesture = MyTapGesture(target: self, action: #selector(statusTransition), statusView: yellowView,status: .ready)
         readyGesture.addTarget(self, action: #selector(statusTransition))
         readyLabel.addGestureRecognizer(readyGesture)
         readyGesture.delegate = self
         
         let blueView = UIView()
-        blueView.backgroundColor = .blue
+        blueView.backgroundColor = UIColor(hex: "#c548fa")
         blueView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             blueView.widthAnchor.constraint(equalToConstant: inProgressLabel.frame.width + 16),
             blueView.heightAnchor.constraint(equalToConstant: inProgressLabel.frame.height)
         ])
-        var progGesture = MyTapGesture(target: self, action: #selector(statusTransition), statusView: blueView)
+        var progGesture = MyTapGesture(target: self, action: #selector(statusTransition), statusView: blueView,status: .inProgress)
         progGesture.addTarget(self, action: #selector(statusTransition))
         inProgressLabel.addGestureRecognizer(progGesture)
         progGesture.delegate = self
 
         let greenView = UIView()
-        greenView.backgroundColor = .green
+        greenView.backgroundColor = .blue
         greenView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             greenView.widthAnchor.constraint(equalToConstant: doneLabel.frame.width + 16),
             greenView.heightAnchor.constraint(equalToConstant: doneLabel.frame.height)
         ])
-        var doneGesture = MyTapGesture(target: self, action: #selector(statusTransition), statusView: greenView)
+        var doneGesture = MyTapGesture(target: self, action: #selector(statusTransition), statusView: greenView,status: .done)
         doneGesture.addTarget(self, action: #selector(statusTransition))
         doneLabel.addGestureRecognizer(doneGesture)
         doneGesture.delegate = self
@@ -106,7 +106,7 @@ class StatusPicker: UIView,UIGestureRecognizerDelegate {
         let redView = UIView()
         redView.backgroundColor = .red
         redView.translatesAutoresizingMaskIntoConstraints = false
-        var blockedGesture = MyTapGesture(target: self, action: #selector(statusTransition), statusView: redView)
+        var blockedGesture = MyTapGesture(target: self, action: #selector(statusTransition), statusView: redView,status: .blocked)
         blockedGesture.addTarget(self, action: #selector(statusTransition))
         blockedLabel.addGestureRecognizer(blockedGesture)
         blockedGesture.delegate = self
@@ -141,9 +141,11 @@ class StatusPicker: UIView,UIGestureRecognizerDelegate {
     @objc func statusTransition(sender:MyTapGesture){
         if currentView != sender.statusView
         {
-            UIView.animate(withDuration: 1.5) {
+            UIView.animate(withDuration: 0.5) {
                 self.currentView.alpha = 0.0
                 sender.statusView.alpha = 1.0
+
+                self.delegate?.changeStatus(status: sender.status)
                 self.currentView = sender.statusView
             }
         }
@@ -154,8 +156,55 @@ class StatusPicker: UIView,UIGestureRecognizerDelegate {
 }
 class MyTapGesture: UITapGestureRecognizer {
     var statusView : UIView
-    init(target: Any?, action: Selector?,statusView:UIView) {
+    var status : TaskStatus
+    init(target: Any?, action: Selector?,statusView:UIView,status : TaskStatus) {
         self.statusView = statusView
+        self.status = status
         super.init(target: target, action: action)
+    }
+}
+//extension UIColor {
+//    public convenience init?(hex: String) {
+//        let r, g, b, a: CGFloat
+//
+//        if hex.hasPrefix("#") {
+//            let start = hex.index(hex.startIndex, offsetBy: 1)
+//            let hexColor = String(hex[start...])
+//
+//            if hexColor.count == 8 {
+//                let scanner = Scanner(string: hexColor)
+//                var hexNumber: UInt64 = 0
+//
+//                if scanner.scanHexInt64(&hexNumber) {
+//                    r = CGFloat((hexNumber & 0xff000000) >> 24) / 255
+//                    g = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
+//                    b = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255
+//                    a = CGFloat(hexNumber & 0x000000ff) / 255
+//
+//                    self.init(red: r, green: g, blue: b, alpha: a)
+//                    return
+//                }
+//            }
+//        }
+//
+//        return nil
+//    }
+//}
+extension UIColor {
+    convenience init(hex: String, alpha: CGFloat = 1.0) {
+        var hexValue = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
+
+        if hexValue.hasPrefix("#") {
+            hexValue.remove(at: hexValue.startIndex)
+        }
+
+        var rgbValue: UInt64 = 0
+        Scanner(string: hexValue).scanHexInt64(&rgbValue)
+
+        let red = CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0
+        let green = CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0
+        let blue = CGFloat(rgbValue & 0x0000FF) / 255.0
+
+        self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
 }
