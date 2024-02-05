@@ -7,7 +7,46 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate, StatusPickerDelegate,TaskCellDelegate,TaskTableDelegate{
+    func refreshTasks() {
+        self.getTasks()
+    }
+    
+    
+    func deleteTask(_ task: Task?) {
+            if let t = task{
+                CoreDataManager().deleteTask(t)
+                self.deleteTask2(name: t.name)
+            
+        }
+        getTasks()
+    }
+    
+    func showDetailView(_ indexPath: IndexPath?) {
+        if let ind = indexPath{
+            let statusView = TaskDetailViewController(task: tasks[ind.row])
+            self.navigationController?.pushViewController(statusView, animated: true)
+        }
+    }
+    
+    func changeStatus(status: TaskStatus) {}
+    
+    func changeStatusFor(_ task: Task, status: TaskStatus) {
+        CoreDataManager().updateTaskStatus(task, status){result in
+            switch result{
+                
+            case .success(_):
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.getTasks()
+
+                }
+
+            case .failure(_):
+                return
+            }
+        }
+                                            
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks.count
@@ -17,30 +56,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? TaskTableViewCell{
             
             let task = tasks[indexPath.row]
+            cell.taskDelegate = self
+            cell.taskTabledelegate = self
+            cell.indexPath = indexPath
             cell.titleLabel.text = task.name
-            cell.statusLabel.text = task.status
-            if task.status == "ready"{
-                cell.statusLabel.backgroundColor = .green
-                cell.statusLabel.textColor = .black
-
-            }else if task.status == "done"{
-                cell.statusLabel.backgroundColor = .blue
-                cell.statusLabel.textColor = .black
-
-            }else if task.status == "blocked"{
-                cell.statusLabel.backgroundColor = .red
-                cell.statusLabel.textColor = .white
-
-            }else if task.status == "in progress"{
-
-                cell.statusLabel.backgroundColor = UIColor(hex: "#c548fa")
-                cell.statusLabel.textColor = .white
-
-            }
+            cell.task = task
+            //cell.statusLabel.text = task.status
      
-            
-            // *********** EDIT ***********
-           // let editAction = UIContextualAction(style: .normal, title: "Edit") {
+// *********** EDIT ***********
+//                 let editAction = UIContextualAction(style: .normal, title: "Edit") {
 //                (action, sourceView, completionHandler) in
 //
 //                let food = self.foodItems[(indexPath as NSIndexPath).row] as FoodItem
@@ -57,27 +81,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let statusView = TaskDetailViewController(task: tasks[indexPath.row])
-        self.navigationController?.pushViewController(statusView, animated: true)
+//        let statusView = TaskDetailViewController(task: tasks[indexPath.row])
+//        self.navigationController?.pushViewController(statusView, animated: true)
     }
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
-            (action, sourceView, completionHandler) in
-            
-            let t = self.tasks[(indexPath as NSIndexPath).row] as Task
-            CoreDataManager().deleteTask(t)
-            self.deleteTask(name: t.name)
-            // Delete the book and associated records
-            //self.swipeDeleteAction(book: book, indexPath: indexPath)
-            // Remove the menu option from the screen
-            completionHandler(true)
-        } // end action Delete
-        
-        
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
-
-        return swipeConfiguration
-    }
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
+//            (action, sourceView, completionHandler) in
+//
+//            let t = self.tasks[(indexPath as NSIndexPath).row] as Task
+//            CoreDataManager().deleteTask(t)
+//            self.deleteTask(name: t.name)
+//            // Delete the book and associated records
+//            //self.swipeDeleteAction(book: book, indexPath: indexPath)
+//            // Remove the menu option from the screen
+//            completionHandler(true)
+//        } // end action Delete
+//
+//
+//        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
+//
+//        return swipeConfiguration
+//    }
     
     var tasks = [Task]()
     var titleLabel = UILabel()
@@ -105,7 +129,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         addButton.translatesAutoresizingMaskIntoConstraints = false
 
         
-        titleLabel.text = "To Do List"
+        titleLabel.text = "Taskie"
+        titleLabel.font = .boldSystemFont(ofSize: 14)
         addButton.setTitle("+", for: .normal)
         entryLabel.text = "Task:"
         entryField.borderStyle = .line
@@ -144,18 +169,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             addButton.widthAnchor.constraint(equalToConstant: 44)
 
         ])
+        //tableView.canCancelContentTouches =  false
         tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: "cell")
 
         tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.allowsSelection = false
         addButton.addTarget(self, action: #selector(saveTask), for: .touchUpInside)
     }
     
     @objc func saveTask(){
         let coreDataManager = CoreDataManager()
         let uuid = UUID()
-        var task = Task(name: entryField.text ?? "", uuid: uuid, status: "ready")
+        var task = Task(name: entryField.text ?? "", uuid: uuid.description, status: "ready")
         coreDataManager.saveTask(task)
         entryField.text = ""
         getTasks()
@@ -169,7 +196,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         tableView.reloadData()
     }
-    func deleteTask(name: String){
+    func deleteTask2(name: String){
         let tasks = tasks.filter { task in
             return task.name != name
         }

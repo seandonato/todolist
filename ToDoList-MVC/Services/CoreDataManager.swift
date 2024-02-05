@@ -19,9 +19,10 @@ class CoreDataManager {
 
         let managedTask = NSManagedObject(entity: entity, insertInto: managedContext)
         managedTask.setValue(task.name, forKeyPath: "name")
-        var uuid = NSUUID()
-        managedTask.setValue(uuid, forKeyPath: "uuid")
+        var uuid = UUID()
+        managedTask.setValue(uuid.description, forKeyPath: "uuid")
         managedTask.setValue("ready", forKeyPath: "status")
+        //managedTask.setValue("", forKeyPath: "uuid")
 
         do {
           try managedContext.save()
@@ -49,9 +50,22 @@ class CoreDataManager {
             if let name = (object as AnyObject).value(forKey: "name") as? String{
                 if let uuid = (object as AnyObject).value(forKey: "uuid"){
                     if let status = (object as AnyObject).value(forKey: "status") as? String{
-                        
-                        let task = Task(name: name, uuid: uuid as! UUID, status: status)
-                        tasks.append(task)
+                        var taskStatus = TaskStatus.ready
+                        if status == "in progress"{
+                            taskStatus = TaskStatus.inProgress
+                        }else if status == "done"{
+                            taskStatus = TaskStatus.done
+
+                        }
+                        if let note = (object as AnyObject).value(forKey: "note") as? String{
+                            
+                            let task = Task(name: name, uuid: uuid as? String ?? "", status: status,taskStatus: taskStatus, note: note)
+                            tasks.append(task)
+
+                        }else{
+                            let task = Task(name: name, uuid: uuid as! String, status: status,taskStatus: taskStatus)
+                            tasks.append(task)
+                        }
                     }
                 }
            }
@@ -74,10 +88,14 @@ class CoreDataManager {
         }
         return tasks
     }
-    
-    func updateTaskStatus(_ task: Task,_ status: TaskStatus) -> Bool? {
+    enum CoreDataError: Error {
+        case NoAppDelegate
+        case FailedToUpdate
+    }
+    func updateTaskStatus(_ task: Task,_ status: TaskStatus,completion: @escaping ((Result<Bool,Error>) -> ())) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-          return false
+            completion(.failure(CoreDataError.NoAppDelegate))
+            return
         }
         let managedContext = appDelegate.persistentContainer.viewContext
         let taskID = task.uuid
@@ -104,10 +122,10 @@ class CoreDataManager {
                     }
                     do {
                       try managedContext.save()
-                        return true
+                        completion(.success(true))
                     } catch let error as NSError {
-                      print("Could not save. \(error), \(error.userInfo)")
-                        return false
+                      //print("Could not save. \(error), \(error.userInfo)")
+                        completion(.failure(error))
                     }
 
                 }
@@ -115,8 +133,6 @@ class CoreDataManager {
         }catch{
             
         }
-
-        return true
                 
     }
     
@@ -146,6 +162,42 @@ class CoreDataManager {
                     }
 
                 }
+            
+        }catch{
+            
+        }
+
+        return true
+                
+    }
+    func updateTaskNotes(_ task: Task,_ note: String) -> Bool? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+          return false
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let taskID = task.uuid
+        let foodsFetch = NSFetchRequest<NSManagedObject>(entityName: "ManagedTask")
+
+        foodsFetch.predicate = NSPredicate(format: "uuid == %@", taskID as CVarArg)
+
+        do{
+             let fetchResults = try managedContext.fetch(foodsFetch)
+            
+                if fetchResults.count != 0{
+                    
+                    var managedObject = fetchResults[0]
+                            managedObject.setValue(note, forKey: "note")
+
+                    }
+                    do {
+                      try managedContext.save()
+                        return true
+                    } catch let error as NSError {
+                      print("Could not save. \(error), \(error.userInfo)")
+                        return false
+                    }
+
+                
             
         }catch{
             

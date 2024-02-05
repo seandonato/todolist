@@ -15,9 +15,9 @@ enum TaskStatus{
 }
 struct Task{
     var name : String
-    var uuid : UUID
+    var uuid : String
     var status : String
     var taskStatus : TaskStatus?
-    var notes : String?
+    var note : String?
 }
 
