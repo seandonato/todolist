@@ -7,46 +7,11 @@
 
 import UIKit
 
-enum taskStatus {
-    case ready
-    case done
-    case blocked
-}
-
-protocol TaskCellDelegate : NSObject{
-    func deleteTask(_ task:Task?)
-    func showDetailView(_ indexPath: IndexPath?)
-}
-
-protocol TaskTableDelegate : NSObject{
-    func refreshTasks()
-}
-
-class TaskTableViewCell: UITableViewCell, StatusPickerDelegate {
-    func changeStatusFor(_ task:Task, status: TaskStatus) {
-        CoreDataManager().updateTaskStatus(task, status){result in
-            switch result{
-            case .success(_):
-                self.taskTabledelegate?.refreshTasks()
-            case .failure(_):
-                return
-            }
-        }
-    }
+class TaskTableViewCell: UITableViewCell{
     
-    func changeStatus(status: TaskStatus) {
-        if let task = task{
-            CoreDataManager().updateTaskStatus(task, status){result in
-                switch result{
-                case .success(_):
-                    self.taskTabledelegate?.refreshTasks()
-                case .failure(_):
-                    return
-                }
-            }
-        }
-    }
-
+    var viewModel: ToDoListViewModel?
+    weak var taskDelegate: TaskCellDelegate?
+    var coreDataManager: CoreDataManager?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -55,36 +20,36 @@ class TaskTableViewCell: UITableViewCell, StatusPickerDelegate {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-    weak var taskTabledelegate : TaskTableDelegate?
-
-    weak var taskDelegate : TaskCellDelegate?
-
-    var task : Task?{
+    
+    var toDoTask: ToDoTask?{
         didSet{
-            if let s = statusSwitcher{
-                if let t = task?.taskStatus{
-                    if statusSwitcher?.status != t{
-                        statusSwitcher?.status = t
-                        statusSwitcher?.cycleStatusNoAnimation(t)
-                    }
+            titleLabel.text = toDoTask?.name
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .short
+
+            if let d = toDoTask?.date{
+                dateLabel.text = dateFormatter.string(from: d as Date)
+            }
+            guard let statusSwitcher = statusSwitcher else {return}
+            statusSwitcher.toDoTask = toDoTask
+            if let status = toDoTask?.taskStatus{
+                if statusSwitcher.status != status{
+                    statusSwitcher.status = status
+                    statusSwitcher.cycleStatusNoAnimation(status)
                 }
-                //setup()
             }
         }
     }
     
-    weak var delegate : TaskTableDelegate?
-    var taskView : UIView
-    var leftView : UIView
-    var rightView : UIView
-    let deleteView : UIView
-    var panGestureRec : UIPanGestureRecognizer
-    var tapGestureRec : UITapGestureRecognizer
-    var deleteGesture : UITapGestureRecognizer
-    var indexPath : IndexPath?
+    var taskView: UIView
+    var leftView: UIView
+    var rightView: UIView
+    let deleteView: UIView
+    var panGestureRec: UIPanGestureRecognizer
+    var tapGestureRec: UITapGestureRecognizer
+    var deleteGesture: UITapGestureRecognizer
+    var row : Int?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         taskView = UIView()
@@ -112,27 +77,38 @@ class TaskTableViewCell: UITableViewCell, StatusPickerDelegate {
     
     var statusSwitcher : StatusSwitcher?
     var titleLabel = UILabel()
+    var dateLabel = UILabel()
+    var deleteLabel = UILabel()
     var statusLabel = UILabel()
     
     func setup(){
         
         deleteView.backgroundColor = .red
         deleteView.translatesAutoresizingMaskIntoConstraints = false
+        deleteLabel.text = "Delete"
+        deleteLabel.textColor = .white
+        deleteLabel.translatesAutoresizingMaskIntoConstraints = false
+
         self.contentView.addSubview(deleteView)
+        self.contentView.addSubview(deleteLabel)
+
         NSLayoutConstraint.activate([
             deleteView.topAnchor.constraint(equalTo: self.contentView.topAnchor,constant: 0),
             deleteView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,constant: 0),
             deleteView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant:0),
-            deleteView.widthAnchor.constraint(equalToConstant: 200)
+            deleteView.widthAnchor.constraint(equalToConstant: 200),
+            deleteLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant:-16),
+            deleteLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor,constant:0)
         ])
         deleteView.addGestureRecognizer(deleteGesture)
 
-        titleLabel.addGestureRecognizer(tapGestureRec)
+        contentView.addGestureRecognizer(tapGestureRec)
+        tapGestureRec.cancelsTouchesInView = false
         titleLabel.isUserInteractionEnabled = true
         tapGestureRec.addTarget(self, action: #selector(goToDetail))
         deleteGesture.addTarget(self, action: #selector(deleteTask))
 
-        taskView.backgroundColor = .white
+        taskView.backgroundColor = UIColor(named: "Background")
         taskView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(taskView)
         NSLayoutConstraint.activate([
@@ -144,22 +120,31 @@ class TaskTableViewCell: UITableViewCell, StatusPickerDelegate {
 
         taskView.addSubview(titleLabel)
         
-        statusSwitcher = StatusSwitcher(frame: CGRect(x: 0, y: 0, width: 100, height: 36), self.task?.taskStatus ?? .ready)
+        statusSwitcher = StatusSwitcher(frame: CGRect(x: 0, y: 0, width: 100, height: 36), toDoTask?.taskStatus ?? .ready)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.font = UIFont(name: "Arial", size: 22)
         statusSwitcher?.translatesAutoresizingMaskIntoConstraints = false
-        statusSwitcher?.delegate = self
+        statusSwitcher?.delegate = self.viewModel
+        statusSwitcher?.toDoTask = self.toDoTask
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: taskView.topAnchor,constant: 12),
-            titleLabel.bottomAnchor.constraint(equalTo: taskView.bottomAnchor,constant: -12),
             titleLabel.leadingAnchor.constraint(equalTo: taskView.leadingAnchor,constant:16)
         ])
         
+        dateLabel.font = UIFont(name: "Arial", size: 16)
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(dateLabel)
+        NSLayoutConstraint.activate([
+            dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 8),
+            dateLabel.leadingAnchor.constraint(equalTo: taskView.leadingAnchor,constant:16)
+        ])
+
         if let switcher = statusSwitcher{
             taskView.addSubview(switcher)
-
             NSLayoutConstraint.activate([
-                switcher.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor,constant: 0),
-                switcher.leadingAnchor.constraint(equalTo: self.titleLabel.trailingAnchor,constant: 16),
+                switcher.topAnchor.constraint(equalTo: dateLabel.bottomAnchor,constant: 10),
+                switcher.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 16),
+                switcher.bottomAnchor.constraint(equalTo: self.taskView.bottomAnchor,constant: -16),
                 switcher.widthAnchor.constraint(equalToConstant: 100),
                 switcher.heightAnchor.constraint(equalToConstant: 36)
 
@@ -172,10 +157,10 @@ class TaskTableViewCell: UITableViewCell, StatusPickerDelegate {
         rightView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            rightView.topAnchor.constraint(equalTo: taskView.topAnchor,constant: 12),
+            rightView.topAnchor.constraint(equalTo: taskView.topAnchor,constant: 0),
             rightView.bottomAnchor.constraint(equalTo: taskView.bottomAnchor,constant: -12),
             rightView.trailingAnchor.constraint(equalTo: taskView.trailingAnchor,constant:16),
-            rightView.widthAnchor.constraint(equalToConstant: 200),
+            rightView.widthAnchor.constraint(equalToConstant: 100),
             rightView.heightAnchor.constraint(equalTo: taskView.heightAnchor)
         ])
         rightView.addGestureRecognizer(panGestureRec)
@@ -183,45 +168,11 @@ class TaskTableViewCell: UITableViewCell, StatusPickerDelegate {
         layoutIfNeeded()
     }
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        let touch = touches.first!
-//        let location = touch.location(in: self)
-//        if location.x < self.frame.width/2{
-//            dump(event)
-//            gestureRecognizerIsPannable()
-//        }
-//    }
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        let touch = touches.first!
-//        let location = touch.location(in: self)
-//        if location.x < self.frame.width/2{
-//            dump(event)
-//            gestureRecognizerIsPannable()
-//        }
-//    }
-    func gestureRecognizerIsPannable(){
-        
-        //self.isUserInteractionEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            print("Timer fired!")
-           // self.isUserInteractionEnabled = true
-
-        }
-
-    }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
-    
     var initialCenter = CGPoint(x: 0, y: 0)
     @objc private func didPan(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .began:
-            let translation = sender.translation(in: self)
             initialCenter = taskView.center
-
-           // print(translation)
 
         case .changed:
             let translation = sender.translation(in: self)
@@ -230,8 +181,8 @@ class TaskTableViewCell: UITableViewCell, StatusPickerDelegate {
                                           y: initialCenter.y )
             
         case .ended:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                UIView.animate(withDuration: 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                UIView.animate(withDuration: 0.6) {
                     self.taskView.frame.origin = CGPoint(x: 0,
                                            y: 0)
                 }
@@ -242,9 +193,13 @@ class TaskTableViewCell: UITableViewCell, StatusPickerDelegate {
     }
 
     @objc func goToDetail(){
-        taskDelegate?.showDetailView(self.indexPath)
+        if let row = row{
+            taskDelegate?.showDetailView(row)
+        }
     }
     @objc func deleteTask(){
-        taskDelegate?.deleteTask(task )
+        if let toDoTask = toDoTask{
+            viewModel?.deleteTask(toDoTask)
+        }
     }
 }

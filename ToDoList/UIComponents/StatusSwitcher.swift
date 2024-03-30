@@ -9,54 +9,39 @@ import UIKit
 
 class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-//    var viewOne = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 20))
-//    var viewTwo = UIView(frame: CGRect(x: 50, y: 0, width: 50, height: 20))
     var viewOne = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
     var viewTwo = UILabel(frame: CGRect(x: 50, y: 0, width: 50, height: 50))
     var viewThree = UILabel(frame: CGRect(x: 50, y: 0, width: 50, height: 50))
     weak var delegate : StatusPickerDelegate?
 
-    private var initialCenter: CGPoint = .zero
-    weak var taskTabledelegate : TaskTableDelegate?
-
-    var stack = UIStackView(frame: CGRect(x: 0, y: 0, width: 300, height: 36))
-    var panGestureRecognizer : UIPanGestureRecognizer?
-    var tapGestureRecognizer : UITapGestureRecognizer?
-    var status : TaskStatus{
+    var toDoTask : ToDoTask?{
         didSet{
-            //cycleStatusNoAnimation(status)
+            if let task = toDoTask?.taskStatus{
+                cycleStatusNoAnimation(task)
+            }
         }
     }
+    private var initialCenter: CGPoint = .zero
 
-    init(frame: CGRect,_ status: TaskStatus) {
+    var stack = UIStackView(frame: CGRect(x: 0, y: 0, width: 300, height: 36))
+    var panGestureRecognizer: UIPanGestureRecognizer?
+    var tapGestureRecognizer: UITapGestureRecognizer?
+    var status: ToDoTaskStatus
+
+    init(frame: CGRect,_ status: ToDoTaskStatus) {
         self.status = status
         super.init(frame: frame)
 
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
         panGestureRecognizer?.delegate = self
         
-     
         if status == .inProgress{
             stack = UIStackView(frame: CGRect(x: -100, y: 0, width: 300, height: 36))
-
         }else if status == .done{
             stack = UIStackView(frame: CGRect(x: -200, y: 0, width: 300, height: 36))
-
         }
+        self.layer.cornerRadius = 10
 
-//
-//        timer = Timer(timeInterval: 5.0, repeats: false, block: { _ in
-//            self.gestureRecognizerIsPannable()
-//        })
-        
-        
         initialCenter = self.center
         backgroundColor = .white
         setup()
@@ -70,6 +55,7 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
         viewOne.translatesAutoresizingMaskIntoConstraints = false
         viewOne.backgroundColor = .green
         viewOne.text = "Ready"
+        viewOne.textAlignment = .center
         NSLayoutConstraint.activate([
             viewOne.widthAnchor.constraint(equalToConstant: 100),
             viewOne.heightAnchor.constraint(equalToConstant: 36)
@@ -79,12 +65,14 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
         viewTwo.backgroundColor = .purple
         viewTwo.text = "In Progress"
         viewTwo.textColor = .white
-        
+        viewTwo.textAlignment = .center
+
         viewThree.translatesAutoresizingMaskIntoConstraints = false
         viewThree.backgroundColor = .blue
         viewThree.text = "Done"
         viewThree.textColor = .white
-        
+        viewThree.textAlignment = .center
+
         NSLayoutConstraint.activate([
             viewTwo.widthAnchor.constraint(equalToConstant: 100),
             viewTwo.heightAnchor.constraint(equalToConstant: 36)
@@ -98,21 +86,14 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
         stack.addArrangedSubview(viewTwo)
         stack.addArrangedSubview(viewThree)
 
+        stack.clipsToBounds = true
         stack.axis = .horizontal
-//        stack.translatesAutoresizingMaskIntoConstraints = false
-//
+
         self.clipsToBounds = true
         stack.layer.masksToBounds = true
         self.addSubview(stack)
         stack.frame.origin = CGPoint(x: 0, y: 0)
-        
-//        NSLayoutConstraint.activate([
-//            stack.topAnchor.constraint(equalTo: self.topAnchor),
-//            stack.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-//            stack.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-//            stack.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-//        ])
-        
+                
         if let g = panGestureRecognizer{
             stack.addGestureRecognizer(g)
             stack.isUserInteractionEnabled = true
@@ -123,21 +104,13 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
         }
         layoutIfNeeded()
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
-//    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIPanGestureRecognizer) -> Bool {
-//        let velocity = gestureRecognizer.velocity(in: stack)
-//        print(velocity.x)
-//        return abs(velocity.x) > abs(velocity.y)
-//    }
+
     @objc private func didPan(_ sender: UIPanGestureRecognizer) {
         
+        guard let task = toDoTask else {return}
         switch sender.state {
         case .began:
             initialCenter = stack.center
-
             
         case .changed:
             let translation = sender.translation(in: self)
@@ -148,21 +121,21 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
             if translation.x < -24{
                 if status == .ready{
                     status = .inProgress
-                    cycleStatus(status)
+                    cycleStatus(task,status)
                     let generator = UINotificationFeedbackGenerator()
                     generator.notificationOccurred(.success)
                     panGestureRecognizer?.isEnabled = false
 
                 }else if status == .inProgress{
                     status = .done
-                    cycleStatus(status)
+                    cycleStatus(task,status)
                     let generator = UINotificationFeedbackGenerator()
                     generator.notificationOccurred(.success)
                     panGestureRecognizer?.isEnabled = false
                 }
                 else if status == .done{
                     status = .done
-                    cycleStatus(status)
+                    cycleStatus(task,status)
                     let generator = UINotificationFeedbackGenerator()
                     generator.notificationOccurred(.success)
                     panGestureRecognizer?.isEnabled = false
@@ -171,21 +144,21 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
                 
                 if status == .done{
                     status = .inProgress
-                    cycleStatus(status)
+                    cycleStatus(task,status)
                     let generator = UINotificationFeedbackGenerator()
                     generator.notificationOccurred(.success)
                     panGestureRecognizer?.isEnabled = false
                     
                 }else if status == .inProgress{
                     status = .ready
-                    cycleStatus(status)
+                    cycleStatus(task,status)
                     let generator = UINotificationFeedbackGenerator()
                     generator.notificationOccurred(.success)
                     panGestureRecognizer?.isEnabled = false
                     
                 }else if status == .ready{
                     status = .ready
-                    cycleStatus(status)
+                    cycleStatus(task,status)
                     let generator = UINotificationFeedbackGenerator()
                     generator.notificationOccurred(.success)
                     panGestureRecognizer?.isEnabled = false
@@ -194,7 +167,7 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
             }
         case .ended:
             panGestureRecognizer?.isEnabled = false
-            cycleStatus(status)
+            cycleStatus(task,status)
             gestureRecognizerIsPannable()
             
         default:
@@ -206,34 +179,24 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
     
     func gestureRecognizerIsPannable(){
         
-        //panGestureRecognizer?.isEnabled = false
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-           // print("Timer fired!")
+
             self.panGestureRecognizer?.isEnabled = true
 
         }
 
     }
-    func cycleStatus(_ status:TaskStatus){
+    func cycleStatus(_ task: ToDoTask, _ status:ToDoTaskStatus){
         gestureRecognizerIsPannable()
 
         if status == .ready{
-//            UIView.animate(withDuration: 0.5, delay: 0.0,usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut) {
-//            UIView.animate(withDuration: 0.5) {
-//
-//                self.stack.frame.origin = CGPoint(x: 0,
-//                                              y: 0)
-//                //self.stack.frame.origin = CGPoint(x: 100,
-//                                           //   y: 0)
-//            }
-            //UIView.animate(withDuration: 0.5, delay: 0.0,options: .curveEaseIn) {
-            
+
             UIView.animate(withDuration: 0.5) {
                 self.stack.frame.origin = CGPoint(x: 0,
                                        y: 0)
 
             } completion: { _ in
-                self.delegate?.changeStatus(status: self.status)
+                self.delegate?.changeStatusFor(task, self.status)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     //print("Timer fired!")
                     self.self.panGestureRecognizer?.isEnabled = true
@@ -242,18 +205,15 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
 
             }
         }else if status == .inProgress{
-//            UIView.animate(withDuration: 0.) {
-//                self.stack.frame.origin = CGPoint(x: -100,
-//                                       y: 0)
-//            }
+
             UIView.animate(withDuration: 0.7) {
                 self.stack.frame.origin = CGPoint(x: -100,
                                        y: 0)
 
             } completion: { _ in
-                self.delegate?.changeStatus(status: self.status)
+                self.delegate?.changeStatusFor(task, self.status)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                   // print("Timer fired!")
+
                     self.panGestureRecognizer?.isEnabled = true
 
                 }
@@ -262,16 +222,13 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
 
 
         }else if status == .done{
-//            UIView.animate(withDuration: 0.5) {
-//                self.stack.frame.origin = CGPoint(x: -200,
-//                                       y: 0)
-//            }
+
             UIView.animate(withDuration: 0.7) {
                 self.stack.frame.origin = CGPoint(x: -200,
                                        y: 0)
 
             } completion: { _ in
-                self.delegate?.changeStatus(status: self.status)
+                self.delegate?.changeStatusFor(task, self.status)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                    // print("Timer fired!")
                     self.self.panGestureRecognizer?.isEnabled = true
@@ -281,11 +238,10 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
 
             }
         }
-        //delegate?.changeStatus(status: self.status)
         
     }
     
-    func cycleStatusNoAnimation(_ status: TaskStatus){
+    func cycleStatusNoAnimation(_ status: ToDoTaskStatus){
         if status == .ready{
                 self.stack.frame.origin = CGPoint(x: 0,
                                               y: 0)
@@ -299,7 +255,4 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
         }
 
     }
-//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-//
-//    }
 }

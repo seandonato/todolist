@@ -8,45 +8,18 @@
 import Foundation
 import UIKit
 
-protocol StatusPickerDelegate: NSObject{
-    func changeStatus(status:TaskStatus)
-    func changeStatusFor(_ task:Task,status:TaskStatus)
-    
-}
-class TaskDetailViewController: UIViewController,StatusPickerDelegate,UITextViewDelegate{
-    func changeStatusFor(_ task:Task, status: TaskStatus) {
-            CoreDataManager().updateTaskStatus(task, status){result in
-                switch result{
-                case .success(_):
-                    return
-                case .failure(_):
-                    return
-                }
-            }
-                 
-    }
-    
 
-    func changeStatus(status: TaskStatus) {
-        CoreDataManager().updateTaskStatus(task, status){result in
-            switch result{
-            case .success(_):
-                return
-            case .failure(_):
-                return
-            }
-        }
-    }
+class TaskDetailViewController: UIViewController,UITextViewDelegate{
     
-    weak var taskTabledelegate : TaskTableDelegate?
+    let viewModel: TaskDetailVCViewModel
     var textView = UITextView()
-    let task : Task
     let titleLabel = UILabel()
     let saveButton = TDLButton()
-    init(task: Task) {
-        self.task = task
+    var keyboardDismissView = UIView()
+    init(_ viewModel: TaskDetailVCViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        titleLabel.text = task.name
+        titleLabel.text = viewModel.toDoTask.name
         saveButton.setTitle("save", for: .normal)
         saveButton.addTarget(self, action: #selector(saveNote), for: .touchUpInside)
     }
@@ -57,14 +30,16 @@ class TaskDetailViewController: UIViewController,StatusPickerDelegate,UITextView
     
     override func viewDidLoad() {
         
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = UIColor(named: "Background")
 
-        var statusSwitcher = StatusSwitcher(frame: CGRect(x: 0, y: 0, width: 100, height: 36), self.task.taskStatus ?? .ready)
+        let statusSwitcher = StatusSwitcher(frame: CGRect(x: 0, y: 0, width: 100, height: 36), viewModel.toDoTask.taskStatus ?? .ready)
+        statusSwitcher.delegate = viewModel
+        statusSwitcher.toDoTask = viewModel.toDoTask
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         statusSwitcher.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(statusSwitcher)
-        if let t = task.taskStatus{
+        if let t = viewModel.toDoTask.taskStatus{
             statusSwitcher.cycleStatusNoAnimation(t)
         }
 
@@ -76,7 +51,6 @@ class TaskDetailViewController: UIViewController,StatusPickerDelegate,UITextView
             titleLabel.widthAnchor.constraint(equalToConstant: 100)
 
         ])
-        statusSwitcher.delegate = self
         NSLayoutConstraint.activate([
             statusSwitcher.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 16),
             statusSwitcher.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 16),
@@ -93,10 +67,10 @@ class TaskDetailViewController: UIViewController,StatusPickerDelegate,UITextView
             textView.heightAnchor.constraint(equalToConstant: 350)
 
         ])
-        textView.text = task.note
+        textView.text = viewModel.toDoTask.note
         textView.layer.borderWidth = 0.5
-        textView.layer.borderColor = UIColor.gray.cgColor
-        
+        textView.layer.borderColor = UIColor(named: "Border")?.cgColor
+        textView.font = .systemFont(ofSize: 16)
         self.view.addSubview(saveButton)
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -106,9 +80,24 @@ class TaskDetailViewController: UIViewController,StatusPickerDelegate,UITextView
 
         ])
 
+        self.view.addSubview(keyboardDismissView)
+        keyboardDismissView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            keyboardDismissView.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 12),
+            keyboardDismissView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: 0),
+            keyboardDismissView.leadingAnchor.constraint(equalTo: statusSwitcher.trailingAnchor,constant: 8),
+            keyboardDismissView.bottomAnchor.constraint(equalTo: textView.topAnchor,constant: 8)
+        ])
+        
+        let tapGesture = UITapGestureRecognizer()
+        tapGesture.addTarget(self, action: #selector(dismissKB))
+        keyboardDismissView.addGestureRecognizer(tapGesture)
     }
     
+    @objc func dismissKB(){
+        textView.endEditing(true)
+    }
     @objc func saveNote(){
-        CoreDataManager().updateTaskNotes(task, textView.text)
+        viewModel.saveNote(viewModel.toDoTask, textView.text)
     }
 }

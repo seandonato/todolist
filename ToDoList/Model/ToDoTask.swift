@@ -7,17 +7,17 @@
 
 import Foundation
 
-enum TaskStatus{
+enum ToDoTaskStatus{
     case ready
     case inProgress
     case done
     case blocked
 }
-struct Task{
-    var name : String
-    var uuid : String
-    var status : String
-    var taskStatus : TaskStatus?
-    var note : String?
+struct ToDoTask{
+    var name: String
+    var uuid: UUID
+    var taskStatus: ToDoTaskStatus?
+    var note: String?
+    var date: NSDate
 }
 

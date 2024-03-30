@@ -18,7 +18,6 @@ class TDLButton :UIButton{
     func style(){
         self.backgroundColor = .blue
         self.layer.cornerRadius = 16
-
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
