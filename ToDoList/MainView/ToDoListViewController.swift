@@ -21,6 +21,9 @@ class ToDoListViewController: UIViewController,UITextFieldDelegate, ToDoListView
     var entryField: UITextField = UITextField()
     var addButton: TDLButton = TDLButton()
     
+    //new for group
+    var groupSwitchButton: TDLButton = TDLButton()
+
     init(_ viewModel: ToDoListViewModel ) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -50,10 +53,15 @@ extension ToDoListViewController{
         self.view.addSubview(entryField)
         self.view.addSubview(addButton)
 
+        //new
+        self.view.addSubview(groupSwitchButton)
+
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         entryLabel.translatesAutoresizingMaskIntoConstraints = false
         entryField.translatesAutoresizingMaskIntoConstraints = false
         addButton.translatesAutoresizingMaskIntoConstraints = false
+
+        groupSwitchButton.translatesAutoresizingMaskIntoConstraints = false
 
         titleLabel.text = "To Do List"
         titleLabel.font = .boldSystemFont(ofSize: 14)
@@ -71,19 +79,30 @@ extension ToDoListViewController{
             entryLabel.trailingAnchor.constraint(equalTo: self.view.centerXAnchor,constant: -8),
             entryLabel.widthAnchor.constraint(equalToConstant: 200)
         ])
+        
         NSLayoutConstraint.activate([
             entryField.topAnchor.constraint(equalTo: entryLabel.bottomAnchor,constant:16),
             entryField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 16),
             entryField.trailingAnchor.constraint(equalTo: entryLabel.trailingAnchor,constant: 0)
 
         ])
+        
+        //new
+        groupSwitchButton.setTitle("Switch Task Group", for: .normal)
+        NSLayoutConstraint.activate([
+
+            groupSwitchButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -20),
+            groupSwitchButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,constant: -20)
+        ])
+
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: addButton.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: groupSwitchButton.topAnchor)
         ])
         NSLayoutConstraint.activate([
             addButton.leadingAnchor.constraint(equalTo: entryField.trailingAnchor,constant:50),
@@ -114,17 +133,26 @@ extension ToDoListViewController{
 extension ToDoListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.row == viewModel.tasks?.count ?? 0{
+            let cell = AddTaskCell()
+            cell.delegate = self
+            return cell
+        }
+        
         guard let task = viewModel.tasks?[indexPath.row] else {
             return UITableViewCell()
         }
+
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? TaskTableViewCell{
-            cell.viewModel = viewModel
-            cell.taskDelegate = self
-            cell.toDoTask = task
-            cell.setup()
-            cell.row = indexPath.row
-            return cell
-        }
+                cell.viewModel = viewModel
+                cell.taskDelegate = self
+                cell.toDoTask = task
+                cell.setup()
+                cell.row = indexPath.row
+                return cell
+            }
+
         return UITableViewCell()
     }
     
@@ -133,7 +161,7 @@ extension ToDoListViewController: UITableViewDelegate{
 extension ToDoListViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.tasks?.count ?? 0
+        return (viewModel.tasks?.count ?? 0) + 1
     }
     
 }
@@ -149,5 +177,14 @@ extension ToDoListViewController: TaskCellDelegate{
     }
     
 }
+
+extension ToDoListViewController: AddTaskDelegate{
+    func addTask() {
+        let vc = AddTaskViewController(self.viewModel)
+        self.present(vc, animated: true)
+    }
+
+}
+
 
 
