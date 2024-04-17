@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import ToDoList_MVC
+@testable import ToDoList
 
 final class ToDoList_MVCTests: XCTestCase {
 
