@@ -22,11 +22,12 @@
 		A925449A29BBCBCE00F38E7C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925449929BBCBCE00F38E7C /* CoreDataManager.swift */; };
 		A94745DD2B9BD8E9002DE068 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94745DC2B9BD8E9002DE068 /* Protocols.swift */; };
 		A981360B2BD01434000B5AE2 /* TaskModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A925449229BBBE3300F38E7C /* TaskModel.xcdatamodeld */; };
-		A981360D2BD027B0000B5AE2 /* ToDoTaskGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981360C2BD027B0000B5AE2 /* ToDoTaskGroup.swift */; };
+		A981360D2BD027B0000B5AE2 /* ToDoTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981360C2BD027B0000B5AE2 /* ToDoTaskList.swift */; };
 		A981360F2BD02868000B5AE2 /* CoreDataGroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981360E2BD02868000B5AE2 /* CoreDataGroupManager.swift */; };
 		A98136112BD04630000B5AE2 /* GroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98136102BD04630000B5AE2 /* GroupListViewController.swift */; };
 		A98136132BD050B2000B5AE2 /* AddTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98136122BD050B2000B5AE2 /* AddTaskCell.swift */; };
 		A98136152BD0672C000B5AE2 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98136142BD0672C000B5AE2 /* AddTaskViewController.swift */; };
+		A98136172BD96B15000B5AE2 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98136162BD96B14000B5AE2 /* AddListViewController.swift */; };
 		A9A070C72B69B3A7005DB5E1 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A070C62B69B3A7005DB5E1 /* TaskDetailViewController.swift */; };
 		A9A070CB2B69F370005DB5E1 /* StatusPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A070CA2B69F370005DB5E1 /* StatusPicker.swift */; };
 		A9A070CD2B6C60EA005DB5E1 /* StatusSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A070CC2B6C60EA005DB5E1 /* StatusSwitcher.swift */; };
@@ -72,11 +73,12 @@
 		A925449729BBC5CD00F38E7C /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		A925449929BBCBCE00F38E7C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		A94745DC2B9BD8E9002DE068 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
-		A981360C2BD027B0000B5AE2 /* ToDoTaskGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTaskGroup.swift; sourceTree = "<group>"; };
+		A981360C2BD027B0000B5AE2 /* ToDoTaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTaskList.swift; sourceTree = "<group>"; };
 		A981360E2BD02868000B5AE2 /* CoreDataGroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataGroupManager.swift; sourceTree = "<group>"; };
 		A98136102BD04630000B5AE2 /* GroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListViewController.swift; sourceTree = "<group>"; };
 		A98136122BD050B2000B5AE2 /* AddTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskCell.swift; sourceTree = "<group>"; };
 		A98136142BD0672C000B5AE2 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		A98136162BD96B14000B5AE2 /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
 		A9A070C62B69B3A7005DB5E1 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		A9A070CA2B69F370005DB5E1 /* StatusPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPicker.swift; sourceTree = "<group>"; };
 		A9A070CC2B6C60EA005DB5E1 /* StatusSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusSwitcher.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				A9A070CA2B69F370005DB5E1 /* StatusPicker.swift */,
 				A98136102BD04630000B5AE2 /* GroupListViewController.swift */,
 				A98136142BD0672C000B5AE2 /* AddTaskViewController.swift */,
+				A98136162BD96B14000B5AE2 /* AddListViewController.swift */,
 			);
 			path = ToDoList;
 			sourceTree = "<group>";
@@ -212,7 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				A925449529BBC50900F38E7C /* ToDoTask.swift */,
-				A981360C2BD027B0000B5AE2 /* ToDoTaskGroup.swift */,
+				A981360C2BD027B0000B5AE2 /* ToDoTaskList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -363,9 +366,10 @@
 				A94745DD2B9BD8E9002DE068 /* Protocols.swift in Sources */,
 				A9A070CD2B6C60EA005DB5E1 /* StatusSwitcher.swift in Sources */,
 				A98136132BD050B2000B5AE2 /* AddTaskCell.swift in Sources */,
-				A981360D2BD027B0000B5AE2 /* ToDoTaskGroup.swift in Sources */,
+				A981360D2BD027B0000B5AE2 /* ToDoTaskList.swift in Sources */,
 				A91579F52B444F1D00AB6BC6 /* TDLButton.swift in Sources */,
 				A981360B2BD01434000B5AE2 /* TaskModel.xcdatamodeld in Sources */,
+				A98136172BD96B15000B5AE2 /* AddListViewController.swift in Sources */,
 				A98136152BD0672C000B5AE2 /* AddTaskViewController.swift in Sources */,
 				A925449829BBC5CD00F38E7C /* TaskTableViewCell.swift in Sources */,
 				A9BAD4452BB6FF4A00C9CBF1 /* CoreDataService.swift in Sources */,

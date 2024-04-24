@@ -1,13 +1,14 @@
 //
-//  AddTaskViewController.swift
+//  AddListViewController.swift
 //  ToDoList
 //
-//  Created by Sean Donato on 4/17/24.
+//  Created by Sean Donato on 4/24/24.
 //
 
 import Foundation
 import UIKit
-class AddTaskViewController: UIViewController{
+
+class AddListViewController: UIViewController{
     
 //    let closeButton
     let viewModel: ToDoListViewModel
@@ -28,7 +29,7 @@ class AddTaskViewController: UIViewController{
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension AddTaskViewController{
+extension AddListViewController{
     
         func setup(){
             
@@ -46,8 +47,8 @@ extension AddTaskViewController{
             
             titleLabel.text = "To Do List"
             titleLabel.font = .boldSystemFont(ofSize: 14)
-            addButton.setTitle("Add Task", for: .normal)
-            entryLabel.text = "Task:"
+            addButton.setTitle("Add List", for: .normal)
+            entryLabel.text = "List Name:"
             entryField.borderStyle = .line
             
             NSLayoutConstraint.activate([
@@ -75,15 +76,15 @@ extension AddTaskViewController{
                 addButton.widthAnchor.constraint(equalToConstant: 44)
             ])
             
-            addButton.addTarget(self, action: #selector(saveTask), for: .touchUpInside)
+            addButton.addTarget(self, action: #selector(saveList), for: .touchUpInside)
 
         }
         
     }
-extension AddTaskViewController{
-    @objc func saveTask(){
+extension AddListViewController{
+    @objc func saveList(){
         if let name = entryField.text{
-            viewModel.saveTask(name)
+            viewModel.saveList(name)
         }
     }
 }

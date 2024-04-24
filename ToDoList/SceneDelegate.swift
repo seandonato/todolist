@@ -14,17 +14,44 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         self.window = self.window ?? UIWindow()
 
-        let coreDataService = CoreDataService(containerName: "TaskModel")
-        let coreDataManager = CoreDataManager(persistentContainer: coreDataService.persistentContainer)
-        let toDoListViewModel = ToDoListViewModel()
-        toDoListViewModel.coreDataManager = coreDataManager
-        
-        let nav = UINavigationController(rootViewController: ToDoListViewController(toDoListViewModel))
-        self.window!.rootViewController = nav
+        //check if its first run, if so, open dialog to create first, if not: fetch primary group and tasks
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if launchedBefore  {
+            print("Not first launch.")
+            let coreDataService = CoreDataService(containerName: "TaskModel")
+            let coreDataManager = CoreDataManager(persistentContainer: coreDataService.persistentContainer)
+            let toDoListViewModel = ToDoListViewModel()
+            toDoListViewModel.lists = coreDataManager.getLists()
+            if let lists = toDoListViewModel.lists{
+                toDoListViewModel.list = lists[0]
+            }
+            toDoListViewModel.coreDataManager = coreDataManager
+            
+            let nav = UINavigationController(rootViewController: ToDoListViewController(toDoListViewModel))
+            self.window!.rootViewController = nav
 
-        self.window!.makeKeyAndVisible()
-        guard scene is UIWindowScene else { return }
-        guard let _ = (scene as? UIWindowScene) else { return }
+            self.window!.makeKeyAndVisible()
+            guard scene is UIWindowScene else { return }
+            guard let _ = (scene as? UIWindowScene) else { return }
+
+        } else {
+            print("First launch, setting UserDefault.")
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+            let coreDataService = CoreDataService(containerName: "TaskModel")
+            let coreDataManager = CoreDataManager(persistentContainer: coreDataService.persistentContainer)
+            let toDoListViewModel = ToDoListViewModel()
+            toDoListViewModel.coreDataManager = coreDataManager
+            
+            let nav = UINavigationController(rootViewController: AddListViewController(toDoListViewModel))
+            self.window!.rootViewController = nav
+
+            self.window!.makeKeyAndVisible()
+            guard scene is UIWindowScene else { return }
+            guard let _ = (scene as? UIWindowScene) else { return }
+
+        }
+
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

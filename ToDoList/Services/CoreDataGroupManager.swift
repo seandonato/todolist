@@ -15,9 +15,9 @@ class CoreDataGroupManager {
     init(persistentContainer: NSPersistentContainer) {
         self.persistentContainer = persistentContainer
     }
-    func saveGroup(_ taskGroup: ToDoTaskGroup) -> Bool? {
+    func saveGroup(_ taskGroup: ToDoTaskList) -> Bool? {
         let managedContext = persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "ManagedTaskGroup", in: managedContext)!
+        let entity = NSEntityDescription.entity(forEntityName: "TDTaskList", in: managedContext)!
         
         let managedTask = NSManagedObject(entity: entity, insertInto: managedContext)
         managedTask.setValue(taskGroup.name, forKeyPath: "name")
@@ -33,44 +33,31 @@ class CoreDataGroupManager {
         }
     }
     
-    func getTasks() -> [ToDoTask]?{
+    func getGroups() -> [ToDoTaskList]?{
         
         let managedContext = persistentContainer.viewContext
-        var tasks = [ToDoTask]()
-        guard let managedTasks = fetchTasksFromCoreData() else {return nil}
+        var lists = [ToDoTaskList]()
+        guard let managedTasks = fetchGroupsFromCoreData() else {return nil}
         
         for object in managedTasks{
             guard let name = (object as AnyObject).value(forKey: "name") as? String else{return nil}
             guard let uuid = (object as AnyObject).value(forKey: "uuid") else{return nil}
-            guard let status = (object as AnyObject).value(forKey: "status") as? String else{return nil}
-            guard let date = (object as AnyObject).value(forKey: "dateCreated") as? NSDate else{return nil}
             
-            var taskStatus = ToDoTaskStatus.ready
-            if status == "in progress"{
-                taskStatus = ToDoTaskStatus.inProgress
-            }else if status == "done"{
-                taskStatus = ToDoTaskStatus.done
-            }
-            if let note = (object as AnyObject).value(forKey: "note") as? String{
-                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: note,date: date)
-                tasks.append(task)
-            }else{
-                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
-                tasks.append(task)
-            }
+            let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [])
+            lists.append(list)
         }
-        return tasks
+        return lists
     }
     
-    func fetchTasksFromCoreData() -> [NSManagedObject]?{
+    func fetchGroupsFromCoreData() -> [NSManagedObject]?{
         let managedContext = persistentContainer.viewContext
-        let foodsFetch = NSFetchRequest<NSManagedObject>(entityName: "ManagedTask")
-        var tasks : [NSManagedObject] = []
+        let listsFetch = NSFetchRequest<NSManagedObject>(entityName: "TDTaskList")
+        var lists : [NSManagedObject] = []
         do {
-            tasks = try managedContext.fetch(foodsFetch)
+            lists = try managedContext.fetch(listsFetch)
         } catch let error as NSError {
             fatalError("Failed to fetch foods: \(error)")
         }
-        return tasks
+        return lists
     }
 }

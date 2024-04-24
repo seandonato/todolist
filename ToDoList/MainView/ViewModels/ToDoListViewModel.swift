@@ -22,6 +22,10 @@ protocol ToDoListViewModelProtocol: AnyObject{
 class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
     var tasks: [ToDoTask]?
     
+    //new. this is the current list
+    var list: ToDoTaskList?
+    var lists: [ToDoTaskList]?
+
     func changeStatusFor(_ task: ToDoTask,_ status: ToDoTaskStatus) {
         coreDataManager?.updateTaskStatus(task, status){result in
             switch result{
@@ -39,11 +43,18 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
     
     var toDoListViewModelDelegate: ToDoListViewModelDelegate?
     
+    //instead of fetching tasks, fetch the tasks associated with list
     func fetchData() {
-        if let tasks = coreDataManager?.getTasks(){
-            self.tasks = tasks
+        // change to get list
+        if let list = coreDataManager?.getList(){
+            self.tasks = list.toDoTasks
             toDoListViewModelDelegate?.didFinishFetchingData()
         }
+
+//        if let tasks = coreDataManager?.getTasks(){
+//            self.tasks = tasks
+//            toDoListViewModelDelegate?.didFinishFetchingData()
+//        }
     }
     
     func deleteTask(_ task: ToDoTask) {
@@ -57,11 +68,28 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
     func saveTask(_ toDoTaskName:String){
         let uuid = UUID()
         let task = ToDoTask(name: toDoTaskName , uuid: uuid,date: NSDate())
-        if let _ = coreDataManager?.saveTask(task){
-            fetchData()
-        }
+        //new
+        if let list = list{
+            if let _ = coreDataManager?.saveTaskWithList(task, list){
+                 fetchData()
+            }
 
+        }
+       // if let _ = coreDataManager?.saveTaskWithList(task, self.list)
+//        if let _ = coreDataManager?.saveTask(task){
+//            fetchData()
+//        }
     }
 
+    //new
+    func saveList(_ toDoListName:String){
+        let uuid = UUID()
+        let list = ToDoTaskList(name: toDoListName, uuid: uuid, toDoTasks: [])
+
+        //update to save list
+        if let _ = coreDataManager?.saveList(list){
+            fetchData()
+        }
+    }
 }
     
