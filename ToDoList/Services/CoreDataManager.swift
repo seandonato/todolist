@@ -31,7 +31,9 @@ class CoreDataManager {
             if !fetchResults.isEmpty{
                 
                 let managedList = fetchResults[0]
+                
                 if let mList = fetchResults[0] as? TDTaskList{
+                    
                     print("suck")
                     let entity = NSEntityDescription.entity(forEntityName: "TDTask", in: managedContext)!
 
@@ -388,6 +390,61 @@ class CoreDataManager {
 //                //tasks.append(task)
 //            }
 //        }
+        return list
+    }
+    func getList2(listID: UUID) -> ToDoTaskList?{
+        
+        var list: ToDoTaskList = ToDoTaskList(name: "", uuid: listID, toDoTasks: [])
+        let managedContext = persistentContainer.viewContext
+
+        let listFetch = NSFetchRequest<NSManagedObject>(entityName: "TDTaskList")
+        listFetch.predicate = NSPredicate(format: "%K == %@", "uuid", listID as any CVarArg )
+        do{
+            
+            let fetchResults = try managedContext.fetch(listFetch)
+            if !fetchResults.isEmpty{
+                
+                let managedList = fetchResults[0]
+                
+                if let mList = fetchResults[0] as? TDTaskList{
+                    
+                    var tasks: [ToDoTask] = []
+                    
+                    
+                    if let c = mList.tasks{
+                        for object in c
+                        {
+                            guard let name = (object as AnyObject).value(forKey: "name") as? String else{return nil}
+                            guard let uuid = (object as AnyObject).value(forKey: "uuid") else{return nil}
+                            guard let status = (object as AnyObject).value(forKey: "status") as? String else{return nil}
+                            guard let date = (object as AnyObject).value(forKey: "dateCreated") as? NSDate else{return nil}
+                            
+                            var taskStatus = ToDoTaskStatus.ready
+                            if status == "in progress"{
+                                taskStatus = ToDoTaskStatus.inProgress
+                            }else if status == "done"{
+                                taskStatus = ToDoTaskStatus.done
+                            }
+                            if let note = (object as AnyObject).value(forKey: "note") as? String{
+                                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: note,date: date)
+                                tasks.append(task)
+                            }else{
+                                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
+                                tasks.append(task)
+                            }
+                        }
+                        
+                        list = ToDoTaskList(name: mList.name ?? "", uuid: mList.uuid as! UUID, toDoTasks: tasks)
+                        
+                    }
+                }
+            }
+        }catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return nil
+        }
+        
+       
         return list
     }
 

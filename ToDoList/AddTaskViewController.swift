@@ -84,6 +84,7 @@ extension AddTaskViewController{
     @objc func saveTask(){
         if let name = entryField.text{
             viewModel.saveTask(name)
+            self.dismiss(animated: true)
         }
     }
 }

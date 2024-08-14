@@ -119,12 +119,13 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
                                           y: initialCenter.y )
 
             if translation.x < -24{
+                panGestureRecognizer?.isEnabled = false
+
                 if status == .ready{
                     status = .inProgress
                     cycleStatus(task,status)
                     let generator = UINotificationFeedbackGenerator()
                     generator.notificationOccurred(.success)
-                    panGestureRecognizer?.isEnabled = false
 
                 }else if status == .inProgress{
                     status = .done
@@ -141,7 +142,8 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
                     panGestureRecognizer?.isEnabled = false
                 }
             }else if translation.x > 24{
-                
+                panGestureRecognizer?.isEnabled = false
+
                 if status == .done{
                     status = .inProgress
                     cycleStatus(task,status)
@@ -179,7 +181,7 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
     
     func gestureRecognizerIsPannable(){
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 
             self.panGestureRecognizer?.isEnabled = true
 
@@ -197,7 +199,7 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
 
             } completion: { _ in
                 self.delegate?.changeStatusFor(task, self.status)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     //print("Timer fired!")
                     self.self.panGestureRecognizer?.isEnabled = true
 
@@ -212,7 +214,7 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
 
             } completion: { _ in
                 self.delegate?.changeStatusFor(task, self.status)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 
                     self.panGestureRecognizer?.isEnabled = true
 
@@ -229,7 +231,7 @@ class StatusSwitcher: UIView, UIGestureRecognizerDelegate {
 
             } completion: { _ in
                 self.delegate?.changeStatusFor(task, self.status)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                    // print("Timer fired!")
                     self.self.panGestureRecognizer?.isEnabled = true
 

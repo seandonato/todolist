@@ -51,7 +51,7 @@ class AddTaskCell: UITableViewCell{
     func setup(){
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "+ Add Task"
+        //titleLabel.text = "+ Add Task"
         
         self.contentView.addSubview(titleLabel)
         

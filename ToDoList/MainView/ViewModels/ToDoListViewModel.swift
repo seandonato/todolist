@@ -46,12 +46,15 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
     //instead of fetching tasks, fetch the tasks associated with list
     func fetchData() {
         // change to get list
-        if let list = coreDataManager?.getList(){
+        if let list = coreDataManager?.getList2(listID: list!.uuid){
             self.tasks = list.toDoTasks
             toDoListViewModelDelegate?.didFinishFetchingData()
         }
 
-//        if let tasks = coreDataManager?.getTasks(){
+//        if let lists = coreDataManager?.getLists(){
+//            self.lists = lists
+//
+//        }//        if let tasks = coreDataManager?.getTasks(){
 //            self.tasks = tasks
 //            toDoListViewModelDelegate?.didFinishFetchingData()
 //        }
@@ -82,6 +85,8 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
     }
 
     //new
+    //todo- what to do on first launch
+    
     func saveList(_ toDoListName:String){
         let uuid = UUID()
         let list = ToDoTaskList(name: toDoListName, uuid: uuid, toDoTasks: [])
@@ -90,6 +95,12 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
         if let _ = coreDataManager?.saveList(list){
             fetchData()
         }
+    }
+    
+    func setList(list: ToDoTaskList){
+        self.list = list
+        self.tasks = list.toDoTasks
+        toDoListViewModelDelegate?.didFinishFetchingData()
     }
 }
     

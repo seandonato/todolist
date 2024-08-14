@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum ToDoTaskStatus{
-    case ready
-    case inProgress
-    case done
-    case blocked
+enum ToDoTaskStatus: String{
+    case ready = "ready"
+    case inProgress = "inProgress"
+    case done = "done"
+    case blocked = "blocked"
 }
 struct ToDoTask{
     var name: String
@@ -19,5 +19,6 @@ struct ToDoTask{
     var taskStatus: ToDoTaskStatus?
     var note: String?
     var date: NSDate
+    var expanded: Bool = false
 }
 
