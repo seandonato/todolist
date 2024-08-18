@@ -32,6 +32,8 @@
 		A981363B2BF4FC69000B5AE2 /* StatusPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981363A2BF4FC69000B5AE2 /* StatusPicker.swift */; };
 		A98BF9EA2C6BFF51004A3505 /* TaskTableViewCellAlpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9E92C6BFF51004A3505 /* TaskTableViewCellAlpha.swift */; };
 		A98BF9EC2C6C4D56004A3505 /* StatusButtonStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9EB2C6C4D56004A3505 /* StatusButtonStack.swift */; };
+		A98BF9EE2C6D52DD004A3505 /* MoreButtonStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9ED2C6D52DD004A3505 /* MoreButtonStack.swift */; };
+		A98BF9F02C6F81C3004A3505 /* StyleTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9EF2C6F81C3004A3505 /* StyleTokens.swift */; };
 		A9A070C72B69B3A7005DB5E1 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A070C62B69B3A7005DB5E1 /* TaskDetailViewController.swift */; };
 		A9A070CD2B6C60EA005DB5E1 /* StatusSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A070CC2B6C60EA005DB5E1 /* StatusSwitcher.swift */; };
 		A9BAD43D2BAD2EBF00C9CBF1 /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BAD43C2BAD2EBF00C9CBF1 /* ToDoListViewModel.swift */; };
@@ -86,6 +88,8 @@
 		A981363A2BF4FC69000B5AE2 /* StatusPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPicker.swift; sourceTree = "<group>"; };
 		A98BF9E92C6BFF51004A3505 /* TaskTableViewCellAlpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCellAlpha.swift; sourceTree = "<group>"; };
 		A98BF9EB2C6C4D56004A3505 /* StatusButtonStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusButtonStack.swift; sourceTree = "<group>"; };
+		A98BF9ED2C6D52DD004A3505 /* MoreButtonStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreButtonStack.swift; sourceTree = "<group>"; };
+		A98BF9EF2C6F81C3004A3505 /* StyleTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleTokens.swift; sourceTree = "<group>"; };
 		A9A070C62B69B3A7005DB5E1 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		A9A070CC2B6C60EA005DB5E1 /* StatusSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusSwitcher.swift; sourceTree = "<group>"; };
 		A9BAD43C2BAD2EBF00C9CBF1 /* ToDoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 				A98136382BDD7446000B5AE2 /* ListTableViewCell.swift */,
 				A98136142BD0672C000B5AE2 /* AddTaskViewController.swift */,
 				A98136162BD96B14000B5AE2 /* AddListViewController.swift */,
+				A98BF9EF2C6F81C3004A3505 /* StyleTokens.swift */,
 			);
 			path = ToDoList;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 				A925449729BBC5CD00F38E7C /* TaskTableViewCell.swift */,
 				A98BF9E92C6BFF51004A3505 /* TaskTableViewCellAlpha.swift */,
 				A98BF9EB2C6C4D56004A3505 /* StatusButtonStack.swift */,
+				A98BF9ED2C6D52DD004A3505 /* MoreButtonStack.swift */,
 				A98136122BD050B2000B5AE2 /* AddTaskCell.swift */,
 			);
 			path = MainView;
@@ -378,6 +384,7 @@
 				A98136132BD050B2000B5AE2 /* AddTaskCell.swift in Sources */,
 				A981360D2BD027B0000B5AE2 /* ToDoTaskList.swift in Sources */,
 				A91579F52B444F1D00AB6BC6 /* TDLButton.swift in Sources */,
+				A98BF9F02C6F81C3004A3505 /* StyleTokens.swift in Sources */,
 				A981360B2BD01434000B5AE2 /* TaskModel.xcdatamodeld in Sources */,
 				A98136172BD96B15000B5AE2 /* AddListViewController.swift in Sources */,
 				A98136152BD0672C000B5AE2 /* AddTaskViewController.swift in Sources */,
@@ -385,6 +392,7 @@
 				A925449829BBC5CD00F38E7C /* TaskTableViewCell.swift in Sources */,
 				A9BAD4452BB6FF4A00C9CBF1 /* CoreDataService.swift in Sources */,
 				A9BAD43D2BAD2EBF00C9CBF1 /* ToDoListViewModel.swift in Sources */,
+				A98BF9EE2C6D52DD004A3505 /* MoreButtonStack.swift in Sources */,
 				A98BF9EC2C6C4D56004A3505 /* StatusButtonStack.swift in Sources */,
 				A981363B2BF4FC69000B5AE2 /* StatusPicker.swift in Sources */,
 				A925449629BBC50900F38E7C /* ToDoTask.swift in Sources */,

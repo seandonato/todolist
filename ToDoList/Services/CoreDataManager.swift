@@ -115,6 +115,8 @@ class CoreDataManager {
                 taskStatus = ToDoTaskStatus.inProgress
             }else if status == "done"{
                 taskStatus = ToDoTaskStatus.done
+            }else if status == "blocked"{
+                taskStatus = ToDoTaskStatus.blocked
             }
             if let note = (object as AnyObject).value(forKey: "note") as? String{
                 let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: note,date: date)
@@ -424,6 +426,8 @@ class CoreDataManager {
                                 taskStatus = ToDoTaskStatus.inProgress
                             }else if status == "done"{
                                 taskStatus = ToDoTaskStatus.done
+                            }else if status == "blocked"{
+                                taskStatus = ToDoTaskStatus.blocked
                             }
                             if let note = (object as AnyObject).value(forKey: "note") as? String{
                                 let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: note,date: date)

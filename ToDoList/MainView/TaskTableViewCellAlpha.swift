@@ -8,15 +8,63 @@
 import Foundation
 import UIKit
 
-class TaskTableViewCellAlpha: UITableViewCell{
+
+class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
+    func showDetailView(_ row: Int) {
+            taskDelegate?.showDetailView(row)
+    }
     
+    func changeStatusFor(_ status: ToDoTaskStatus) {
+        guard let task = toDoTask else{
+            return
+        }
+        viewModel?.changeStatusFor(task, status)
+
+      changeStatusColor(status)
+    }
+    
+    func changeStatusColor(_ status: ToDoTaskStatus){
+        switch status {
+        case .ready:
+            statusLabel?.text = "ready"
+            statusLabel?.textColor = .white
+            statusLabel?.backgroundColor = .green
+
+        case .inProgress:
+            statusLabel?.text = "in progress"
+            statusLabel?.textColor = .white
+            statusLabel?.backgroundColor = .purple
+
+            
+        case .done:
+            statusLabel?.text = "done"
+            statusLabel?.textColor = .white
+            statusLabel?.backgroundColor = .blue
+
+            
+        case .blocked:
+            statusLabel?.text = "blocked"
+            statusLabel?.textColor = .white
+            statusLabel?.backgroundColor = .red
+
+            
+        default:
+            statusLabel?.text = "ready"
+            statusLabel?.textColor = .white
+            statusLabel?.backgroundColor = .green
+
+        }
+    }
     var moreButton = UIButton()
-    var statusButton = UIButton()
+    
+    var statusLabel:StatusLabel? = StatusLabel()
 
     var expanded: Bool?
- 
+
     var viewModel: ToDoListViewModel?
+    
     weak var taskDelegate: TaskCellDelegate?
+    
     var coreDataManager: CoreDataManager?
 
     var bottomConstraint: NSLayoutConstraint!
@@ -26,7 +74,10 @@ class TaskTableViewCellAlpha: UITableViewCell{
     var heightConstant: CGFloat = 0.0
 
     var bStack = StatusButtonStack(frame: .zero)
+    var mStack = MoreButtonStack(frame: .zero)
+
     var buttonStack = UIStackView()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -45,48 +96,97 @@ class TaskTableViewCellAlpha: UITableViewCell{
             if let d = toDoTask?.date{
                 dateLabel.text = dateFormatter.string(from: d as Date)
             }
-           // guard let statusSwitcher = statusSwitcher else {return}
-//            statusSwitcher.toDoTask = toDoTask
-//            if let status = toDoTask?.taskStatus{
-//                if statusSwitcher.status != status{
-//                    statusSwitcher.status = status
-//                    statusSwitcher.cycleStatusNoAnimation(status)
-//                }
-//            }
+            statusLabel?.text = toDoTask?.taskStatus?.rawValue
+            if let status = toDoTask?.taskStatus{
+                changeStatusColor(status)
+            }
         }
     }
     
     var taskView: UIView
-    var row : Int?
+    var row : Int?{
+        didSet{
+            mStack.row = row
+        }
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         taskView = UIView()
 
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.contentView.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.font = UIFont(name: "Arial", size: 22)
+
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor,constant: 12),
+            titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant:16)
+        ])
+        
+        guard let statusLabel = statusLabel else{
+            return
+        }
+        statusLabel.layer.cornerRadius = StyleTokens.buttonCornerRadius
+        self.contentView.addSubview(statusLabel)
+        statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        statusLabel.font = UIFont(name: "Arial", size: 22)
+
+        
+        NSLayoutConstraint.activate([
+            statusLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor,constant: 12),
+            statusLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant:-16)
+        ])
+
+        
+        dateLabel.font = UIFont(name: "Arial", size: 16)
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(dateLabel)
+        NSLayoutConstraint.activate([
+            dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 8),
+            dateLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant:16)
+        ])
 
         buttonStack.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(buttonStack)
         NSLayoutConstraint.activate([
-            buttonStack.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            buttonStack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 50),
-            buttonStack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant: -50),
-            buttonStack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            buttonStack.topAnchor.constraint(equalTo: dateLabel.bottomAnchor,constant: 16),
+            buttonStack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 16),
+            buttonStack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant: -16),
+            buttonStack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,constant: -16),
         ])
         
         buttonStack.axis = .vertical
-        moreButton.setTitle("more", for: .normal)
-        statusButton.setTitle("status", for: .normal)
+        
+        mStack = MoreButtonStack()
+        mStack.statusDelegate = self
+        mStack.setup()
+        mStack.translatesAutoresizingMaskIntoConstraints = false
+//        self.contentView.addSubview(mStack)
+//        NSLayoutConstraint.activate([
+//            mStack.topAnchor.constraint(equalTo: bStack.bottomAnchor,constant: 16),
+//            mStack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 50),
+//            mStack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant: -50),
+//            mStack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,constant: -16),
+//        ])
 
-        moreButton.backgroundColor = .blue
-        statusButton.backgroundColor = .blue
-        buttonStack.addArrangedSubview(moreButton)
+
+
+        statusLabel.textColor = .white
+
+        //statusLabel.backgroundColor = .blue
+        //buttonStack.addArrangedSubview(moreButton)
         bStack.setup()
         buttonStack.addArrangedSubview(bStack)
+        buttonStack.addArrangedSubview(mStack)
+        buttonStack.spacing = 16
+        mStack.row = row
+        mStack.delegate = self
+        bStack.delegate = self
 
         setup()
     }
-    
+        
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -99,13 +199,14 @@ class TaskTableViewCellAlpha: UITableViewCell{
     var titleLabel = UILabel()
     var dateLabel = UILabel()
     var deleteLabel = UILabel()
-    var statusLabel = UILabel()
     
     func setup(){
         if expanded == true{
             bStack.isHidden = false
+            mStack.isHidden = false
         }else{
             bStack.isHidden = true
+            mStack.isHidden = true
         }
     }
     func setup2(){
@@ -213,34 +314,10 @@ class TaskTableViewCellAlpha: UITableViewCell{
         
         layoutIfNeeded()
     }
-    
-    var initialCenter = CGPoint(x: 0, y: 0)
-    @objc private func didPan(_ sender: UIPanGestureRecognizer) {
-        switch sender.state {
-        case .began:
-            initialCenter = taskView.center
-
-        case .changed:
-            let translation = sender.translation(in: self)
-
-            taskView.center = CGPoint(x: initialCenter.x + translation.x,
-                                          y: initialCenter.y )
-            
-        case .ended:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                UIView.animate(withDuration: 0.6) {
-                    self.taskView.frame.origin = CGPoint(x: 0,
-                                           y: 0)
-                }
-            }
-        default:
-            break
-        }
-    }
 
     @objc func goToDetail(){
         if let row = row{
-            //taskDelegate?.showDetailView(row)
+            taskDelegate?.showDetailView(row)
         }
     }
     @objc func deleteTask(){
@@ -249,7 +326,67 @@ class TaskTableViewCellAlpha: UITableViewCell{
         }
     }
     
-//    override func prepareForReuse() {
-//        statusSwitcher = nil
-//    }
+    @objc func changeStatusReady(){
+        if let toDoTask{
+            viewModel?.changeStatusFor(toDoTask, .ready)
+            statusLabel?.text = ToDoTaskStatus.ready.rawValue
+        }
+    }
+    @objc func changeStatusInProgress(){
+        if let toDoTask{
+            
+            viewModel?.changeStatusFor(toDoTask, .inProgress)
+            statusLabel?.text = ToDoTaskStatus.inProgress.rawValue
+
+        }
+    }
+    @objc func changeStatusDone(){
+        if let toDoTask{
+            
+            viewModel?.changeStatusFor(toDoTask, .done)
+            statusLabel?.text = ToDoTaskStatus.done.rawValue
+
+        }
+    }
+    @objc func changeStatusBlocked(){
+        if let toDoTask{
+            
+            viewModel?.changeStatusFor(toDoTask, .blocked)
+            statusLabel?.text = ToDoTaskStatus.blocked.rawValue
+
+        }
+    }
+
+    override func prepareForReuse() {
+        //statusLabel = nil
+       // statusLabel = UILabel()
+    }
+}
+ class StatusLabel: UILabel {
+
+    @IBInspectable var topInset: CGFloat = 8.0
+    @IBInspectable var bottomInset: CGFloat = 8.0
+    @IBInspectable var leftInset: CGFloat = 8.0
+    @IBInspectable var rightInset: CGFloat = 8.0
+
+    override func drawText(in rect: CGRect) {
+        let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+        super.drawText(in: rect.inset(by: insets))
+        
+        self.layer.cornerRadius = StyleTokens.buttonCornerRadius
+        self.layer.masksToBounds = true
+    }
+
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        return CGSize(width: size.width + leftInset + rightInset,
+                      height: size.height + topInset + bottomInset)
+    }
+
+    override var bounds: CGRect {
+        didSet {
+            // ensures this works within stack views if multi-line
+            preferredMaxLayoutWidth = bounds.width - (leftInset + rightInset)
+        }
+    }
 }

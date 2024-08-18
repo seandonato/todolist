@@ -76,12 +76,7 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
             if let _ = coreDataManager?.saveTaskWithList(task, list){
                  fetchData()
             }
-
         }
-       // if let _ = coreDataManager?.saveTaskWithList(task, self.list)
-//        if let _ = coreDataManager?.saveTask(task){
-//            fetchData()
-//        }
     }
 
     //new

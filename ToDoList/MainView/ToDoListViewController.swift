@@ -154,18 +154,16 @@ extension ToDoListViewController: UITableViewDelegate{
         }
 
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cella") as? TaskTableViewCellAlpha{
-                cell.viewModel = viewModel
-                cell.taskDelegate = self
-                cell.toDoTask = task
-                cell.expanded = task.expanded
-                cell.setup()
-                cell.row = indexPath.row
-                return cell
-            }
-
+            cell.viewModel = viewModel
+            cell.taskDelegate = self
+            cell.toDoTask = task
+            cell.expanded = task.expanded
+            cell.setup()
+            cell.row = indexPath.row
+            return cell
+        }
         return UITableViewCell()
     }
-    
 }
 
 extension ToDoListViewController: UITableViewDataSource{
@@ -173,13 +171,11 @@ extension ToDoListViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cellModel = viewModel.tasks?[indexPath.row]{
             tableView.beginUpdates()
-           // tableView.reloadRows(at: [indexPath], with: .automatic)
             viewModel.tasks?[indexPath.row].expanded.toggle()
+             tableView.reloadRows(at: [indexPath], with: .automatic)
 
-            tableView.reloadData()
+            // tableView.reloadData()
             tableView.endUpdates()
-
-
         }
         
 //        if let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCellAlpha{
