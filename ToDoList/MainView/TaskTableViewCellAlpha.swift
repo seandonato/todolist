@@ -11,8 +11,10 @@ import UIKit
 
 class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
     func showDetailView(_ row: Int) {
-            taskDelegate?.showDetailView(row)
+        taskDelegate?.showDetailView(row)
     }
+    
+    var selectedStatus: ToDoTaskStatus?
     
     func changeStatusFor(_ status: ToDoTaskStatus) {
         guard let task = toDoTask else{
@@ -28,31 +30,31 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
         case .ready:
             statusLabel?.text = "ready"
             statusLabel?.textColor = .white
-            statusLabel?.backgroundColor = .green
+            statusLabel?.backgroundColor = StyleTokens.readySelected
+            labelWidthConstraint.constant = 100
 
         case .inProgress:
             statusLabel?.text = "in progress"
             statusLabel?.textColor = .white
-            statusLabel?.backgroundColor = .purple
+            statusLabel?.backgroundColor = StyleTokens.inProgressSelected
+            labelWidthConstraint.constant = 130
 
-            
         case .done:
             statusLabel?.text = "done"
             statusLabel?.textColor = .white
-            statusLabel?.backgroundColor = .blue
+            statusLabel?.backgroundColor = StyleTokens.doneSelected
+            labelWidthConstraint.constant = 80
 
-            
         case .blocked:
             statusLabel?.text = "blocked"
             statusLabel?.textColor = .white
-            statusLabel?.backgroundColor = .red
+            statusLabel?.backgroundColor = StyleTokens.blockedSelected
+            labelWidthConstraint.constant = 130
 
-            
         default:
             statusLabel?.text = "ready"
             statusLabel?.textColor = .white
-            statusLabel?.backgroundColor = .green
-
+            statusLabel?.backgroundColor = StyleTokens.readySelected
         }
     }
     var moreButton = UIButton()
@@ -74,10 +76,12 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
     var heightConstant: CGFloat = 0.0
 
     var bStack = StatusButtonStack(frame: .zero)
-    var mStack = MoreButtonStack(frame: .zero)
 
     var buttonStack = UIStackView()
-    
+     
+    var labelWidth: CGFloat = 100
+    var labelWidthConstraint: NSLayoutConstraint!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -99,6 +103,7 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
             statusLabel?.text = toDoTask?.taskStatus?.rawValue
             if let status = toDoTask?.taskStatus{
                 changeStatusColor(status)
+                bStack.selectedStatus = status
             }
         }
     }
@@ -106,7 +111,7 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
     var taskView: UIView
     var row : Int?{
         didSet{
-            mStack.row = row
+            bStack.row = self.row
         }
     }
     
@@ -124,6 +129,9 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
             titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant:16)
         ])
         
+        labelWidthConstraint = titleLabel.widthAnchor.constraint(equalToConstant: labelWidth)
+        labelWidthConstraint.isActive = true
+        
         guard let statusLabel = statusLabel else{
             return
         }
@@ -132,13 +140,11 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         statusLabel.font = UIFont(name: "Arial", size: 22)
 
-        
         NSLayoutConstraint.activate([
             statusLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor,constant: 12),
             statusLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant:-16)
         ])
 
-        
         dateLabel.font = UIFont(name: "Arial", size: 16)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(dateLabel)
@@ -158,32 +164,14 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
         
         buttonStack.axis = .vertical
         
-        mStack = MoreButtonStack()
-        mStack.statusDelegate = self
-        mStack.setup()
-        mStack.translatesAutoresizingMaskIntoConstraints = false
-//        self.contentView.addSubview(mStack)
-//        NSLayoutConstraint.activate([
-//            mStack.topAnchor.constraint(equalTo: bStack.bottomAnchor,constant: 16),
-//            mStack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 50),
-//            mStack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant: -50),
-//            mStack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,constant: -16),
-//        ])
-
-
-
         statusLabel.textColor = .white
 
-        //statusLabel.backgroundColor = .blue
-        //buttonStack.addArrangedSubview(moreButton)
         bStack.setup()
         buttonStack.addArrangedSubview(bStack)
-        buttonStack.addArrangedSubview(mStack)
         buttonStack.spacing = 16
-        mStack.row = row
-        mStack.delegate = self
         bStack.delegate = self
-
+        bStack.taskDelegate = self
+        bStack.row = self.row
         setup()
     }
         
@@ -203,116 +191,9 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
     func setup(){
         if expanded == true{
             bStack.isHidden = false
-            mStack.isHidden = false
         }else{
             bStack.isHidden = true
-            mStack.isHidden = true
         }
-    }
-    func setup2(){
-        if expanded == true{
-            heightConstant = 200
-        }else{
-            heightConstant = 100
-        }
-
-        heightConstraint = contentView.heightAnchor.constraint(equalToConstant: heightConstant)
-        
-        heightConstraint.isActive = true
-        titleLabel.isUserInteractionEnabled = true
-
-        taskView.backgroundColor = UIColor(named: "Background")
-        taskView.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(taskView)
-        NSLayoutConstraint.activate([
-            taskView.topAnchor.constraint(equalTo: self.contentView.topAnchor,constant: 0),
-            taskView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,constant: 0),
-            taskView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant:0),
-            taskView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant:bottomConstant)
-        ])
-
-        taskView.addSubview(titleLabel)
-        
-
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont(name: "Arial", size: 22)
-
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: taskView.topAnchor,constant: 12),
-            titleLabel.leadingAnchor.constraint(equalTo: taskView.leadingAnchor,constant:16)
-        ])
-        
-        dateLabel.font = UIFont(name: "Arial", size: 16)
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(dateLabel)
-        NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 8),
-            dateLabel.leadingAnchor.constraint(equalTo: taskView.leadingAnchor,constant:16)
-        ])
-
-        switcherLabel.translatesAutoresizingMaskIntoConstraints = false
-        switcherLabel.text = self.toDoTask?.taskStatus?.rawValue
-       // if let switcher = switcherLabel{
-            taskView.addSubview(switcherLabel)
-            NSLayoutConstraint.activate([
-                switcherLabel.topAnchor.constraint(equalTo: self.taskView.topAnchor,constant: 10),
-                //switcherLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,constant: -16),
-                switcherLabel.trailingAnchor.constraint(equalTo: self.taskView.trailingAnchor,constant: -16),
-                switcherLabel.widthAnchor.constraint(equalToConstant: 100),
-                switcherLabel.heightAnchor.constraint(equalToConstant: 36)
-
-            ])
-            //switcher.panGestureRecognizer?.cancelsTouchesInView =  true
-       // }
-        
-        bottomConstraint = switcherLabel.bottomAnchor.constraint(equalTo: self.taskView.bottomAnchor, constant: bottomConstant)
-
-        //bottomConstraint.isActive = true
-
-        moreButton.setTitle("More", for: .normal)
-        moreButton.backgroundColor = .blue
-        moreButton.translatesAutoresizingMaskIntoConstraints = false
-        taskView.addSubview(moreButton)
-        if let exp = expanded{
-            moreButton.isHidden = !exp 
-            if exp == true{
-                bottomConstraint.isActive = false
-
-                bottomConstant = 100
-                bottomConstraint.isActive = true
-
-
-            }else{
-                bottomConstraint.isActive = false
-
-                bottomConstant = 0
-                bottomConstraint.isActive = true
-
-            }
-        }
-        NSLayoutConstraint.activate([
-            moreButton.topAnchor.constraint(equalTo: switcherLabel.bottomAnchor,constant: 10),
-            //moreButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,constant: -16),
-            moreButton.trailingAnchor.constraint(equalTo: self.taskView.trailingAnchor,constant: -16),
-            moreButton.widthAnchor.constraint(equalToConstant: 100),
-            moreButton.heightAnchor.constraint(equalToConstant: 36)
-        ])
-        
-        
-//        taskView.addSubview(rightView)
-//        
-//        rightView.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        NSLayoutConstraint.activate([
-//            rightView.topAnchor.constraint(equalTo: taskView.topAnchor,constant: 0),
-//            rightView.bottomAnchor.constraint(equalTo: taskView.bottomAnchor,constant: -12),
-//            rightView.trailingAnchor.constraint(equalTo: taskView.trailingAnchor,constant:16),
-//            rightView.widthAnchor.constraint(equalToConstant: 100),
-//            rightView.heightAnchor.constraint(equalTo: taskView.heightAnchor)
-//        ])
-//        rightView.addGestureRecognizer(panGestureRec)
-        
-        layoutIfNeeded()
     }
 
     @objc func goToDetail(){
@@ -320,6 +201,7 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
             taskDelegate?.showDetailView(row)
         }
     }
+    
     @objc func deleteTask(){
         if let toDoTask = toDoTask{
             viewModel?.deleteTask(toDoTask)
@@ -330,8 +212,10 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
         if let toDoTask{
             viewModel?.changeStatusFor(toDoTask, .ready)
             statusLabel?.text = ToDoTaskStatus.ready.rawValue
+            
         }
     }
+    
     @objc func changeStatusInProgress(){
         if let toDoTask{
             
@@ -354,6 +238,7 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
             viewModel?.changeStatusFor(toDoTask, .blocked)
             statusLabel?.text = ToDoTaskStatus.blocked.rawValue
 
+            
         }
     }
 
@@ -361,6 +246,8 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
         //statusLabel = nil
        // statusLabel = UILabel()
     }
+    
+
 }
  class StatusLabel: UILabel {
 

@@ -21,7 +21,7 @@ class ToDoListViewController: UIViewController,UITextFieldDelegate, ToDoListView
     var tableView: UITableView = UITableView()
     var entryField: UITextField = UITextField()
     var addButton: TDLButton = TDLButton()
-    
+    var expandedRow: Int?
     //new for group
     var groupSwitchButton: TDLButton = TDLButton()
 
@@ -157,7 +157,7 @@ extension ToDoListViewController: UITableViewDelegate{
             cell.viewModel = viewModel
             cell.taskDelegate = self
             cell.toDoTask = task
-            cell.expanded = task.expanded
+            cell.expanded = expandedRow == indexPath.row ? true : false
             cell.setup()
             cell.row = indexPath.row
             return cell
@@ -170,8 +170,15 @@ extension ToDoListViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cellModel = viewModel.tasks?[indexPath.row]{
+            
             tableView.beginUpdates()
             viewModel.tasks?[indexPath.row].expanded.toggle()
+            if viewModel.tasks?[indexPath.row].expanded == true{
+                self.expandedRow = indexPath.row
+            }else{
+                self.expandedRow = nil
+
+            }
              tableView.reloadRows(at: [indexPath], with: .automatic)
 
             // tableView.reloadData()

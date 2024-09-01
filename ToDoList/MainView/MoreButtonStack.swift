@@ -22,7 +22,10 @@ class MoreButtonStack: UIView{
 
     weak var delegate: TaskCellDelegate?
     var stack: UIStackView = UIStackView()
-    var more = StatusButton()
+    var topStack: UIStackView = UIStackView()
+    var bottomStack: UIStackView = UIStackView()
+
+    var more = UIButton()
     var row: Int?
     var blocked = StatusButton()
 
@@ -30,22 +33,35 @@ class MoreButtonStack: UIView{
         
         more.setTitle("More >", for: .normal)
         
-        more.backgroundColor = .blue
+        //more.backgroundColor = .gray
+        more.setTitleColor(.black, for: .normal)
         more.addTarget(self, action: #selector(showDetail), for: .touchUpInside)
         
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        view.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        view.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        blocked.translatesAutoresizingMaskIntoConstraints = false
+
         blocked.setTitle("blocked", for: .normal)
+        blocked.widthAnchor.constraint(equalToConstant: 100).isActive = true
+
         blocked.backgroundColor = .red
         blocked.addTarget(self, action: #selector(blockedSwitch), for: .touchUpInside)
 
-        stack.addArrangedSubview(blocked)
+        
+        topStack.addArrangedSubview(blocked)
+        topStack.addArrangedSubview(view)
+        topStack.distribution = .fillProportionally
 
-        stack.addArrangedSubview(view)
-        stack.addArrangedSubview(more)
+        bottomStack.addArrangedSubview(UIView())
 
+        bottomStack.addArrangedSubview(more)
+
+        stack.addArrangedSubview(topStack)
+        stack.addArrangedSubview(bottomStack)
+
+        stack.axis = .vertical
         stack.spacing = 12
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.distribution = .fillProportionally
