@@ -10,7 +10,7 @@ import UIKit
 
 
 class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
-    func showDetailView(_ row: Int) {
+    func showDetailView(_ row: Int) { 
         taskDelegate?.showDetailView(row)
     }
     
