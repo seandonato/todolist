@@ -14,4 +14,8 @@ protocol TaskCellDelegate : AnyObject{
 
 protocol StatusPickerDelegate: AnyObject{
     func changeStatusFor(_ task:ToDoTask,_ status:ToDoTaskStatus)
+
+}
+protocol StatusUISwitcher: AnyObject{
+    func changeStatusFor(_ status:ToDoTaskStatus)
 }

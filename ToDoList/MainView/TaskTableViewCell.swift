@@ -202,4 +202,8 @@ class TaskTableViewCell: UITableViewCell{
             viewModel?.deleteTask(toDoTask)
         }
     }
+    
+    override func prepareForReuse() {
+        statusSwitcher = nil
+    }
 }
