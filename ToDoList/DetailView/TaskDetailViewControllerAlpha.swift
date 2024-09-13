@@ -9,13 +9,25 @@ import Foundation
 import UIKit
 
 
-class TaskDetailViewControllerAlpha: UIViewController,UITextViewDelegate{
+class TaskDetailViewControllerAlpha: UIViewController,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return rows
+    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        return UITableViewCell()
+    }
+    
+    var rows = 3
+    
+    //tableview with items cells, add item cell, notes cells, add note cell
     let viewModel: TaskDetailVCViewModel
     var textView = UITextView()
     let titleLabel = UILabel()
     let saveButton = TDLButton()
     var keyboardDismissView = UIView()
+    var tableView: UITableView = UITableView()
     
     init(_ viewModel: TaskDetailVCViewModel) {
         self.viewModel = viewModel
@@ -59,40 +71,51 @@ class TaskDetailViewControllerAlpha: UIViewController,UITextViewDelegate{
             statusSwitcher.widthAnchor.constraint(equalToConstant: 100)
 
         ])
-        self.view.addSubview(textView)
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            textView.topAnchor.constraint(equalTo: statusSwitcher.bottomAnchor,constant: 26),
-            textView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 16),
-            textView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -16),
-            textView.heightAnchor.constraint(equalToConstant: 350)
-
-        ])
-        textView.text = viewModel.toDoTask.note
-        textView.layer.borderWidth = 0.5
-        textView.layer.borderColor = UIColor(named: "Border")?.cgColor
-        textView.font = .systemFont(ofSize: 16)
-        self.view.addSubview(saveButton)
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            saveButton.topAnchor.constraint(equalTo: textView.bottomAnchor,constant: 12),
-            saveButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -16),
-            saveButton.widthAnchor.constraint(equalToConstant: 75)
-
-        ])
-
-        self.view.addSubview(keyboardDismissView)
-        keyboardDismissView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            keyboardDismissView.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 12),
-            keyboardDismissView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: 0),
-            keyboardDismissView.leadingAnchor.constraint(equalTo: statusSwitcher.trailingAnchor,constant: 8),
-            keyboardDismissView.bottomAnchor.constraint(equalTo: textView.topAnchor,constant: 8)
-        ])
         
-        let tapGesture = UITapGestureRecognizer()
-        tapGesture.addTarget(self, action: #selector(dismissKB))
-        keyboardDismissView.addGestureRecognizer(tapGesture)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(tableView)
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: statusSwitcher.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: statusSwitcher.topAnchor)
+        ])
+//        self.view.addSubview(textView)
+//        textView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            textView.topAnchor.constraint(equalTo: statusSwitcher.bottomAnchor,constant: 26),
+//            textView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 16),
+//            textView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -16),
+//            textView.heightAnchor.constraint(equalToConstant: 350)
+//
+//        ])
+//        textView.text = viewModel.toDoTask.note
+//        textView.layer.borderWidth = 0.5
+//        textView.layer.borderColor = UIColor(named: "Border")?.cgColor
+//        textView.font = .systemFont(ofSize: 16)
+//        self.view.addSubview(saveButton)
+//        saveButton.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            saveButton.topAnchor.constraint(equalTo: textView.bottomAnchor,constant: 12),
+//            saveButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -16),
+//            saveButton.widthAnchor.constraint(equalToConstant: 75)
+//
+//        ])
+
+//        self.view.addSubview(keyboardDismissView)
+//        keyboardDismissView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            keyboardDismissView.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 12),
+//            keyboardDismissView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: 0),
+//            keyboardDismissView.leadingAnchor.constraint(equalTo: statusSwitcher.trailingAnchor,constant: 8),
+//            keyboardDismissView.bottomAnchor.constraint(equalTo: textView.topAnchor,constant: 8)
+//        ])
+//        
+//        let tapGesture = UITapGestureRecognizer()
+//        tapGesture.addTarget(self, action: #selector(dismissKB))
+//        keyboardDismissView.addGestureRecognizer(tapGesture)
     }
     
     @objc func dismissKB(){

@@ -36,6 +36,8 @@
 		A98BF9F02C6F81C3004A3505 /* StyleTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9EF2C6F81C3004A3505 /* StyleTokens.swift */; };
 		A98BF9F22C874553004A3505 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9F12C874553004A3505 /* ToDoItem.swift */; };
 		A98BF9F42C874B9A004A3505 /* TaskDetailViewControllerAlpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9F32C874B9A004A3505 /* TaskDetailViewControllerAlpha.swift */; };
+		A98BF9F62C94DE39004A3505 /* AddItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9F52C94DE39004A3505 /* AddItemCell.swift */; };
+		A98BF9F82C94DFEE004A3505 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9F72C94DFEE004A3505 /* AddItemViewController.swift */; };
 		A9A070C72B69B3A7005DB5E1 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A070C62B69B3A7005DB5E1 /* TaskDetailViewController.swift */; };
 		A9A070CD2B6C60EA005DB5E1 /* StatusSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A070CC2B6C60EA005DB5E1 /* StatusSwitcher.swift */; };
 		A9BAD43D2BAD2EBF00C9CBF1 /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BAD43C2BAD2EBF00C9CBF1 /* ToDoListViewModel.swift */; };
@@ -94,6 +96,8 @@
 		A98BF9EF2C6F81C3004A3505 /* StyleTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleTokens.swift; sourceTree = "<group>"; };
 		A98BF9F12C874553004A3505 /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		A98BF9F32C874B9A004A3505 /* TaskDetailViewControllerAlpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewControllerAlpha.swift; sourceTree = "<group>"; };
+		A98BF9F52C94DE39004A3505 /* AddItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemCell.swift; sourceTree = "<group>"; };
+		A98BF9F72C94DFEE004A3505 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		A9A070C62B69B3A7005DB5E1 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		A9A070CC2B6C60EA005DB5E1 /* StatusSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusSwitcher.swift; sourceTree = "<group>"; };
 		A9BAD43C2BAD2EBF00C9CBF1 /* ToDoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
@@ -209,6 +213,8 @@
 				A9A070C62B69B3A7005DB5E1 /* TaskDetailViewController.swift */,
 				A9BAD43E2BAE502C00C9CBF1 /* TaskDetailVCViewModel.swift */,
 				A98BF9F32C874B9A004A3505 /* TaskDetailViewControllerAlpha.swift */,
+				A98BF9F52C94DE39004A3505 /* AddItemCell.swift */,
+				A98BF9F72C94DFEE004A3505 /* AddItemViewController.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -386,6 +392,7 @@
 				A98BF9F22C874553004A3505 /* ToDoItem.swift in Sources */,
 				A981360F2BD02868000B5AE2 /* CoreDataGroupManager.swift in Sources */,
 				A925446729BBBD9D00F38E7C /* ToDoListViewController.swift in Sources */,
+				A98BF9F82C94DFEE004A3505 /* AddItemViewController.swift in Sources */,
 				A94745DD2B9BD8E9002DE068 /* Protocols.swift in Sources */,
 				A9A070CD2B6C60EA005DB5E1 /* StatusSwitcher.swift in Sources */,
 				A98136132BD050B2000B5AE2 /* AddTaskCell.swift in Sources */,
@@ -404,6 +411,7 @@
 				A981363B2BF4FC69000B5AE2 /* StatusPicker.swift in Sources */,
 				A925449629BBC50900F38E7C /* ToDoTask.swift in Sources */,
 				A98136112BD04630000B5AE2 /* GroupListViewController.swift in Sources */,
+				A98BF9F62C94DE39004A3505 /* AddItemCell.swift in Sources */,
 				A925446329BBBD9D00F38E7C /* AppDelegate.swift in Sources */,
 				A925449A29BBCBCE00F38E7C /* CoreDataManager.swift in Sources */,
 				A98BF9F42C874B9A004A3505 /* TaskDetailViewControllerAlpha.swift in Sources */,

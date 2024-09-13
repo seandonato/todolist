@@ -115,6 +115,7 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
         }
     }
     
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         taskView = UIView()
 
@@ -129,21 +130,29 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
             titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant:16)
         ])
         
-        labelWidthConstraint = titleLabel.widthAnchor.constraint(equalToConstant: labelWidth)
-        labelWidthConstraint.isActive = true
+        if let statusLabel{
+            labelWidthConstraint = statusLabel.widthAnchor.constraint(equalToConstant: labelWidth)
+            labelWidthConstraint.isActive = true
+
+        }
         
         guard let statusLabel = statusLabel else{
             return
         }
+        
         statusLabel.layer.cornerRadius = StyleTokens.buttonCornerRadius
         self.contentView.addSubview(statusLabel)
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         statusLabel.font = UIFont(name: "Arial", size: 22)
 
+        statusLabel.textAlignment = .center
         NSLayoutConstraint.activate([
             statusLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor,constant: 12),
             statusLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant:-16)
         ])
+
+        titleLabel.numberOfLines = 0
+        titleLabel.trailingAnchor.constraint(equalTo: statusLabel.leadingAnchor,constant:-16).isActive = true
 
         dateLabel.font = UIFont(name: "Arial", size: 16)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false

@@ -2390,6 +2390,21 @@
                   endingLineNumber = "91"
                   offsetFromSymbolStart = "292">
                </Location>
+               <Location
+                  uuid = "D758938D-F89E-4378-B698-3CBE120497B8 - 96aba8837acdc0d8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoList.CoreDataManager.getTasks() -&gt; Swift.Optional&lt;Swift.Array&lt;ToDoList.ToDoTask&gt;&gt;"
+                  moduleName = "ToDoList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seandonato/Downloads/ToDoList/ToDoList/Services/CoreDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "352">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -2544,6 +2559,36 @@
                   startingLineNumber = "293"
                   endingLineNumber = "293"
                   offsetFromSymbolStart = "452">
+               </Location>
+               <Location
+                  uuid = "8C3BC394-7C6C-45CB-AF12-B0572A003CED - 8c253dc192cab595"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoList.CoreDataManager.tasksFromManagedObject(Swift.Array&lt;Swift.AnyObject&gt;) -&gt; Swift.Optional&lt;Swift.Array&lt;ToDoList.ToDoTask&gt;&gt;"
+                  moduleName = "ToDoList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seandonato/Downloads/ToDoList/ToDoList/Services/CoreDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "293"
+                  endingLineNumber = "293"
+                  offsetFromSymbolStart = "392">
+               </Location>
+               <Location
+                  uuid = "8C3BC394-7C6C-45CB-AF12-B0572A003CED - 8c253dc192cab595"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoList.CoreDataManager.tasksFromManagedObject(Swift.Array&lt;Swift.AnyObject&gt;) -&gt; Swift.Optional&lt;Swift.Array&lt;ToDoList.ToDoTask&gt;&gt;"
+                  moduleName = "ToDoList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seandonato/Downloads/ToDoList/ToDoList/Services/CoreDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "293"
+                  endingLineNumber = "293"
+                  offsetFromSymbolStart = "520">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2828,8 +2873,8 @@
             filePath = "ToDoList/MainView/TaskTableViewCellAlpha.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "setup()"
             landmarkType = "7">
             <Locations>
@@ -2876,8 +2921,8 @@
             filePath = "ToDoList/MainView/TaskTableViewCellAlpha.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
             landmarkName = "setup()"
             landmarkType = "7">
             <Locations>
@@ -2924,8 +2969,8 @@
             filePath = "ToDoList/MainView/TaskTableViewCellAlpha.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "setup()"
             landmarkType = "7">
             <Locations>
@@ -2972,8 +3017,8 @@
             filePath = "ToDoList/MainView/TaskTableViewCellAlpha.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "setup()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3052,8 +3097,8 @@
             filePath = "ToDoList/MainView/TaskTableViewCellAlpha.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "init(style:reuseIdentifier:)"
             landmarkType = "7">
             <Locations>
@@ -3308,8 +3353,8 @@
             filePath = "ToDoList/MainView/TaskTableViewCellAlpha.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "init(style:reuseIdentifier:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3324,8 +3369,8 @@
             filePath = "ToDoList/MainView/TaskTableViewCellAlpha.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "init(style:reuseIdentifier:)"
             landmarkType = "7">
          </BreakpointContent>

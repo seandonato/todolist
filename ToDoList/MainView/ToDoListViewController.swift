@@ -207,7 +207,10 @@ extension ToDoListViewController: TaskCellDelegate{
     func showDetailView(_ row: Int) {
         guard let task = viewModel.tasks?[row] else {return}
         let viewModel = TaskDetailVCViewModel(toDoTask: task, coreDataManager: viewModel.coreDataManager)
-        let taskDetailView = TaskDetailViewController(viewModel)
+//        let taskDetailView = TaskDetailViewController(viewModel)
+        let taskDetailView = TaskDetailViewControllerAlpha(viewModel)
+
+        
         self.navigationController?.pushViewController(taskDetailView, animated: true)
 
     }
