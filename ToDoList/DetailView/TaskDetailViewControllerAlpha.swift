@@ -11,15 +11,23 @@ import UIKit
 
 class TaskDetailViewControllerAlpha: UIViewController,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rows
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        if indexPath.row < items.count{
+            
+        }else{
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "addItem", for: indexPath) as? AddItemCell{
+                cell.setup()
+                return cell
+            }
+        }
         return UITableViewCell()
     }
     
-    var rows = 3
+    var rows = 0
     
     //tableview with items cells, add item cell, notes cells, add note cell
     let viewModel: TaskDetailVCViewModel
@@ -40,7 +48,8 @@ class TaskDetailViewControllerAlpha: UIViewController,UITextViewDelegate,UITable
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    var items = [ToDoItem]()
+
     override func viewDidLoad() {
         
         self.view.backgroundColor = UIColor(named: "Background")
@@ -75,12 +84,14 @@ class TaskDetailViewControllerAlpha: UIViewController,UITextViewDelegate,UITable
         tableView.delegate = self
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        tableView.register(AddItemCell.self, forCellReuseIdentifier: "addItem")
         self.view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: statusSwitcher.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: statusSwitcher.topAnchor)
+            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
 //        self.view.addSubview(textView)
 //        textView.translatesAutoresizingMaskIntoConstraints = false
@@ -124,4 +135,11 @@ class TaskDetailViewControllerAlpha: UIViewController,UITextViewDelegate,UITable
     @objc func saveNote(){
         viewModel.saveNote(viewModel.toDoTask, textView.text)
     }
+}
+extension TaskDetailViewControllerAlpha: AddItemDelegate{
+    func addItem() {
+        let vc = AddItemViewController(self.viewModel)
+        self.present(vc, animated: true)
+    }
+
 }

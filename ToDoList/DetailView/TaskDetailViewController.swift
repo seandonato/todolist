@@ -104,7 +104,7 @@ class TaskDetailViewController: UIViewController,UITextViewDelegate{
 }
 extension TaskDetailViewController: AddItemDelegate{
     func addItem() {
-        let vc = AddTaskViewController(self.viewModel)
+        let vc = AddItemViewController(self.viewModel)
         self.present(vc, animated: true)
     }
 

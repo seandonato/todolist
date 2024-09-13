@@ -10,13 +10,13 @@ import UIKit
 class AddItemViewController: UIViewController{
     
 //    let closeButton
-    let viewModel: ToDoListViewModel
+    let viewModel: TaskDetailVCViewModel
     var titleLabel: UILabel = UILabel()
     var entryLabel: UILabel = UILabel()
     var entryField: UITextField = UITextField()
     var addButton: TDLButton = TDLButton()
     
-    init(_ viewModel: ToDoListViewModel ) {
+    init(_ viewModel: TaskDetailVCViewModel ) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -46,8 +46,8 @@ extension AddItemViewController{
             
             titleLabel.text = "To Do List"
             titleLabel.font = .boldSystemFont(ofSize: 14)
-            addButton.setTitle("Add Task", for: .normal)
-            entryLabel.text = "Task:"
+            addButton.setTitle("Add Item", for: .normal)
+            entryLabel.text = "Item:"
             entryField.borderStyle = .line
             
             NSLayoutConstraint.activate([
@@ -83,7 +83,8 @@ extension AddItemViewController{
 extension AddItemViewController{
     @objc func saveItem(){
         if let name = entryField.text{
-            viewModel.saveTask(name)
+            //TODO save item
+           // viewModel.saveTask(name)
             self.dismiss(animated: true)
         }
     }
