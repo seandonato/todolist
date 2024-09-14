@@ -37,6 +37,10 @@ class TaskDetailVCViewModel: TaskDetailVCViewModelProtocol, StatusPickerDelegate
     func saveNote(_ task:ToDoTask,_ text:String){
         coreDataManager?.updateTaskNotes(task, text)
     }
+    func saveItem(_ item:ToDoItem){
+       // coreDataManager?.updateTaskNotes(task, text)
+        coreDataManager?.saveItemToTask(item, self.toDoTask)
+    }
 
 }
     

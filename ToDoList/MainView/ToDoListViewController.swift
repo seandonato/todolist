@@ -168,6 +168,18 @@ extension ToDoListViewController: UITableViewDelegate{
 
 extension ToDoListViewController: UITableViewDataSource{
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+      if editingStyle == .delete {
+        print("Deleted")
+
+          if let task = viewModel.tasks?[indexPath.row]{
+              self.viewModel.deleteTask(task)
+
+              viewModel.fetchData()
+          }
+      }
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cellModel = viewModel.tasks?[indexPath.row]{
             
