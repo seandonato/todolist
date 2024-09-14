@@ -141,14 +141,19 @@ extension ToDoListViewController{
 extension ToDoListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        print(indexPath.row)
         if indexPath.row == viewModel.tasks?.count ?? 0{
             let cell = AddTaskCell()
             cell.titleLabel.text = "+ Add Task"
             cell.delegate = self
             return cell
         }
-        
+        if( indexPath.row == (viewModel.tasks?.count ?? 0) + 1 ){
+            let cell = AddTaskCell()
+            cell.titleLabel.text = "+ Add Item"
+            cell.delegate = self
+            return cell
+        }
         guard let task = viewModel.tasks?[indexPath.row] else {
             return UITableViewCell()
         }
@@ -197,7 +202,7 @@ extension ToDoListViewController: UITableViewDataSource{
 //        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (viewModel.tasks?.count ?? 0) + 1
+        return (viewModel.tasks?.count ?? 0) + 2
     }
     
 }
@@ -225,5 +230,13 @@ extension ToDoListViewController: AddTaskDelegate{
 
 }
 
+
+extension ToDoListViewController: AddItemDelegate{
+    func addItem() {
+        let vc = AddListItemViewController(self.viewModel)
+        self.present(vc, animated: true)
+    }
+
+}
 
 

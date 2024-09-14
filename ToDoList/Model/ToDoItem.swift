@@ -16,3 +16,12 @@ struct ToDoItem{
     var date: NSDate
 }
 
+
+struct ToDoTaskItem{
+    var name: String
+    var brand: String
+    var quantity: Int
+    var uuid: UUID
+    var acquired: Bool?
+    var date: NSDate
+}

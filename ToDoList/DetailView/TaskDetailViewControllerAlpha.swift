@@ -48,7 +48,7 @@ class TaskDetailViewControllerAlpha: UIViewController,UITextViewDelegate,UITable
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    var items = [ToDoItem]()
+    var items = [ToDoTaskItem]()
 
     override func viewDidLoad() {
         

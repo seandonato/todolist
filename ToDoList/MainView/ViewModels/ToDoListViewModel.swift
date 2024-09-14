@@ -97,5 +97,18 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
         self.tasks = list.toDoTasks
         toDoListViewModelDelegate?.didFinishFetchingData()
     }
+    
+    
+    func saveItem(_ toDoListItemName:String){
+        let uuid = UUID()
+        //TODO: brand, quantity parameters
+        let item = ToDoItem(name: toDoListItemName, brand: "", quantity: 1, uuid: uuid, date: NSDate())
+        //new
+        if let list = list{
+            if let _ = coreDataManager?.saveItemToList(item, list){
+                 fetchData()
+            }
+        }
+    }
 }
     
