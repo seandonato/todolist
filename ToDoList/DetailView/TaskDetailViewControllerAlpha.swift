@@ -11,13 +11,22 @@ import UIKit
 
 class TaskDetailViewControllerAlpha: UIViewController,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return (viewModel.toDoTask.items?.count ?? 0) + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row < items.count{
-            
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath) as? ItemTableViewCell{
+                if let items = viewModel.toDoTask.items{
+                    cell.setup()
+
+                    cell.titleLabel.text = items[indexPath.row].name
+                    return cell
+
+                }
+            }
+
         }else{
             if let cell = tableView.dequeueReusableCell(withIdentifier: "addItem", for: indexPath) as? AddItemCell{
                 cell.setup()
@@ -39,6 +48,10 @@ class TaskDetailViewControllerAlpha: UIViewController,UITextViewDelegate,UITable
     
     init(_ viewModel: TaskDetailVCViewModel) {
         self.viewModel = viewModel
+        if let items = viewModel.toDoTask.items{
+            self.items = items
+
+        }
         super.init(nibName: nil, bundle: nil)
         titleLabel.text = viewModel.toDoTask.name
         saveButton.setTitle("save", for: .normal)
@@ -86,6 +99,7 @@ class TaskDetailViewControllerAlpha: UIViewController,UITextViewDelegate,UITable
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         tableView.register(AddItemCell.self, forCellReuseIdentifier: "addItem")
+        tableView.register(ItemTableViewCell.self, forCellReuseIdentifier: "item")
         self.view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: statusSwitcher.bottomAnchor),
@@ -134,6 +148,11 @@ class TaskDetailViewControllerAlpha: UIViewController,UITextViewDelegate,UITable
     }
     @objc func saveNote(){
         viewModel.saveNote(viewModel.toDoTask, textView.text)
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == items.count {
+            self.addItem()
+        }
     }
 }
 extension TaskDetailViewControllerAlpha: AddItemDelegate{

@@ -1,5 +1,5 @@
 //
-//  AddItemCell.swift
+//  ItemTableViewCell.swift
 //  ToDoList
 //
 //  Created by Sean Donato on 9/13/24.
@@ -7,10 +7,7 @@
 
 import Foundation
 import UIKit
-protocol AddItemDelegate: AnyObject{
-    func addItem()
-}
-class AddItemCell: UITableViewCell{
+class ItemTableViewCell: UITableViewCell{
     
     weak var delegate: AddItemDelegate?
     var viewModel: ToDoListViewModel?
@@ -26,15 +23,9 @@ class AddItemCell: UITableViewCell{
         super.setSelected(selected, animated: animated)
     }
     
-    var tapGestureRec: UITapGestureRecognizer
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        tapGestureRec = UITapGestureRecognizer()
-        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-       // self.addGestureRecognizer(tapGestureRec)
-       // tapGestureRec.addTarget(self, action: #selector(addTask))
         setup()
     }
     
@@ -51,7 +42,7 @@ class AddItemCell: UITableViewCell{
     func setup(){
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "+ Add Item"
+        titleLabel.text = ""
         
         self.contentView.addSubview(titleLabel)
         
