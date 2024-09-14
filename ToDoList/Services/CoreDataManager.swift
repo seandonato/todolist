@@ -26,7 +26,6 @@ class CoreDataManager {
         let listFetch = NSFetchRequest<NSManagedObject>(entityName: "TDTaskList")
         listFetch.predicate = NSPredicate(format: "%K == %@", "uuid", listID as any CVarArg )
         do{
-            
             let fetchResults = try managedContext.fetch(listFetch)
             if !fetchResults.isEmpty{
                 
@@ -38,9 +37,7 @@ class CoreDataManager {
                     let entity = NSEntityDescription.entity(forEntityName: "TDTask", in: managedContext)!
 
                     let managedTask = TDTask(entity: entity, insertInto: managedContext)
-
-    //                NSManagedObject(entity: entity, insertInto: managedContext)
-
+                    
                     managedTask.setValue(task.name, forKeyPath: "name")
                     let uuid = UUID()
                     managedTask.setValue(uuid, forKeyPath: "uuid")
@@ -55,22 +52,13 @@ class CoreDataManager {
                       print("Could not save. \(error), \(error.userInfo)")
                         return false
                     }
-
                 }
-                
-                
                 print(fetchResults)
-
             }
-        
-            
         }catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
               return false
           }
-        
-        //NSManagedObject(entity: entity, insertInto: managedContext)
-        
         return false
     }
 
@@ -450,6 +438,52 @@ class CoreDataManager {
         
        
         return list
+    }
+
+    // MARK: Items
+    func saveItemToTask(_ item: ToDoItem,_ task: ToDoTask) -> Bool? {
+        let managedContext = persistentContainer.viewContext
+        
+        //get list
+        print(task.name)
+        let taskID = task.uuid
+        let taskFetch = NSFetchRequest<NSManagedObject>(entityName: "TDTask")
+        taskFetch.predicate = NSPredicate(format: "%K == %@", "uuid", taskID as any CVarArg )
+        do{
+            let fetchResults = try managedContext.fetch(taskFetch)
+            if !fetchResults.isEmpty{
+                
+                let managedTask = fetchResults[0]
+                
+                if let mTask = fetchResults[0] as? TDTask{
+                    
+                    print("suck")
+                    let entity = NSEntityDescription.entity(forEntityName: "TDItem", in: managedContext)!
+
+                    let managedItem = TDItem(entity: entity, insertInto: managedContext)
+                    
+                    managedItem.setValue(task.name, forKeyPath: "name")
+                    let uuid = UUID()
+                    managedItem.setValue(uuid, forKeyPath: "uuid")
+                    managedItem.setValue("false", forKeyPath: "acquired")
+                    managedItem.setValue(NSDate(), forKeyPath: "dateCreated")
+                    
+                    mTask.addToItems(managedItem)
+                    do {
+                      try managedContext.save()
+                        return true
+                    } catch let error as NSError {
+                      print("Could not save. \(error), \(error.userInfo)")
+                        return false
+                    }
+                }
+                print(fetchResults)
+            }
+        }catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+              return false
+          }
+        return false
     }
 
 }

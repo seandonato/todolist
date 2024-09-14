@@ -28,6 +28,7 @@ class TaskDetailViewController: UIViewController,UITextViewDelegate{
         fatalError("init(coder:) has not been implemented")
     }
     
+    var items = [ToDoItem]()
     override func viewDidLoad() {
         
         self.view.backgroundColor = UIColor(named: "Background")
@@ -101,3 +102,12 @@ class TaskDetailViewController: UIViewController,UITextViewDelegate{
         viewModel.saveNote(viewModel.toDoTask, textView.text)
     }
 }
+extension TaskDetailViewController: AddItemDelegate{
+    func addItem() {
+        let vc = AddItemViewController(self.viewModel)
+        self.present(vc, animated: true)
+    }
+
+}
+
+

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23D56" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="TDItem" representedClassName="TDItem" syncable="YES" codeGenerationType="class">
+        <attribute name="acquired" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="brand" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TDTask" inverseName="items" inverseEntity="TDTask"/>
+    </entity>
     <entity name="TDTask" representedClassName="TDTask" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateFinished" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -7,6 +14,7 @@
         <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="status" optional="YES" attributeType="String"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TDItem" inverseName="task" inverseEntity="TDItem"/>
         <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TDTaskList" inverseName="tasks" inverseEntity="TDTaskList"/>
     </entity>
     <entity name="TDTaskList" representedClassName="TDTaskList" syncable="YES" codeGenerationType="class">
