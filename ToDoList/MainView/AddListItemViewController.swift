@@ -85,6 +85,7 @@ extension AddListItemViewController{
         if let name = entryField.text{
             //TODO save item
            // viewModel.saveTask(name)
+            viewModel.saveItem(name)
             self.dismiss(animated: true)
         }
     }

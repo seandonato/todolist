@@ -43,7 +43,7 @@ class CoreDataGroupManager {
             guard let name = (object as AnyObject).value(forKey: "name") as? String else{return nil}
             guard let uuid = (object as AnyObject).value(forKey: "uuid") else{return nil}
             
-            let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [])
+            let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [],items:[])
             lists.append(list)
         }
         return lists

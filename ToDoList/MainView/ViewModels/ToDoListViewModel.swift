@@ -21,7 +21,8 @@ protocol ToDoListViewModelProtocol: AnyObject{
 }
 class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
     var tasks: [ToDoTask]?
-    
+    var items: [ToDoItem]?
+
     //new. this is the current list
     var list: ToDoTaskList?
     var lists: [ToDoTaskList]?
@@ -48,6 +49,7 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
         // change to get list
         if let list = coreDataManager?.getList2(listID: list!.uuid){
             self.tasks = list.toDoTasks
+            self.items = list.items
             toDoListViewModelDelegate?.didFinishFetchingData()
         }
 
@@ -84,7 +86,7 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
     
     func saveList(_ toDoListName:String){
         let uuid = UUID()
-        let list = ToDoTaskList(name: toDoListName, uuid: uuid, toDoTasks: [])
+        let list = ToDoTaskList(name: toDoListName, uuid: uuid, toDoTasks: [],items: [])
 
         //update to save list
         if let _ = coreDataManager?.saveList(list){

@@ -5,6 +5,7 @@
         <attribute name="brand" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TDList" inverseName="items" inverseEntity="TDList"/>
     </entity>
     <entity name="TDList" representedClassName="TDList" syncable="YES" codeGenerationType="class">
