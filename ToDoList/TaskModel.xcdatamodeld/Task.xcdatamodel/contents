@@ -6,13 +6,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TDList" inverseName="items" inverseEntity="TDList"/>
-    </entity>
-    <entity name="TDList" representedClassName="TDList" syncable="YES" codeGenerationType="class">
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TDItem" inverseName="list" inverseEntity="TDItem"/>
-        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TDTask" inverseName="list" inverseEntity="TDTask"/>
+        <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TDTask" inverseName="items" inverseEntity="TDTask"/>
     </entity>
     <entity name="TDTask" representedClassName="TDTask" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

@@ -113,6 +113,15 @@ class CoreDataManager {
                 let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
                 tasks.append(task)
             }
+            
+            if let items = (object as AnyObject).value(forKey: "items") as? [ToDoItem]{
+                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: "",date: date,items: items)
+                tasks.append(task)
+            }else{
+                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
+                tasks.append(task)
+            }
+
         }
         return tasks
     }
@@ -272,6 +281,145 @@ class CoreDataManager {
             if let tasks = (object as AnyObject).value(forKey: "tasks") as? [AnyObject]{
                 
                 if let tasks = tasksFromManagedObject(tasks){
+                    let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: tasks)
+                    lists?.append(list)
+                }else{
+                    let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [])
+                    lists?.append(list)
+
+                }
+            }else{
+                let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [])
+                lists?.append(list)
+            }
+        }
+        return lists
+    }
+
+    func tasksFromManagedObject(_ managedTasks: [AnyObject]) -> [ToDoTask]?{
+        var tasks: [ToDoTask] = []
+        
+        for object in managedTasks{
+            guard let name = (object as AnyObject).value(forKey: "name") as? String else{return nil}
+            guard let uuid = (object as AnyObject).value(forKey: "uuid") else{return nil}
+            guard let status = (object as AnyObject).value(forKey: "status") as? String else{return nil}
+            guard let date = (object as AnyObject).value(forKey: "dateCreated") as? NSDate else{return nil}
+
+            var taskStatus = ToDoTaskStatus.ready
+            if status == "in progress"{
+                taskStatus = ToDoTaskStatus.inProgress
+            }else if status == "done"{
+                taskStatus = ToDoTaskStatus.done
+            }
+            if let note = (object as AnyObject).value(forKey: "note") as? String{
+                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: note,date: date)
+                tasks.append(task)
+            }else{
+                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
+                tasks.append(task)
+            }
+            if let items = (object as AnyObject).value(forKey: "items") as? [ToDoItem]{
+                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: "",date: date,items: items)
+                tasks.append(task)
+            }else{
+                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
+                tasks.append(task)
+            }
+
+        }
+        return tasks
+    }
+    func getList() -> ToDoTaskList?{
+        
+        let managedContext = persistentContainer.viewContext
+        var list: ToDoTaskList?
+        
+        guard let managedLists = fetchListsFromCoreData() else {return nil}
+        
+        if managedLists.count > 0 {
+            if let mList = managedLists[0] as? TDTaskList{
+                
+//                guard let name = (mList as AnyObject).value(forKey: "name") as? String else{return nil}
+//                guard let uuid = (mList as AnyObject).value(forKey: "uuid") else{return nil}
+//                guard let mTasks = (mList as AnyObject).value(forKey: "tasks")  else{return nil}
+
+                var tasks: [ToDoTask] = []
+                
+                
+                if let c = mList.tasks{
+                    for object in c
+                     {
+                        guard let name = (object as AnyObject).value(forKey: "name") as? String else{return nil}
+                        guard let uuid = (object as AnyObject).value(forKey: "uuid") else{return nil}
+                        guard let status = (object as AnyObject).value(forKey: "status") as? String else{return nil}
+                        guard let date = (object as AnyObject).value(forKey: "dateCreated") as? NSDate else{return nil}
+            
+                        var taskStatus = ToDoTaskStatus.ready
+                        if status == "in progress"{
+                            taskStatus = ToDoTaskStatus.inProgress
+                        }else if status == "done"{
+                            taskStatus = ToDoTaskStatus.done
+                        }
+                        if let note = (object as AnyObject).value(forKey: "note") as? String{
+                            let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: note,date: date)
+                            tasks.append(task)
+                        }else{
+                            let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
+                            tasks.append(task)
+                        }
+                        if let items = (object as AnyObject).value(forKey: "items") as? [ToDoItem]{
+                            let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: "",date: date,items: items)
+                            tasks.append(task)
+                        }else{
+                            let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
+                            tasks.append(task)
+                        }
+                    }
+
+                    list = ToDoTaskList(name: mList.name ?? "", uuid: mList.uuid as! UUID, toDoTasks: tasks)
+
+                }
+
+            }
+        
+        }
+//        for object in managedTasks{
+//            guard let name = (object as AnyObject).value(forKey: "name") as? String else{return nil}
+//            guard let uuid = (object as AnyObject).value(forKey: "uuid") else{return nil}
+//            guard let status = (object as AnyObject).value(forKey: "status") as? String else{return nil}
+//            guard let date = (object as AnyObject).value(forKey: "dateCreated") as? NSDate else{return nil}
+//
+//            var taskStatus = ToDoTaskStatus.ready
+//            if status == "in progress"{
+//                taskStatus = ToDoTaskStatus.inProgress
+//            }else if status == "done"{
+//                taskStatus = ToDoTaskStatus.done
+//            }
+//            if let note = (object as AnyObject).value(forKey: "note") as? String{
+//                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: note,date: date)
+//                //tasks.append(task)
+//            }else{
+//                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
+//                //tasks.append(task)
+//            }
+//        }
+        return list
+    }
+    func getList2(listID: UUID) -> ToDoTaskList?{
+        
+        var list: ToDoTaskList = ToDoTaskList(name: "", uuid: listID, toDoTasks: [])
+        let managedContext = persistentContainer.viewContext
+
+        let listFetch = NSFetchRequest<NSManagedObject>(entityName: "TDTaskList")
+        listFetch.predicate = NSPredicate(format: "%K == %@", "uuid", listID as any CVarArg )
+        do{
+            
+            let fetchResults = try managedContext.fetch(listFetch)
+            if !fetchResults.isEmpty{
+                
+                let managedList = fetchResults[0]
+                
+                if let mList = fetchResults[0] as? TDTaskList{
                     
                     if let items = (object as AnyObject).value(forKey: "items") as? [AnyObject]{
                         
@@ -449,26 +597,39 @@ class CoreDataManager {
                                 //                                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
                                 //                                tasks.append(task)
                             }
-                        }
-                        if let i = mList.items{
-                            for object in i
-                            {
-                                guard let name = (object as AnyObject).value(forKey: "name") as? String else{return nil}
-                                guard let uuid = (object as AnyObject).value(forKey: "uuid") else {return nil}
-                                guard let quantity = (object as AnyObject).value(forKey: "quantity") as? NSNumber else{return nil}
-//                                guard let brand = (object as AnyObject).value(forKey: "brand") as? String else{return nil}
-                                //guard let date = (object as AnyObject).value(forKey: "date") as? NSDate else{return nil}
-                                
-                                let item = ToDoItem(name: name, brand: "brand", quantity: quantity.intValue, uuid: uuid  as! UUID, date: NSDate())
-                                items.append(item)
-                                
-                                //                            if let note = (object as AnyObject).value(forKey: "note") as? String{
-                                //                                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: note,date: date)
-                                //                                tasks.append(task)
-                                //                            }else{
-                                //                                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
-                                //                                tasks.append(task)
+//                            if let note = (object as AnyObject).value(forKey: "note") as? String{
+//                                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: note,date: date)
+//                                tasks.append(task)
+//                            }else{
+//                                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
+//                                tasks.append(task)
+//                            }
+                            var todoItems = [ToDoItem]()
+                            if let task = object as? TDTask{
+
+                                if let items = task.items{
+                                    for item in items{
+                                        guard let name = (item as AnyObject).value(forKey: "name") as? String else{return nil}
+                                        guard let uuid = (object as AnyObject).value(forKey: "uuid") else{return nil}
+                                        guard let brand = (item as AnyObject).value(forKey: "brand") as? String else{return nil}
+                                        guard let acquired = (item as AnyObject).value(forKey: "acquired") as? Bool else{return nil}
+                                        guard let quantity = (item as AnyObject).value(forKey: "quantity") as? Int else{return nil}
+
+                                        var toDoItem = ToDoItem(name: name, brand: "", quantity: quantity, uuid: uuid as! UUID, date: NSDate())
+                                        todoItems.append(toDoItem)
+                                    }
+                                }
                             }
+                           
+                            
+//                            if let tdItems = todoItems{
+                                
+                                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: "",date: date,items: todoItems)
+                                tasks.append(task)
+//                            }else{
+//                                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
+//                                tasks.append(task)
+//                            }
                         }
                         
                         
@@ -499,28 +660,26 @@ class CoreDataManager {
                 let fetchResults = try managedContext.fetch(taskFetch)
                 if !fetchResults.isEmpty{
                     
-                    let managedTask = fetchResults[0]
+                    let entity = NSEntityDescription.entity(forEntityName: "TDItem", in: managedContext)!
+
+                    let managedItem = TDItem(entity: entity, insertInto: managedContext)
                     
-                    if let mTask = fetchResults[0] as? TDTask{
-                        
-                        print("suck")
-                        let entity = NSEntityDescription.entity(forEntityName: "TDTaskItem", in: managedContext)!
-                        
-                        let managedItem = TDTaskItem(entity: entity, insertInto: managedContext)
-                        
-                        managedItem.setValue(task.name, forKeyPath: "name")
-                        let uuid = UUID()
-                        managedItem.setValue(uuid, forKeyPath: "uuid")
-                        managedItem.setValue(false, forKeyPath: "acquired")
-//                        managedItem.setValue(NSDate(), forKeyPath: "dateCreated")
-                        mTask.addToItems(managedItem)
-                        do {
-                            try managedContext.save()
-                            return true
-                        } catch let error as NSError {
-                            print("Could not save. \(error), \(error.userInfo)")
-                            return false
-                        }
+                    managedItem.setValue(item.name, forKeyPath: "name")
+                    managedItem.setValue(item.brand, forKeyPath: "brand")
+
+                    let uuid = UUID()
+                    managedItem.setValue(uuid, forKeyPath: "uuid")
+                    managedItem.setValue(item.quantity, forKeyPath: "quantity")
+                    managedItem.setValue(false, forKeyPath: "acquired")
+//                    managedItem.setValue(NSDate(), forKeyPath: "dateCreated")
+                    
+                    mTask.addToItems(managedItem)
+                    do {
+                      try managedContext.save()
+                        return true
+                    } catch let error as NSError {
+                      print("Could not save. \(error), \(error.userInfo)")
+                        return false
                     }
                     print(fetchResults)
                 }

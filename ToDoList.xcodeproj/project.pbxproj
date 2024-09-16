@@ -41,6 +41,7 @@
 		A98BF9F42C874B9A004A3505 /* TaskDetailViewControllerAlpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9F32C874B9A004A3505 /* TaskDetailViewControllerAlpha.swift */; };
 		A98BF9F62C94DE39004A3505 /* AddItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9F52C94DE39004A3505 /* AddItemCell.swift */; };
 		A98BF9F82C94DFEE004A3505 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9F72C94DFEE004A3505 /* AddItemViewController.swift */; };
+		A98BF9FA2C94FBD4004A3505 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9F92C94FBD4004A3505 /* ItemTableViewCell.swift */; };
 		A9A070C72B69B3A7005DB5E1 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A070C62B69B3A7005DB5E1 /* TaskDetailViewController.swift */; };
 		A9A070CD2B6C60EA005DB5E1 /* StatusSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A070CC2B6C60EA005DB5E1 /* StatusSwitcher.swift */; };
 		A9BAD43D2BAD2EBF00C9CBF1 /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BAD43C2BAD2EBF00C9CBF1 /* ToDoListViewModel.swift */; };
@@ -104,6 +105,7 @@
 		A98BF9F32C874B9A004A3505 /* TaskDetailViewControllerAlpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewControllerAlpha.swift; sourceTree = "<group>"; };
 		A98BF9F52C94DE39004A3505 /* AddItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemCell.swift; sourceTree = "<group>"; };
 		A98BF9F72C94DFEE004A3505 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		A98BF9F92C94FBD4004A3505 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		A9A070C62B69B3A7005DB5E1 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		A9A070CC2B6C60EA005DB5E1 /* StatusSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusSwitcher.swift; sourceTree = "<group>"; };
 		A9BAD43C2BAD2EBF00C9CBF1 /* ToDoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				A9A070C62B69B3A7005DB5E1 /* TaskDetailViewController.swift */,
 				A9BAD43E2BAE502C00C9CBF1 /* TaskDetailVCViewModel.swift */,
 				A98BF9F32C874B9A004A3505 /* TaskDetailViewControllerAlpha.swift */,
+				A98BF9F92C94FBD4004A3505 /* ItemTableViewCell.swift */,
 				A98BF9F52C94DE39004A3505 /* AddItemCell.swift */,
 				A98BF9F72C94DFEE004A3505 /* AddItemViewController.swift */,
 			);
@@ -428,6 +431,7 @@
 				A925449A29BBCBCE00F38E7C /* CoreDataManager.swift in Sources */,
 				A98BF9F42C874B9A004A3505 /* TaskDetailViewControllerAlpha.swift in Sources */,
 				A925446529BBBD9D00F38E7C /* SceneDelegate.swift in Sources */,
+				A98BF9FA2C94FBD4004A3505 /* ItemTableViewCell.swift in Sources */,
 				A9BAD43F2BAE502C00C9CBF1 /* TaskDetailVCViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
