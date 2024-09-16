@@ -28,7 +28,7 @@ class TaskDetailViewController: UIViewController,UITextViewDelegate{
         fatalError("init(coder:) has not been implemented")
     }
     
-    var items = [ToDoItem]()
+    var items = [ToDoTaskItem]()
     override func viewDidLoad() {
         
         self.view.backgroundColor = UIColor(named: "Background")

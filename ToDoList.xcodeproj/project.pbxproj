@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A91113B22C963B6A00783F1E /* AddListItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113B12C963B6A00783F1E /* AddListItemViewController.swift */; };
+		A91113B42C96430700783F1E /* AddListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113B32C96430700783F1E /* AddListItemCell.swift */; };
+		A91113B62C970FAE00783F1E /* ItemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113B52C970FAE00783F1E /* ItemListCell.swift */; };
 		A91579F52B444F1D00AB6BC6 /* TDLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91579F42B444F1D00AB6BC6 /* TDLButton.swift */; };
 		A925446329BBBD9D00F38E7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925446229BBBD9D00F38E7C /* AppDelegate.swift */; };
 		A925446529BBBD9D00F38E7C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925446429BBBD9D00F38E7C /* SceneDelegate.swift */; };
@@ -64,6 +67,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A91113B12C963B6A00783F1E /* AddListItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListItemViewController.swift; sourceTree = "<group>"; };
+		A91113B32C96430700783F1E /* AddListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListItemCell.swift; sourceTree = "<group>"; };
+		A91113B52C970FAE00783F1E /* ItemListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListCell.swift; sourceTree = "<group>"; };
 		A91579F42B444F1D00AB6BC6 /* TDLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDLButton.swift; sourceTree = "<group>"; };
 		A925445F29BBBD9D00F38E7C /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A925446229BBBD9D00F38E7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -199,12 +205,15 @@
 			isa = PBXGroup;
 			children = (
 				A925446629BBBD9D00F38E7C /* ToDoListViewController.swift */,
+				A91113B52C970FAE00783F1E /* ItemListCell.swift */,
+				A91113B32C96430700783F1E /* AddListItemCell.swift */,
 				A94745E82BAB578D002DE068 /* ViewModels */,
 				A925449729BBC5CD00F38E7C /* TaskTableViewCell.swift */,
 				A98BF9E92C6BFF51004A3505 /* TaskTableViewCellAlpha.swift */,
 				A98BF9EB2C6C4D56004A3505 /* StatusButtonStack.swift */,
 				A98BF9ED2C6D52DD004A3505 /* MoreButtonStack.swift */,
 				A98136122BD050B2000B5AE2 /* AddTaskCell.swift */,
+				A91113B12C963B6A00783F1E /* AddListItemViewController.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -394,11 +403,13 @@
 				A9A070C72B69B3A7005DB5E1 /* TaskDetailViewController.swift in Sources */,
 				A98BF9F22C874553004A3505 /* ToDoItem.swift in Sources */,
 				A981360F2BD02868000B5AE2 /* CoreDataGroupManager.swift in Sources */,
+				A91113B42C96430700783F1E /* AddListItemCell.swift in Sources */,
 				A925446729BBBD9D00F38E7C /* ToDoListViewController.swift in Sources */,
 				A98BF9F82C94DFEE004A3505 /* AddItemViewController.swift in Sources */,
 				A94745DD2B9BD8E9002DE068 /* Protocols.swift in Sources */,
 				A9A070CD2B6C60EA005DB5E1 /* StatusSwitcher.swift in Sources */,
 				A98136132BD050B2000B5AE2 /* AddTaskCell.swift in Sources */,
+				A91113B22C963B6A00783F1E /* AddListItemViewController.swift in Sources */,
 				A981360D2BD027B0000B5AE2 /* ToDoTaskList.swift in Sources */,
 				A91579F52B444F1D00AB6BC6 /* TDLButton.swift in Sources */,
 				A98BF9F02C6F81C3004A3505 /* StyleTokens.swift in Sources */,
@@ -406,6 +417,7 @@
 				A98136172BD96B15000B5AE2 /* AddListViewController.swift in Sources */,
 				A98136152BD0672C000B5AE2 /* AddTaskViewController.swift in Sources */,
 				A98136392BDD7446000B5AE2 /* ListTableViewCell.swift in Sources */,
+				A91113B62C970FAE00783F1E /* ItemListCell.swift in Sources */,
 				A925449829BBC5CD00F38E7C /* TaskTableViewCell.swift in Sources */,
 				A9BAD4452BB6FF4A00C9CBF1 /* CoreDataService.swift in Sources */,
 				A9BAD43D2BAD2EBF00C9CBF1 /* ToDoListViewModel.swift in Sources */,

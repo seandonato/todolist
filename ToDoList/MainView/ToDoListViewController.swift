@@ -115,6 +115,7 @@ extension ToDoListViewController{
 
         tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(TaskTableViewCellAlpha.self, forCellReuseIdentifier: "cella")
+        tableView.register(ItemTableViewCell.self, forCellReuseIdentifier: "itemCell")
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -127,6 +128,16 @@ extension ToDoListViewController{
     @objc func presentListViewController(){
         let vc = GroupListViewController(viewModel, viewModel.lists ?? [], 0)
         present(vc, animated: true)
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0{
+            return "Tasks"
+        }else{
+            return "Items"
+        }
     }
 }
 
@@ -141,27 +152,52 @@ extension ToDoListViewController{
 extension ToDoListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indexPath.row == viewModel.tasks?.count ?? 0{
-            let cell = AddTaskCell()
-            cell.titleLabel.text = "+ Add Task"
-            cell.delegate = self
-            return cell
-        }
-        
-        guard let task = viewModel.tasks?[indexPath.row] else {
-            return UITableViewCell()
-        }
+        print(indexPath.row)
+        if indexPath.section == 0{
+            if indexPath.row == viewModel.tasks?.count ?? 0{
+                let cell = AddTaskCell()
+                cell.titleLabel.text = "+ Add Task"
+                cell.delegate = self
+                return cell
+            }
+            guard let task = viewModel.tasks?[indexPath.row] else {
+                return UITableViewCell()
+            }
 
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "cella") as? TaskTableViewCellAlpha{
-            cell.viewModel = viewModel
-            cell.taskDelegate = self
-            cell.toDoTask = task
-            cell.expanded = expandedRow == indexPath.row ? true : false
-            cell.setup()
-            cell.row = indexPath.row
-            return cell
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "cella") as? TaskTableViewCellAlpha{
+                cell.viewModel = viewModel
+                cell.taskDelegate = self
+                cell.toDoTask = task
+                cell.expanded = expandedRow == indexPath.row ? true : false
+                cell.setup()
+                cell.row = indexPath.row
+                return cell
+            }
+        }else if indexPath.section == 1{
+            if indexPath.row == viewModel.items?.count ?? 0{
+                let cell = AddItemCell()
+                cell.titleLabel.text = "+ Add Item"
+                cell.delegate = self
+                return cell
+            }
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell") as? ItemTableViewCell{
+//                cell.viewModel = viewModel
+//                cell.taskDelegate = self
+//                cell.toDoTask = task
+                //cell.expanded = expandedRow == indexPath.row ? true : false
+                //cell.setup()
+                if let item = viewModel.items?[indexPath.row]{
+                    cell.titleLabel.text = item.name
+                    
+
+                    return cell
+                }
+                return cell
+            }
         }
+        
+        
+        
         return UITableViewCell()
     }
 }
@@ -181,20 +217,23 @@ extension ToDoListViewController: UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cellModel = viewModel.tasks?[indexPath.row]{
-            
-            tableView.beginUpdates()
-            viewModel.tasks?[indexPath.row].expanded.toggle()
-            if viewModel.tasks?[indexPath.row].expanded == true{
-                self.expandedRow = indexPath.row
-            }else{
-                self.expandedRow = nil
+        if indexPath.section == 0{
+            if let cellModel = viewModel.tasks?[indexPath.row]{
+                
+                tableView.beginUpdates()
+                viewModel.tasks?[indexPath.row].expanded.toggle()
+                if viewModel.tasks?[indexPath.row].expanded == true{
+                    self.expandedRow = indexPath.row
+                }else{
+                    self.expandedRow = nil
 
+                }
+                 tableView.reloadRows(at: [indexPath], with: .automatic)
+
+                // tableView.reloadData()
+                tableView.endUpdates()
             }
-             tableView.reloadRows(at: [indexPath], with: .automatic)
 
-            // tableView.reloadData()
-            tableView.endUpdates()
         }
         
 //        if let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCellAlpha{
@@ -209,7 +248,13 @@ extension ToDoListViewController: UITableViewDataSource{
 //        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (viewModel.tasks?.count ?? 0) + 1
+        if section == 0{
+          return  (viewModel.tasks?.count ?? 0) + 1
+        }else if section == 1{
+            return  (viewModel.items?.count ?? 0) + 1
+
+        }
+        return 0
     }
     
 }
@@ -237,5 +282,13 @@ extension ToDoListViewController: AddTaskDelegate{
 
 }
 
+
+extension ToDoListViewController: AddItemDelegate{
+    func addItem() {
+        let vc = AddListItemViewController(self.viewModel)
+        self.present(vc, animated: true)
+    }
+
+}
 
 

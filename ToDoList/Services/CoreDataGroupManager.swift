@@ -17,7 +17,7 @@ class CoreDataGroupManager {
     }
     func saveGroup(_ taskGroup: ToDoTaskList) -> Bool? {
         let managedContext = persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "TDTaskList", in: managedContext)!
+        let entity = NSEntityDescription.entity(forEntityName: "TDList", in: managedContext)!
         
         let managedTask = NSManagedObject(entity: entity, insertInto: managedContext)
         managedTask.setValue(taskGroup.name, forKeyPath: "name")
@@ -43,7 +43,7 @@ class CoreDataGroupManager {
             guard let name = (object as AnyObject).value(forKey: "name") as? String else{return nil}
             guard let uuid = (object as AnyObject).value(forKey: "uuid") else{return nil}
             
-            let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [])
+            let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [],items:[])
             lists.append(list)
         }
         return lists
@@ -51,7 +51,7 @@ class CoreDataGroupManager {
     
     func fetchGroupsFromCoreData() -> [NSManagedObject]?{
         let managedContext = persistentContainer.viewContext
-        let listsFetch = NSFetchRequest<NSManagedObject>(entityName: "TDTaskList")
+        let listsFetch = NSFetchRequest<NSManagedObject>(entityName: "TDList")
         var lists : [NSManagedObject] = []
         do {
             lists = try managedContext.fetch(listsFetch)

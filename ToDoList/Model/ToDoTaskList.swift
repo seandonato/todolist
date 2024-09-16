@@ -7,8 +7,15 @@
 
 import Foundation
 
+//struct ToDoTaskList{
+//    let name: String
+//    let uuid: UUID
+//    var toDoTasks: [ToDoTask]
+//}
+
 struct ToDoTaskList{
     let name: String
-    let uuid : UUID
-    var toDoTasks : [ToDoTask]
+    let uuid: UUID
+    var toDoTasks: [ToDoTask]
+    var items: [ToDoItem]
 }

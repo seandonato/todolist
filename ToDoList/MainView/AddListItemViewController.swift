@@ -7,16 +7,16 @@
 
 import Foundation
 import UIKit
-class AddItemViewController: UIViewController{
+class AddListItemViewController: UIViewController{
     
 //    let closeButton
-    let viewModel: TaskDetailVCViewModel
+    let viewModel: ToDoListViewModel
     var titleLabel: UILabel = UILabel()
     var entryLabel: UILabel = UILabel()
     var entryField: UITextField = UITextField()
     var addButton: TDLButton = TDLButton()
     
-    init(_ viewModel: TaskDetailVCViewModel ) {
+    init(_ viewModel: ToDoListViewModel ) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -28,7 +28,7 @@ class AddItemViewController: UIViewController{
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension AddListItemViewController{
+extension AddItemViewController{
     
         func setup(){
             
@@ -80,17 +80,13 @@ extension AddListItemViewController{
         }
         
     }
-extension AddItemViewController{
+extension AddListItemViewController{
     @objc func saveItem(){
         if let name = entryField.text{
             //TODO save item
            // viewModel.saveTask(name)
-            if let name = entryField.text{
-                let item = ToDoTaskItem(name: name, brand: "nil", quantity: 1, uuid: UUID(), date: Date() as NSDate)
-                viewModel.saveItem(item)
-                self.dismiss(animated: true)
-
-            }
+            viewModel.saveItem(name)
+            self.dismiss(animated: true)
         }
     }
 }
