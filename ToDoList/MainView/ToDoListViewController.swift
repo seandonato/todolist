@@ -65,6 +65,7 @@ extension ToDoListViewController{
         groupSwitchButton.translatesAutoresizingMaskIntoConstraints = false
 
         titleLabel.text = viewModel.list?.name
+        
         titleLabel.font = .boldSystemFont(ofSize: 24)
         addButton.setTitle("Add Task", for: .normal)
         entryLabel.text = "Task:"
@@ -208,10 +209,16 @@ extension ToDoListViewController: UITableViewDataSource{
       if editingStyle == .delete {
         print("Deleted")
 
-          if let task = viewModel.tasks?[indexPath.row]{
-              self.viewModel.deleteTask(task)
-
-              viewModel.fetchData()
+          if indexPath.section == 0{
+              if let task = viewModel.tasks?[indexPath.row]{
+                  self.viewModel.deleteTask(task)
+                  viewModel.fetchData()
+              }
+          }else if indexPath.section == 1{
+              if let item = viewModel.items?[indexPath.row]{
+                  self.viewModel.deleteItem(item)
+                  viewModel.fetchData()
+              }
           }
       }
     }

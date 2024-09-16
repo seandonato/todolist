@@ -69,7 +69,13 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
         }
         
     }
-    
+    func deleteItem(_ item: ToDoItem) {
+       
+        if let _ = coreDataManager?.deleteItem(item){
+            fetchData()
+        }
+        
+    }
     func saveTask(_ toDoTaskName:String){
         let uuid = UUID()
         let task = ToDoTask(name: toDoTaskName , uuid: uuid,date: NSDate())
