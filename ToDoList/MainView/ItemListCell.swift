@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ItemTableViewCell: UITableViewCell{
+class ItemListCell: UITableViewCell{
     
     var titleLabel = UILabel()
 

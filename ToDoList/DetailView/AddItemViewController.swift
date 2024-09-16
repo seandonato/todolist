@@ -86,7 +86,7 @@ extension AddItemViewController{
             //TODO save item
            // viewModel.saveTask(name)
             if let name = entryField.text{
-                let item = ToDoItem(name: name, brand: "nil", quantity: 1, uuid: UUID(), date: Date() as NSDate)
+                let item = ToDoTaskItem(name: name, brand: "nil", quantity: 1, uuid: UUID(), date: Date() as NSDate)
                 viewModel.saveItem(item)
                 self.dismiss(animated: true)
 
