@@ -17,6 +17,7 @@ class ToDoListViewController: UIViewController,UITextFieldDelegate, ToDoListView
 
     let viewModel: ToDoListViewModel
     var titleLabel: UILabel = UILabel()
+    var dateLabel: UILabel = UILabel()
     var entryLabel: UILabel = UILabel()
     var tableView: UITableView = UITableView()
     var entryField: UITextField = UITextField()
@@ -49,7 +50,7 @@ extension ToDoListViewController{
         
         self.view.backgroundColor = .white
         self.view.addSubview(titleLabel)
-//        self.view.addSubview(entryLabel)
+        self.view.addSubview(dateLabel)
         self.view.addSubview(tableView)
 //        self.view.addSubview(entryField)
 //        self.view.addSubview(addButton)
@@ -58,14 +59,15 @@ extension ToDoListViewController{
         self.view.addSubview(groupSwitchButton)
 
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        entryLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
 //        entryField.translatesAutoresizingMaskIntoConstraints = false
 //        addButton.translatesAutoresizingMaskIntoConstraints = false
 
         groupSwitchButton.translatesAutoresizingMaskIntoConstraints = false
 
         titleLabel.text = viewModel.list?.name
-        
+        dateLabel.text = viewModel.list?.dateCreated.description
+
         titleLabel.font = .boldSystemFont(ofSize: 24)
         addButton.setTitle("Add Task", for: .normal)
         entryLabel.text = "Task:"
@@ -73,7 +75,11 @@ extension ToDoListViewController{
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor,constant:100),
-            titleLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 16)
+            titleLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 16),
+            dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant:12),
+            dateLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 16)
+
+            
         ])
 //        NSLayoutConstraint.activate([
 //            entryLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant:16),
@@ -101,7 +107,7 @@ extension ToDoListViewController{
         tableView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: groupSwitchButton.topAnchor)

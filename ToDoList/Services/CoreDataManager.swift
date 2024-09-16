@@ -287,7 +287,8 @@ class CoreDataManager {
         managedTask.setValue(taskList.name, forKeyPath: "name")
         let uuid = UUID()
         managedTask.setValue(uuid, forKeyPath: "uuid")
-        
+        managedTask.setValue(NSDate(), forKeyPath: "dateCreated")
+
         do {
             try managedContext.save()
             return true
@@ -305,6 +306,8 @@ class CoreDataManager {
         for object in managedTasks{
             guard let name = (object as AnyObject).value(forKey: "name") as? String else{return nil}
             guard let uuid = (object as AnyObject).value(forKey: "uuid") else{return nil}
+            guard let dateCreated = (object as AnyObject).value(forKey: "dateCreated") as? NSDate else{return nil}
+
             // guard let tasks = (object as AnyObject).value(forKey: "tasks") as? NSDate else{return nil}
             
             if let tasks = (object as AnyObject).value(forKey: "tasks") as? [AnyObject]{
@@ -314,18 +317,18 @@ class CoreDataManager {
                     if let items = (object as AnyObject).value(forKey: "items") as? [AnyObject]{
                         
                         if let items = itemsFromManagedObject(items){
-                            let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: tasks,items: items)
+                            let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: tasks,items: items,dateCreated: dateCreated)
                             lists?.append(list)
                             
                         }
                     }else{
-                        let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [],items: [])
+                        let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [],items: [],dateCreated:dateCreated)
                         lists?.append(list)
                         
                     }
                 }
                 }else{
-                    let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [],items: [])
+                    let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [],items: [],dateCreated:dateCreated)
                     lists?.append(list)
                 }
             }
@@ -499,7 +502,7 @@ class CoreDataManager {
 //    }
     func getList2(listID: UUID) -> ToDoTaskList?{
         
-        var list: ToDoTaskList = ToDoTaskList(name: "", uuid: listID, toDoTasks: [],items: [])
+        var list: ToDoTaskList = ToDoTaskList(name: "", uuid: listID, toDoTasks: [],items: [],dateCreated: NSDate())
         let managedContext = persistentContainer.viewContext
         
         let listFetch = NSFetchRequest<NSManagedObject>(entityName: "TDList")
@@ -564,7 +567,7 @@ class CoreDataManager {
                     }
                     
                     
-                    list = ToDoTaskList(name: mList.name ?? "", uuid: mList.uuid!, toDoTasks: tasks,items: items)
+                    list = ToDoTaskList(name: mList.name ?? "", uuid: mList.uuid!, toDoTasks: tasks,items: items,dateCreated: mList.dateCreated as! NSDate)
                     
                 }
                 
