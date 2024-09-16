@@ -220,6 +220,36 @@ class CoreDataManager {
         return true
         
     }
+    
+    func deleteItem(_ item: ToDoItem) -> Bool? {
+        let managedContext = persistentContainer.viewContext
+        let itemID = item.uuid
+        let itemsFetch = NSFetchRequest<NSManagedObject>(entityName: "TDItem")
+        
+        itemsFetch.predicate = NSPredicate(format: "%K == %@", "uuid", itemID as any CVarArg )
+        
+        do{
+            let fetchResults = try managedContext.fetch(itemsFetch)
+            
+            if fetchResults.count != 0{
+                let managedObject = fetchResults[0]
+                managedContext.delete(managedObject)
+                do {
+                    try managedContext.save()
+                    return true
+                } catch let error as NSError {
+                    print("Could not save. \(error), \(error.userInfo)")
+                    return false
+                }
+            }
+        }catch{
+            print("Could not fetch.")
+            return false
+        }
+        return true
+        
+    }
+
     func updateTaskNotes(_ task: ToDoTask,_ note: String) -> Bool? {
         let managedContext = persistentContainer.viewContext
         let taskID = task.uuid
