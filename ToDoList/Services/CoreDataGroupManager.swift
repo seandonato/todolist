@@ -42,8 +42,9 @@ class CoreDataGroupManager {
         for object in managedTasks{
             guard let name = (object as AnyObject).value(forKey: "name") as? String else{return nil}
             guard let uuid = (object as AnyObject).value(forKey: "uuid") else{return nil}
-            
-            let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [],items:[])
+            guard let date = (object as AnyObject).value(forKey: "dateCreated") as? NSDate else {return nil}
+
+            let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [],items:[],dateCreated: date)
             lists.append(list)
         }
         return lists

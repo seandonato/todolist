@@ -92,7 +92,7 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
     
     func saveList(_ toDoListName:String){
         let uuid = UUID()
-        let list = ToDoTaskList(name: toDoListName, uuid: uuid, toDoTasks: [],items: [])
+        let list = ToDoTaskList(name: toDoListName, uuid: uuid, toDoTasks: [],items: [],dateCreated: NSDate())
 
         //update to save list
         if let _ = coreDataManager?.saveList(list){

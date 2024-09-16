@@ -18,4 +18,6 @@ struct ToDoTaskList{
     let uuid: UUID
     var toDoTasks: [ToDoTask]
     var items: [ToDoItem]
+    let dateCreated: NSDate
+
 }
