@@ -122,8 +122,9 @@ extension ToDoListViewController{
 
         tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(TaskTableViewCellAlpha.self, forCellReuseIdentifier: "cella")
-        tableView.register(ItemTableViewCell.self, forCellReuseIdentifier: "itemCell")
-
+        tableView.register(ItemTableViewCell.self, forCellReuseIdentifier: "itemCell2")
+        tableView.register(ItemListCell.self, forCellReuseIdentifier: "itemCell")
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
@@ -187,7 +188,7 @@ extension ToDoListViewController: UITableViewDelegate{
                 cell.delegate = self
                 return cell
             }
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell") as? ItemTableViewCell{
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell") as? ItemListCell{
 //                cell.viewModel = viewModel
 //                cell.taskDelegate = self
 //                cell.toDoTask = task
@@ -195,8 +196,10 @@ extension ToDoListViewController: UITableViewDelegate{
                 //cell.setup()
                 if let item = viewModel.items?[indexPath.row]{
                     cell.titleLabel.text = item.name
-                    
+                    cell.row = indexPath.row
+                    cell.checked = false
 
+                    cell.delegate = self
                     return cell
                 }
                 return cell
@@ -248,7 +251,11 @@ extension ToDoListViewController: UITableViewDataSource{
             }
 
         }
-        
+        if indexPath.section == 1{
+            if indexPath.row == viewModel.items?.count{
+                addItem()
+            }
+        }
 //        if let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCellAlpha{
 //            if cell.expanded == false{
 //                cell.expanded? = true
@@ -302,6 +309,12 @@ extension ToDoListViewController: AddItemDelegate{
         self.present(vc, animated: true)
     }
 
+}
+extension ToDoListViewController: ItemAcquisitionDelegate{
+    func acquiredItem(row: Int, acquired: Bool) {
+        
+    }
+    
 }
 
 

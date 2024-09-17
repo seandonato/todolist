@@ -10,6 +10,7 @@
 		A91113B22C963B6A00783F1E /* AddListItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113B12C963B6A00783F1E /* AddListItemViewController.swift */; };
 		A91113B42C96430700783F1E /* AddListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113B32C96430700783F1E /* AddListItemCell.swift */; };
 		A91113B62C970FAE00783F1E /* ItemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113B52C970FAE00783F1E /* ItemListCell.swift */; };
+		A91113B82C98EF2300783F1E /* CellCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113B72C98EF2300783F1E /* CellCheckbox.swift */; };
 		A91579F52B444F1D00AB6BC6 /* TDLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91579F42B444F1D00AB6BC6 /* TDLButton.swift */; };
 		A925446329BBBD9D00F38E7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925446229BBBD9D00F38E7C /* AppDelegate.swift */; };
 		A925446529BBBD9D00F38E7C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925446429BBBD9D00F38E7C /* SceneDelegate.swift */; };
@@ -70,6 +71,7 @@
 		A91113B12C963B6A00783F1E /* AddListItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListItemViewController.swift; sourceTree = "<group>"; };
 		A91113B32C96430700783F1E /* AddListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListItemCell.swift; sourceTree = "<group>"; };
 		A91113B52C970FAE00783F1E /* ItemListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListCell.swift; sourceTree = "<group>"; };
+		A91113B72C98EF2300783F1E /* CellCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCheckbox.swift; sourceTree = "<group>"; };
 		A91579F42B444F1D00AB6BC6 /* TDLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDLButton.swift; sourceTree = "<group>"; };
 		A925445F29BBBD9D00F38E7C /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A925446229BBBD9D00F38E7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				A98BF9ED2C6D52DD004A3505 /* MoreButtonStack.swift */,
 				A98136122BD050B2000B5AE2 /* AddTaskCell.swift */,
 				A91113B12C963B6A00783F1E /* AddListItemViewController.swift */,
+				A91113B72C98EF2300783F1E /* CellCheckbox.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				A98BF9F62C94DE39004A3505 /* AddItemCell.swift in Sources */,
 				A925446329BBBD9D00F38E7C /* AppDelegate.swift in Sources */,
 				A925449A29BBCBCE00F38E7C /* CoreDataManager.swift in Sources */,
+				A91113B82C98EF2300783F1E /* CellCheckbox.swift in Sources */,
 				A98BF9F42C874B9A004A3505 /* TaskDetailViewControllerAlpha.swift in Sources */,
 				A925446529BBBD9D00F38E7C /* SceneDelegate.swift in Sources */,
 				A98BF9FA2C94FBD4004A3505 /* ItemTableViewCell.swift in Sources */,

@@ -33,8 +33,8 @@ class AddItemCell: UITableViewCell{
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-       // self.addGestureRecognizer(tapGestureRec)
-       // tapGestureRec.addTarget(self, action: #selector(addTask))
+//        self.addGestureRecognizer(tapGestureRec)
+//        tapGestureRec.addTarget(self, action: #selector(addTask))
         setup()
     }
     
