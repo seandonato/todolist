@@ -36,6 +36,40 @@ class TaskDetailViewControllerAlpha: UIViewController,UITextViewDelegate,UITable
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+      if editingStyle == .delete {
+        print("Deleted")
+          self.viewModel.deleteItem(items[indexPath.row]) { result in
+              
+              switch result {
+              case .success(let task):
+                  if let modelItems = self.viewModel.toDoTask.items{
+                      self.items = modelItems
+                      tableView.reloadData()
+
+                  }
+              case .failure(let error):
+                  tableView.reloadData()
+
+              default:
+                  return
+              }
+//              switch result{
+//              case .success():
+//                  self.items = viewModel.toDoTask.items
+//                  
+//                  self.tableView.reloadData()
+//              case .failure(error):
+//                  tableView.reloadData()
+//
+//              }
+              if let items = self.viewModel.toDoTask.items{
+                  
+              }
+          }
+      }
+    }
+
     var rows = 0
     
     //tableview with items cells, add item cell, notes cells, add note cell

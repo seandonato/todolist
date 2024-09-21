@@ -41,6 +41,34 @@ class TaskDetailVCViewModel: TaskDetailVCViewModelProtocol, StatusPickerDelegate
        // coreDataManager?.updateTaskNotes(task, text)
         coreDataManager?.saveItemToTask(item, self.toDoTask)
     }
+    
+    func deleteItem(_ item: ToDoTaskItem,completion: @escaping ((Result<ToDoTask,Error>) -> ())) {
+       
+        if let _ = coreDataManager?.deleteTaskItem(item){
+            coreDataManager?.fetchTask(task: self.toDoTask,completion: { result in
+                switch result {
+                case .success(let task):
+                    self.toDoTask = task
+                    completion(.success(task))
+                case .failure(let error):
+                    completion(.failure(NSError()))
+
+                    print(error.localizedDescription)
+                }
+            })
+        }else{
+            completion(.failure(NSError()))
+
+        }
+        
+    }
+    
+    func fetchTask(){
+        if let task = coreDataManager?.fetchTask(task: self.toDoTask){
+            toDoTask = task
+        }
+    }
+    
 
 }
     

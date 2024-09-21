@@ -249,6 +249,34 @@ class CoreDataManager {
         return true
         
     }
+    func deleteTaskItem(_ item: ToDoTaskItem) -> Bool? {
+        let managedContext = persistentContainer.viewContext
+        let itemID = item.uuid
+        let itemsFetch = NSFetchRequest<NSManagedObject>(entityName: "TDTaskItem")
+        
+        itemsFetch.predicate = NSPredicate(format: "%K == %@", "uuid", itemID as any CVarArg )
+        
+        do{
+            let fetchResults = try managedContext.fetch(itemsFetch)
+            
+            if fetchResults.count != 0{
+                let managedObject = fetchResults[0]
+                managedContext.delete(managedObject)
+                do {
+                    try managedContext.save()
+                    return true
+                } catch let error as NSError {
+                    print("Could not save. \(error), \(error.userInfo)")
+                    return false
+                }
+            }
+        }catch{
+            print("Could not fetch.")
+            return false
+        }
+        return true
+        
+    }
 
     func updateTaskNotes(_ task: ToDoTask,_ note: String) -> Bool? {
         let managedContext = persistentContainer.viewContext
@@ -527,6 +555,7 @@ class CoreDataManager {
                             guard let uuid = (object as AnyObject).value(forKey: "uuid") else{return nil}
                             guard let status = (object as AnyObject).value(forKey: "status") as? String else{return nil}
                             guard let date = (object as AnyObject).value(forKey: "dateCreated") as? NSDate else{return nil}
+                            //guard let items = object
                             
                             var taskStatus = ToDoTaskStatus.ready
                             if status == "in progress"{
@@ -536,11 +565,44 @@ class CoreDataManager {
                             }else if status == "blocked"{
                                 taskStatus = ToDoTaskStatus.blocked
                             }
+                            var itemArray = [ToDoTaskItem]()
+                            
+                            
+                            //MARK: fetch task to get items
+                            let taskFetch = NSFetchRequest<NSManagedObject>(entityName: "TDTask")
+                            taskFetch.predicate = NSPredicate(format: "%K == %@", "uuid", uuid as! any CVarArg  )
+                            
+                            do{
+                                
+                                let taskFetchResults = try managedContext.fetch(taskFetch)
+                                if !taskFetchResults.isEmpty{
+                                    
+                                    let managedTask = taskFetchResults[0]
+                                    
+                                    if let mTask = taskFetchResults[0] as? TDTask{
+                                        if let items = mTask.items {
+                                            for item in items{
+                                                guard let itemName = (item as AnyObject).value(forKey: "name") as? String else{return nil}
+                                                guard let uuid = (item as AnyObject).value(forKey: "uuid") else {return nil}
+                                                //guard let quantity = (object as AnyObject).value(forKey: "quantity") as? NSNumber else{return nil}
+
+                                                let item = ToDoTaskItem(name: itemName, brand: "brand", quantity: 1, uuid: uuid  as! UUID, date: NSDate())
+                                                itemArray.append(item)
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }catch{
+                                        
+                            }
+                          
+
                             if let note = (object as AnyObject).value(forKey: "note") as? String{
-                                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: note,date: date)
+                                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: note,date: date,items: itemArray)
                                 tasks.append(task)
                             }else{
-                                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
+                                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date,items: itemArray)
                                 tasks.append(task)
                             }
                         }
@@ -660,7 +722,51 @@ class CoreDataManager {
             }
             return items
         }
+    
+    func taskItemsFromManagedObject(_ managedItems: [AnyObject]) -> [ToDoTaskItem]?{
+        var items: [ToDoTaskItem] = []
         
+        for object in managedItems{
+            guard let name = (object as AnyObject).value(forKey: "name") as? String else{return nil}
+            guard let uuid = (object as AnyObject).value(forKey: "uuid") else{return nil}
+            guard let quantity = (object as AnyObject).value(forKey: "quantity") as? Int else{return nil}
+            guard let brand = (object as AnyObject).value(forKey: "brand") as? String else{return nil}
+            guard let date = (object as AnyObject).value(forKey: "date") as? NSDate else{return nil}
+            
+            let item = ToDoTaskItem(name: name, brand: brand, quantity: quantity, uuid: uuid  as! UUID, date: date)
+            items.append(item)
+            
+        }
+        return items
+    }
+    func taskFromManagedObject(_ managedTask: TDTask) -> ToDoTask?{
+
+            guard let name = managedTask.value(forKey: "name") as? String else{return nil}
+            guard let uuid = managedTask.value(forKey: "uuid") as? UUID else{return nil}
+            guard let date = managedTask.value(forKey: "dateCreated") as? NSDate else{return nil}
+            
+        var itemArray = [ToDoTaskItem]()
+        if let items = managedTask.items {
+            for item in items{
+                guard let itemName = (item as AnyObject).value(forKey: "name") as? String else{return nil}
+                guard let uuid = (item as AnyObject).value(forKey: "uuid") else {return nil}
+                //guard let quantity = (object as AnyObject).value(forKey: "quantity") as? NSNumber else{return nil}
+
+                let item = ToDoTaskItem(name: itemName, brand: "brand", quantity: 1, uuid: uuid  as! UUID, date: NSDate())
+                itemArray.append(item)
+
+            }
+                let task = ToDoTask(name: name, uuid: uuid, date: date,items: itemArray)
+                return task
+
+
+        }
+        
+                    
+        return nil
+        
+    }
+
         //    func getList() -> ToDoTaskList?{
         //
         //        let managedContext = persistentContainer.viewContext
@@ -846,7 +952,7 @@ class CoreDataManager {
                     
                     let managedItem = TDTaskItem(entity: entity, insertInto: managedContext)
                     
-                    managedItem.setValue(task.name, forKeyPath: "name")
+                    managedItem.setValue(item.name, forKeyPath: "name")
                     let uuid = UUID()
                     managedItem.setValue(uuid, forKeyPath: "uuid")
                     managedItem.setValue(false, forKeyPath: "acquired")
@@ -953,6 +1059,57 @@ class CoreDataManager {
             }
             return false
         }
+    
+    func fetchTask(task:ToDoTask) -> ToDoTask?{
+        let managedContext = persistentContainer.viewContext
         
+        let taskFetch = NSFetchRequest<NSManagedObject>(entityName: "TDTask")
+        taskFetch.predicate = NSPredicate(format: "%K == %@", "uuid", task.uuid as any CVarArg )
+        do{
+            
+            let fetchResults = try managedContext.fetch(taskFetch)
+            if !fetchResults.isEmpty{
+                
+                if let managedTask = fetchResults[0] as? TDTask{
+                    if let toDotask = taskFromManagedObject(managedTask){
+                        return toDotask
+                    }
+                    
+                }
+            }
+        }catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+            return nil
+        }
+        return nil
+
     }
+        
+    func fetchTask(task:ToDoTask,completion: @escaping ((Result<ToDoTask,Error>) -> ())){
+        let managedContext = persistentContainer.viewContext
+        
+        let taskFetch = NSFetchRequest<NSManagedObject>(entityName: "TDTask")
+        taskFetch.predicate = NSPredicate(format: "%K == %@", "uuid", task.uuid as any CVarArg )
+        do{
+            
+            let fetchResults = try managedContext.fetch(taskFetch)
+            if !fetchResults.isEmpty{
+                
+                if let managedTask = fetchResults[0] as? TDTask{
+                    if let toDotask = taskFromManagedObject(managedTask){
+                        completion(.success(toDotask))
+                    }
+                    
+                }
+            }
+        }catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+            completion(.failure(NSError()))
+           // return nil
+        }
+       // return nil
+
+    }
+
+}
 
