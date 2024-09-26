@@ -11,6 +11,15 @@
 		A91113B42C96430700783F1E /* AddListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113B32C96430700783F1E /* AddListItemCell.swift */; };
 		A91113B62C970FAE00783F1E /* ItemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113B52C970FAE00783F1E /* ItemListCell.swift */; };
 		A91113B82C98EF2300783F1E /* CellCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113B72C98EF2300783F1E /* CellCheckbox.swift */; };
+		A91113BA2C9F6B3B00783F1E /* ToDoListGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113B92C9F6B3B00783F1E /* ToDoListGroup.swift */; };
+		A91113BD2C9F77A600783F1E /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113BC2C9F77A600783F1E /* GroupViewController.swift */; };
+		A91113BF2C9F77B600783F1E /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113BE2C9F77B600783F1E /* AddGroupViewController.swift */; };
+		A91113C22CA19B5A00783F1E /* AddEntityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113C12CA19B5A00783F1E /* AddEntityCell.swift */; };
+		A91113C42CA19CB400783F1E /* ListGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113C32CA19CB400783F1E /* ListGroupViewModel.swift */; };
+		A91113CA2CA19EA700783F1E /* ListCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113C92CA19EA700783F1E /* ListCoreDataManager.swift */; };
+		A91113CD2CA2F03400783F1E /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113CC2CA2F03400783F1E /* ListViewModel.swift */; };
+		A91113CF2CA35ED600783F1E /* CoreDataUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113CE2CA35ED600783F1E /* CoreDataUtil.swift */; };
+		A91113D12CA43EF400783F1E /* ListViewControllerAlpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91113D02CA43EF400783F1E /* ListViewControllerAlpha.swift */; };
 		A91579F52B444F1D00AB6BC6 /* TDLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91579F42B444F1D00AB6BC6 /* TDLButton.swift */; };
 		A925446329BBBD9D00F38E7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925446229BBBD9D00F38E7C /* AppDelegate.swift */; };
 		A925446529BBBD9D00F38E7C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925446429BBBD9D00F38E7C /* SceneDelegate.swift */; };
@@ -27,7 +36,7 @@
 		A94745DD2B9BD8E9002DE068 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94745DC2B9BD8E9002DE068 /* Protocols.swift */; };
 		A981360B2BD01434000B5AE2 /* TaskModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A925449229BBBE3300F38E7C /* TaskModel.xcdatamodeld */; };
 		A981360D2BD027B0000B5AE2 /* ToDoTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981360C2BD027B0000B5AE2 /* ToDoTaskList.swift */; };
-		A981360F2BD02868000B5AE2 /* CoreDataGroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981360E2BD02868000B5AE2 /* CoreDataGroupManager.swift */; };
+		A981360F2BD02868000B5AE2 /* GroupCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981360E2BD02868000B5AE2 /* GroupCoreDataManager.swift */; };
 		A98136112BD04630000B5AE2 /* GroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98136102BD04630000B5AE2 /* GroupListViewController.swift */; };
 		A98136132BD050B2000B5AE2 /* AddTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98136122BD050B2000B5AE2 /* AddTaskCell.swift */; };
 		A98136152BD0672C000B5AE2 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98136142BD0672C000B5AE2 /* AddTaskViewController.swift */; };
@@ -72,6 +81,15 @@
 		A91113B32C96430700783F1E /* AddListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListItemCell.swift; sourceTree = "<group>"; };
 		A91113B52C970FAE00783F1E /* ItemListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListCell.swift; sourceTree = "<group>"; };
 		A91113B72C98EF2300783F1E /* CellCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCheckbox.swift; sourceTree = "<group>"; };
+		A91113B92C9F6B3B00783F1E /* ToDoListGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListGroup.swift; sourceTree = "<group>"; };
+		A91113BC2C9F77A600783F1E /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
+		A91113BE2C9F77B600783F1E /* AddGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
+		A91113C12CA19B5A00783F1E /* AddEntityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntityCell.swift; sourceTree = "<group>"; };
+		A91113C32CA19CB400783F1E /* ListGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGroupViewModel.swift; sourceTree = "<group>"; };
+		A91113C92CA19EA700783F1E /* ListCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCoreDataManager.swift; sourceTree = "<group>"; };
+		A91113CC2CA2F03400783F1E /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		A91113CE2CA35ED600783F1E /* CoreDataUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataUtil.swift; sourceTree = "<group>"; };
+		A91113D02CA43EF400783F1E /* ListViewControllerAlpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerAlpha.swift; sourceTree = "<group>"; };
 		A91579F42B444F1D00AB6BC6 /* TDLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDLButton.swift; sourceTree = "<group>"; };
 		A925445F29BBBD9D00F38E7C /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A925446229BBBD9D00F38E7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,7 +110,7 @@
 		A925449929BBCBCE00F38E7C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		A94745DC2B9BD8E9002DE068 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		A981360C2BD027B0000B5AE2 /* ToDoTaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTaskList.swift; sourceTree = "<group>"; };
-		A981360E2BD02868000B5AE2 /* CoreDataGroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataGroupManager.swift; sourceTree = "<group>"; };
+		A981360E2BD02868000B5AE2 /* GroupCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCoreDataManager.swift; sourceTree = "<group>"; };
 		A98136102BD04630000B5AE2 /* GroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListViewController.swift; sourceTree = "<group>"; };
 		A98136122BD050B2000B5AE2 /* AddTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskCell.swift; sourceTree = "<group>"; };
 		A98136142BD0672C000B5AE2 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +158,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A91113BB2C9F6FBF00783F1E /* GroupView */ = {
+			isa = PBXGroup;
+			children = (
+				A91113BC2C9F77A600783F1E /* GroupViewController.swift */,
+				A91113BE2C9F77B600783F1E /* AddGroupViewController.swift */,
+				A91113C12CA19B5A00783F1E /* AddEntityCell.swift */,
+				A91113C32CA19CB400783F1E /* ListGroupViewModel.swift */,
+			);
+			path = GroupView;
+			sourceTree = "<group>";
+		};
+		A91113C02CA1996E00783F1E /* ListView */ = {
+			isa = PBXGroup;
+			children = (
+				A98136162BD96B14000B5AE2 /* AddListViewController.swift */,
+				A98136382BDD7446000B5AE2 /* ListTableViewCell.swift */,
+				A98136102BD04630000B5AE2 /* GroupListViewController.swift */,
+				A91113D02CA43EF400783F1E /* ListViewControllerAlpha.swift */,
+				A91113CC2CA2F03400783F1E /* ListViewModel.swift */,
+			);
+			path = ListView;
+			sourceTree = "<group>";
+		};
 		A925445629BBBD9D00F38E7C = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +204,7 @@
 		A925446129BBBD9D00F38E7C /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				A91113BB2C9F6FBF00783F1E /* GroupView */,
 				A94745E02B9BD910002DE068 /* MainView */,
 				A94745E42B9BD939002DE068 /* DetailView */,
 				A94745E52B9D1ABA002DE068 /* UIComponents */,
@@ -177,10 +219,8 @@
 				A925446D29BBBD9F00F38E7C /* LaunchScreen.storyboard */,
 				A925447029BBBD9F00F38E7C /* Info.plist */,
 				A925449229BBBE3300F38E7C /* TaskModel.xcdatamodeld */,
-				A98136102BD04630000B5AE2 /* GroupListViewController.swift */,
-				A98136382BDD7446000B5AE2 /* ListTableViewCell.swift */,
+				A91113C02CA1996E00783F1E /* ListView */,
 				A98136142BD0672C000B5AE2 /* AddTaskViewController.swift */,
-				A98136162BD96B14000B5AE2 /* AddListViewController.swift */,
 				A98BF9EF2C6F81C3004A3505 /* StyleTokens.swift */,
 			);
 			path = ToDoList;
@@ -258,6 +298,7 @@
 				A925449529BBC50900F38E7C /* ToDoTask.swift */,
 				A981360C2BD027B0000B5AE2 /* ToDoTaskList.swift */,
 				A98BF9F12C874553004A3505 /* ToDoItem.swift */,
+				A91113B92C9F6B3B00783F1E /* ToDoListGroup.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -266,7 +307,9 @@
 			isa = PBXGroup;
 			children = (
 				A925449929BBCBCE00F38E7C /* CoreDataManager.swift */,
-				A981360E2BD02868000B5AE2 /* CoreDataGroupManager.swift */,
+				A981360E2BD02868000B5AE2 /* GroupCoreDataManager.swift */,
+				A91113C92CA19EA700783F1E /* ListCoreDataManager.swift */,
+				A91113CE2CA35ED600783F1E /* CoreDataUtil.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -404,17 +447,22 @@
 			files = (
 				A98BF9EA2C6BFF51004A3505 /* TaskTableViewCellAlpha.swift in Sources */,
 				A9A070C72B69B3A7005DB5E1 /* TaskDetailViewController.swift in Sources */,
+				A91113CD2CA2F03400783F1E /* ListViewModel.swift in Sources */,
 				A98BF9F22C874553004A3505 /* ToDoItem.swift in Sources */,
-				A981360F2BD02868000B5AE2 /* CoreDataGroupManager.swift in Sources */,
+				A981360F2BD02868000B5AE2 /* GroupCoreDataManager.swift in Sources */,
 				A91113B42C96430700783F1E /* AddListItemCell.swift in Sources */,
 				A925446729BBBD9D00F38E7C /* ToDoListViewController.swift in Sources */,
 				A98BF9F82C94DFEE004A3505 /* AddItemViewController.swift in Sources */,
 				A94745DD2B9BD8E9002DE068 /* Protocols.swift in Sources */,
+				A91113C42CA19CB400783F1E /* ListGroupViewModel.swift in Sources */,
 				A9A070CD2B6C60EA005DB5E1 /* StatusSwitcher.swift in Sources */,
 				A98136132BD050B2000B5AE2 /* AddTaskCell.swift in Sources */,
 				A91113B22C963B6A00783F1E /* AddListItemViewController.swift in Sources */,
 				A981360D2BD027B0000B5AE2 /* ToDoTaskList.swift in Sources */,
+				A91113CF2CA35ED600783F1E /* CoreDataUtil.swift in Sources */,
+				A91113BF2C9F77B600783F1E /* AddGroupViewController.swift in Sources */,
 				A91579F52B444F1D00AB6BC6 /* TDLButton.swift in Sources */,
+				A91113BA2C9F6B3B00783F1E /* ToDoListGroup.swift in Sources */,
 				A98BF9F02C6F81C3004A3505 /* StyleTokens.swift in Sources */,
 				A981360B2BD01434000B5AE2 /* TaskModel.xcdatamodeld in Sources */,
 				A98136172BD96B15000B5AE2 /* AddListViewController.swift in Sources */,
@@ -426,9 +474,13 @@
 				A9BAD43D2BAD2EBF00C9CBF1 /* ToDoListViewModel.swift in Sources */,
 				A98BF9EE2C6D52DD004A3505 /* MoreButtonStack.swift in Sources */,
 				A98BF9EC2C6C4D56004A3505 /* StatusButtonStack.swift in Sources */,
+				A91113D12CA43EF400783F1E /* ListViewControllerAlpha.swift in Sources */,
+				A91113BD2C9F77A600783F1E /* GroupViewController.swift in Sources */,
 				A981363B2BF4FC69000B5AE2 /* StatusPicker.swift in Sources */,
 				A925449629BBC50900F38E7C /* ToDoTask.swift in Sources */,
 				A98136112BD04630000B5AE2 /* GroupListViewController.swift in Sources */,
+				A91113CA2CA19EA700783F1E /* ListCoreDataManager.swift in Sources */,
+				A91113C22CA19B5A00783F1E /* AddEntityCell.swift in Sources */,
 				A98BF9F62C94DE39004A3505 /* AddItemCell.swift in Sources */,
 				A925446329BBBD9D00F38E7C /* AppDelegate.swift in Sources */,
 				A925449A29BBCBCE00F38E7C /* CoreDataManager.swift in Sources */,

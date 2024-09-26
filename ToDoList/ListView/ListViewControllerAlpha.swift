@@ -1,14 +1,22 @@
 //
-//  GroupListViewController.swift
+//  ListViewControllerAlpha.swift
 //  ToDoList
 //
-//  Created by Sean Donato on 4/17/24.
+//  Created by Sean Donato on 9/25/24.
 //
 
 import Foundation
 import UIKit
 
-class GroupListViewController : UIViewController, UITableViewDelegate, UITableViewDataSource,AddTaskDelegate{
+class ListViewControllerAlpha: UIViewController, UITableViewDelegate, UITableViewDataSource,AddTaskDelegate,ListGroupViewModelDelegate{
+    func didFinishFetchingData() {
+        if let lists = viewModel.lists{
+            self.lists = lists
+            self.tableView.reloadData()
+
+        }
+    }
+    
     func addTask() {
         let vc = AddListViewController(viewModel)
         self.present(vc, animated: true)
@@ -37,18 +45,22 @@ class GroupListViewController : UIViewController, UITableViewDelegate, UITableVi
         return UITableViewCell()
     }
     var tableView: UITableView = UITableView()
-    var okButton: TDLButton = TDLButton()
-    let viewModel: ToDoListViewModel
+//    let viewModel: ToDoListViewModel
+    let viewModel: ListViewModel
 
     var lists: [ToDoTaskList]
     let selectedIndex: Int
     let titleLabel: UILabel = UILabel()
     
-    init(_ viewModel:ToDoListViewModel,_ lists: [ToDoTaskList],_ selectedIndex: Int) {
+    init(_ viewModel:ListViewModel,_ lists: [ToDoTaskList],_ selectedIndex: Int) {
         self.lists = lists
         self.selectedIndex = selectedIndex
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        
+        self.viewModel.delegate = self
+        self.viewModel.fetchLists()
+
     }
     
     required init?(coder: NSCoder) {
@@ -70,16 +82,6 @@ class GroupListViewController : UIViewController, UITableViewDelegate, UITableVi
             titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 50),
             titleLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 50)
         ])
-        
-        okButton.translatesAutoresizingMaskIntoConstraints = false
-        okButton.setTitle("OK", for: .normal)
-        self.view.addSubview(okButton)
-        NSLayoutConstraint.activate([
-            okButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,constant: -64),
-            okButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -32),
-            okButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 32)
-
-        ])
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(tableView)
@@ -87,7 +89,7 @@ class GroupListViewController : UIViewController, UITableViewDelegate, UITableVi
             tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: okButton.topAnchor)
+            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
         
         tableView.allowsSelection = true
@@ -109,7 +111,12 @@ class GroupListViewController : UIViewController, UITableViewDelegate, UITableVi
         }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if indexPath.row < lists.count{
+          //  if let list = lists[indexPath.row]{
+                navigateToToDoList(list: lists[indexPath.row])
+
+           // }
+        }
         newList(list: lists[indexPath.row])
         
     }
@@ -117,8 +124,20 @@ class GroupListViewController : UIViewController, UITableViewDelegate, UITableVi
         
     }
     func newList(list:ToDoTaskList){
-        viewModel.setList(list: list)
-        viewModel.fetchData()
-        self.dismiss(animated: true)
+//        viewModel.setList(list: list)
+//        viewModel.fetchData()
+    }
+    func navigateToToDoList(list:ToDoTaskList){
+        let toDoListViewModel = ToDoListViewModel()
+        if let persistantCon = self.viewModel.coreDataManager?.persistentContainer{
+            var coreDataMan = CoreDataManager(persistentContainer: persistantCon)
+            toDoListViewModel.list = coreDataMan.getList2(listID: list.uuid)
+//            toDoListViewModel.list = list
+            toDoListViewModel.coreDataManager = coreDataMan
+
+            self.navigationController?.pushViewController(ToDoListViewController(toDoListViewModel), animated: true)
+
+        }
+
     }
 }

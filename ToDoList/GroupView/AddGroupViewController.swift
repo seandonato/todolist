@@ -1,23 +1,22 @@
 //
-//  AddListViewController.swift
+//  AddGroupViewController.swift
 //  ToDoList
 //
-//  Created by Sean Donato on 4/24/24.
+//  Created by Sean Donato on 9/21/24.
 //
 
 import Foundation
 import UIKit
 
-class AddListViewController: UIViewController{
-    
-//    let closeButton
-    let viewModel: ToDoListViewModel
+class AddGroupViewController: UIViewController{
+
+    let viewModel: ListGroupViewModel
     var titleLabel: UILabel = UILabel()
     var entryLabel: UILabel = UILabel()
     var entryField: UITextField = UITextField()
     var addButton: TDLButton = TDLButton()
     
-    init(_ viewModel: ToDoListViewModel ) {
+    init(_ viewModel: ListGroupViewModel ) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -29,7 +28,7 @@ class AddListViewController: UIViewController{
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension AddListViewController{
+extension AddGroupViewController{
     
         func setup(){
             
@@ -45,9 +44,9 @@ extension AddListViewController{
             entryField.translatesAutoresizingMaskIntoConstraints = false
             addButton.translatesAutoresizingMaskIntoConstraints = false
             
-            titleLabel.text = "To Do List"
+            titleLabel.text = "To Do List Group"
             titleLabel.font = .boldSystemFont(ofSize: 14)
-            addButton.setTitle("Add List", for: .normal)
+            addButton.setTitle("Add Group", for: .normal)
             entryLabel.text = "List Name:"
             entryField.borderStyle = .line
             
@@ -76,15 +75,17 @@ extension AddListViewController{
                 addButton.widthAnchor.constraint(equalToConstant: 44)
             ])
             
-            addButton.addTarget(self, action: #selector(saveList), for: .touchUpInside)
+            addButton.addTarget(self, action: #selector(saveGroup), for: .touchUpInside)
 
         }
         
     }
-extension AddListViewController{
-    @objc func saveList(){
+extension AddGroupViewController{
+    @objc func saveGroup(){
         if let name = entryField.text{
-            viewModel.saveList(name)
+            viewModel.saveGroup(name)
+            
+            self.dismiss(animated: true)
         }
     }
 }
