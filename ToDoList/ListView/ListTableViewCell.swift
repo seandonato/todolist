@@ -56,7 +56,7 @@ class ListTableViewCell: UITableViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool{
         return false
     }
     
@@ -67,14 +67,11 @@ class ListTableViewCell: UITableViewCell{
     
     func setup(){
         
-
         contentView.addGestureRecognizer(tapGestureRec)
         tapGestureRec.cancelsTouchesInView = false
         titleLabel.isUserInteractionEnabled = true
         tapGestureRec.addTarget(self, action: #selector(goToDetail))
         deleteGesture.addTarget(self, action: #selector(deleteTask))
-
-     
 
         self.contentView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -83,7 +80,6 @@ class ListTableViewCell: UITableViewCell{
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 12),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant:16)
         ])
-        
 
         layoutIfNeeded()
     }

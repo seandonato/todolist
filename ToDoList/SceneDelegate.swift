@@ -16,40 +16,60 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         //check if its first run, if so, open dialog to create first, if not: fetch primary group and tasks
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-        if launchedBefore  {
-            print("Not first launch.")
-            let coreDataService = CoreDataService(containerName: "TaskModel")
-            let coreDataManager = CoreDataManager(persistentContainer: coreDataService.persistentContainer)
-            let toDoListViewModel = ToDoListViewModel()
-            toDoListViewModel.lists = coreDataManager.getLists()
-            if let lists = toDoListViewModel.lists{
-                toDoListViewModel.list = lists[0]
-            }
-            toDoListViewModel.coreDataManager = coreDataManager
+//        if launchedBefore  {
+//            print("Not first launch.")
+//            let coreDataService = CoreDataService(containerName: "TaskModel")
+//            let coreDataManager = CoreDataManager(persistentContainer: coreDataService.persistentContainer)
+//            let toDoListViewModel = ToDoListViewModel()
+//            toDoListViewModel.lists = coreDataManager.getLists()
+//            if let lists = toDoListViewModel.lists{
+//                toDoListViewModel.list = lists[0]
+//            }
+//            toDoListViewModel.coreDataManager = coreDataManager
+//            
+//            let nav = UINavigationController(rootViewController: ToDoListViewController(toDoListViewModel))
+//            self.window!.rootViewController = nav
+//
+//            self.window!.makeKeyAndVisible()
+//            guard scene is UIWindowScene else { return }
+//            guard let _ = (scene as? UIWindowScene) else { return }
+//
+//        } else {
+//            print("First launch, setting UserDefault.")
+//            UserDefaults.standard.set(true, forKey: "launchedBefore")
+//            let coreDataService = CoreDataService(containerName: "TaskModel")
+//            let coreDataManager = CoreDataManager(persistentContainer: coreDataService.persistentContainer)
+//            let toDoListViewModel = ToDoListViewModel()
+//            toDoListViewModel.coreDataManager = coreDataManager
+//            
+//            let nav = UINavigationController(rootViewController: AddListViewController(toDoListViewModel))
+//            self.window!.rootViewController = nav
+//
+//            self.window!.makeKeyAndVisible()
+//            guard scene is UIWindowScene else { return }
+//            guard let _ = (scene as? UIWindowScene) else { return }
             
-            let nav = UINavigationController(rootViewController: ToDoListViewController(toDoListViewModel))
-            self.window!.rootViewController = nav
-
-            self.window!.makeKeyAndVisible()
-            guard scene is UIWindowScene else { return }
-            guard let _ = (scene as? UIWindowScene) else { return }
-
-        } else {
+            //start with group view controller
+            
             print("First launch, setting UserDefault.")
             UserDefaults.standard.set(true, forKey: "launchedBefore")
             let coreDataService = CoreDataService(containerName: "TaskModel")
-            let coreDataManager = CoreDataManager(persistentContainer: coreDataService.persistentContainer)
-            let toDoListViewModel = ToDoListViewModel()
-            toDoListViewModel.coreDataManager = coreDataManager
+            let coreDataManager = GroupCoreDataManager(persistentContainer: coreDataService.persistentContainer)
             
-            let nav = UINavigationController(rootViewController: AddListViewController(toDoListViewModel))
-            self.window!.rootViewController = nav
+            let viewModel = ListGroupViewModel()
+            viewModel.coreDataManager = coreDataManager
+           // if let groups = coreDataManager.getGroups(){
+                var vc = GroupViewController(viewModel)
+                let nav = UINavigationController(rootViewController: vc)
+                self.window!.rootViewController = nav
 
-            self.window!.makeKeyAndVisible()
-            guard scene is UIWindowScene else { return }
-            guard let _ = (scene as? UIWindowScene) else { return }
+                self.window!.makeKeyAndVisible()
+                guard scene is UIWindowScene else { return }
+                guard let _ = (scene as? UIWindowScene) else { return }
 
-        }
+           // }
+
+  //      }
 
         
     }

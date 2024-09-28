@@ -16,7 +16,7 @@ struct ToDoItem{
     var date: NSDate
 }
 
-
+//item for task
 struct ToDoTaskItem{
     var name: String
     var brand: String
