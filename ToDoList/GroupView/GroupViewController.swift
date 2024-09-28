@@ -76,18 +76,18 @@ class GroupViewController: UIViewController,UITableViewDelegate, UITableViewData
     }
     
     func setupUI(){
-        titleLabel.text = "List Groups"
+        titleLabel.text = "Projects"
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 50),
-            titleLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 50)
+            titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 64),
+            titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
         ])
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 32),
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo:  self.view.bottomAnchor)
