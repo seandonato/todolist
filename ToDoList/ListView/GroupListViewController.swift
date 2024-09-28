@@ -64,12 +64,12 @@ class GroupListViewController : UIViewController, UITableViewDelegate, UITableVi
     }
     
     func setupUI(){
-        titleLabel.text = "Lists"
+        titleLabel.text = "Task Groups"
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 50),
-            titleLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 50)
+            titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 64),
+            titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
         ])
         
         okButton.translatesAutoresizingMaskIntoConstraints = false

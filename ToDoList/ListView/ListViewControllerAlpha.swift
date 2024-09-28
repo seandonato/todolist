@@ -75,12 +75,12 @@ class ListViewControllerAlpha: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func setupUI(){
-        titleLabel.text = "Lists"
+        titleLabel.text = viewModel.group?.name
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 50),
-            titleLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 50)
+            titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
         ])
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
