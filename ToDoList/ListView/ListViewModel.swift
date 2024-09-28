@@ -45,5 +45,9 @@ class ListViewModel{
 
         }
     }
-    
+    func deleteList(_ toDoListID:UUID){
+        if coreDataManager?.deleteList(toDoListID) == true{
+            fetchLists()
+        }
+    }
 }

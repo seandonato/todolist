@@ -204,4 +204,34 @@ class ListCoreDataManager {
         }
         return groups
     }
+    
+    func deleteList(_ listID: UUID) -> Bool? {
+        let managedContext = persistentContainer.viewContext
+        let listID = listID
+        let listFetch = NSFetchRequest<NSManagedObject>(entityName: "TDList")
+        
+        listFetch.predicate = NSPredicate(format: "%K == %@", "uuid", listID as any CVarArg )
+        
+        do{
+            let fetchResults = try managedContext.fetch(listFetch)
+            
+            if fetchResults.count != 0{
+                let managedObject = fetchResults[0]
+                managedContext.delete(managedObject)
+                do {
+                    try managedContext.save()
+                    return true
+                } catch let error as NSError {
+                    print("Could not save. \(error), \(error.userInfo)")
+                    return false
+                }
+            }
+        }catch{
+            print("Could not fetch.")
+            return false
+        }
+        return true
+        
+    }
+
 }
