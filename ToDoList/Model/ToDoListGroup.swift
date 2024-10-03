@@ -10,4 +10,7 @@ struct ToDoListGroup{
     var name: String
     var uuid: UUID
     var lists: [ToDoTaskList]?
+    var items: [ToDoItem]?
+    var tasks: [ToDoTask]?
+
 }
