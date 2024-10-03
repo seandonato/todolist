@@ -102,11 +102,7 @@ class ListViewControllerAlpha: UIViewController, UITableViewDelegate, UITableVie
         }
     func tableView(_ tableView: UITableView, commit editingStyle:   UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
             if (editingStyle == .delete) {
-                lists.remove(at: indexPath.row)
-                //TODO: delete list from core data
-                tableView.beginUpdates()
-                tableView.deleteRows(at: [indexPath], with: .middle)
-                tableView.endUpdates()
+                viewModel.deleteList(lists[indexPath.row].uuid)
             }
         }
 
