@@ -18,7 +18,7 @@ class CoreDataUtil {
 
     func fetchListsFromCoreData() -> [NSManagedObject]?{
         let managedContext = persistentContainer.viewContext
-        let listsFetch = NSFetchRequest<NSManagedObject>(entityName: "TDList")
+        let listsFetch = NSFetchRequest<NSManagedObject>(entityName: "TDTask")
         var lists : [NSManagedObject] = []
         do {
             lists = try managedContext.fetch(listsFetch)
@@ -86,8 +86,8 @@ class CoreDataUtil {
         return items
     }
 
-func taskItemsFromManagedObject(_ managedItems: [AnyObject]) -> [ToDoTaskItem]?{
-    var items: [ToDoTaskItem] = []
+func taskItemsFromManagedObject(_ managedItems: [AnyObject]) -> [ToDoItem]?{
+    var items: [ToDoItem] = []
     
     for object in managedItems{
         guard let name = (object as AnyObject).value(forKey: "name") as? String else{return nil}
@@ -96,36 +96,59 @@ func taskItemsFromManagedObject(_ managedItems: [AnyObject]) -> [ToDoTaskItem]?{
         guard let brand = (object as AnyObject).value(forKey: "brand") as? String else{return nil}
         guard let date = (object as AnyObject).value(forKey: "date") as? NSDate else{return nil}
         
-        let item = ToDoTaskItem(name: name, brand: brand, quantity: quantity, uuid: uuid  as! UUID, date: date)
+        let item = ToDoItem(name: name, brand: brand, quantity: quantity, uuid: uuid  as! UUID, date: date)
         items.append(item)
         
     }
     return items
 }
-func taskFromManagedObject(_ managedTask: TDTask) -> ToDoTask?{
+//    func taskFromManagedObject(_ managedTask: TDTask) -> ToDoTask?{
+//
+//            guard let name = managedTask.value(forKey: "name") as? String else{return nil}
+//            guard let uuid = managedTask.value(forKey: "uuid") as? UUID else{return nil}
+//            guard let date = managedTask.value(forKey: "dateCreated") as? NSDate else{return nil}
+//            
+//        var itemArray = [ToDoItem]()
+//        if let items = managedTask.items {
+//            for item in items{
+//                guard let itemName = (item as AnyObject).value(forKey: "name") as? String else{return nil}
+//                guard let uuid = (item as AnyObject).value(forKey: "uuid") else {return nil}
+//                //guard let quantity = (object as AnyObject).value(forKey: "quantity") as? NSNumber else{return nil}
+//
+//                let item = ToDoItem(name: itemName, brand: "brand", quantity: 1, uuid: uuid  as! UUID, date: NSDate())
+//                itemArray.append(item)
+//
+//            }
+//                let task = ToDoTask(name: name, uuid: uuid, date: date,items: itemArray)
+//                return task
+//
+//
+//        }
+//
+        //new function
+        func taskFromManagedObject(_ managedTask: TDTask) -> ToDoTask?{
 
-        guard let name = managedTask.value(forKey: "name") as? String else{return nil}
-        guard let uuid = managedTask.value(forKey: "uuid") as? UUID else{return nil}
-        guard let date = managedTask.value(forKey: "dateCreated") as? NSDate else{return nil}
-        
-    var itemArray = [ToDoTaskItem]()
-    if let items = managedTask.items {
-        for item in items{
-            guard let itemName = (item as AnyObject).value(forKey: "name") as? String else{return nil}
-            guard let uuid = (item as AnyObject).value(forKey: "uuid") else {return nil}
-            //guard let quantity = (object as AnyObject).value(forKey: "quantity") as? NSNumber else{return nil}
-
-            let item = ToDoTaskItem(name: itemName, brand: "brand", quantity: 1, uuid: uuid  as! UUID, date: NSDate())
-            itemArray.append(item)
-
-        }
-            let task = ToDoTask(name: name, uuid: uuid, date: date,items: itemArray)
-            return task
-
-
-    }
-    
+            guard let name = managedTask.value(forKey: "name") as? String else{return nil}
+            guard let uuid = managedTask.value(forKey: "uuid") as? UUID else{return nil}
+            guard let date = managedTask.value(forKey: "dateCreated") as? NSDate else{return nil}
                 
+            var itemArray = [ToDoItem]()
+            if let items = managedTask.items {
+                for item in items{
+                    guard let itemName = (item as AnyObject).value(forKey: "name") as? String else{return nil}
+                    guard let uuid = (item as AnyObject).value(forKey: "uuid") else {return nil}
+                    //guard let quantity = (object as AnyObject).value(forKey: "quantity") as? NSNumber else{return nil}
+
+                    let item = ToDoItem(name: itemName, brand: "brand", quantity: 1, uuid: uuid  as! UUID, date: NSDate())
+                    itemArray.append(item)
+
+                }
+                    let task = ToDoTask(name: name, uuid: uuid, date: date,items: itemArray)
+                    return task
+
+            }
+            
+
     return nil
     
 }

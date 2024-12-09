@@ -29,7 +29,7 @@ class GroupViewController: UIViewController,UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == groups?.count ?? 0{
             let cell = AddEntityCell()
-            cell.titleLabel.text = "+ Add Group"
+            cell.titleLabel.text = "+ Add Project"
             //cell.delegate = self
             return cell
         }else{

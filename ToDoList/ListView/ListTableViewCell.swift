@@ -23,7 +23,7 @@ class ListTableViewCell: UITableViewCell{
         super.setSelected(selected, animated: animated)
     }
     
-    var toDoList: ToDoTaskList?{
+    var toDoList: ToDoTask?{
         didSet{
             titleLabel.text = toDoList?.name
         }

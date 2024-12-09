@@ -15,13 +15,13 @@ protocol ListViewModelDelegate: AnyObject {
 class ListViewModel{
     
     var delegate: ListGroupViewModelDelegate?
-    var lists: [ToDoTaskList]?
+    var lists: [ToDoTask]?
     
     var group: ToDoListGroup?
 
     var coreDataManager: ListCoreDataManager?
 
-    init(lists: [ToDoTaskList]? = nil, coreDataManager: ListCoreDataManager? = nil) {
+    init(lists: [ToDoTask]? = nil, coreDataManager: ListCoreDataManager? = nil) {
         self.lists = lists
         self.coreDataManager = coreDataManager
     }
@@ -35,7 +35,7 @@ class ListViewModel{
     }
     func saveList(_ toDoListName:String){
         let uuid = UUID()
-        let list = ToDoTaskList(name: toDoListName, uuid: uuid, toDoTasks: [],items: [],dateCreated: NSDate())
+        let list = ToDoTask(name: toDoListName, uuid: uuid, date: NSDate(), items: [], subTasks: [])
 
         //update to save list
         if let group{

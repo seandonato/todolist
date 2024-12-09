@@ -49,7 +49,7 @@ extension AddListViewController{
             
             titleLabel.text = "To Do List"
             titleLabel.font = .boldSystemFont(ofSize: 14)
-            addButton.setTitle("Add List", for: .normal)
+            addButton.setTitle("Add Task", for: .normal)
             entryLabel.text = "List Name:"
             entryField.borderStyle = .line
             

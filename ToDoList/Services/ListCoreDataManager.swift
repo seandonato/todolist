@@ -17,7 +17,7 @@ class ListCoreDataManager {
         coreDataUtil = CoreDataUtil(persistentContainer: persistentContainer)
 
     }
-    //    func saveGroup(_ taskGroup: ToDoTaskList) -> Bool? {
+    //    func saveGroup(_ taskGroup: ToDoTask) -> Bool? {
     //        let managedContext = persistentContainer.viewContext
     //        let entity = NSEntityDescription.entity(forEntityName: "TDList", in: managedContext)!
     //
@@ -35,10 +35,10 @@ class ListCoreDataManager {
     //        }
     //    }
     //
-    //    func getGroups() -> [ToDoTaskList]?{
+    //    func getGroups() -> [ToDoTask]?{
     //
     //        let managedContext = persistentContainer.viewContext
-    //        var lists = [ToDoTaskList]()
+    //        var lists = [ToDoTask]()
     //        guard let managedTasks = fetchGroupsFromCoreData() else {return nil}
     //
     //        for object in managedTasks{
@@ -46,7 +46,7 @@ class ListCoreDataManager {
     //            guard let uuid = (object as AnyObject).value(forKey: "uuid") else{return nil}
     //            guard let date = (object as AnyObject).value(forKey: "dateCreated") as? NSDate else {return nil}
     //
-    //            let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [],items:[],dateCreated: date)
+    //            let list = ToDoTask(name: name, uuid: uuid as! UUID, toDoTasks: [],items:[],dateCreated: date)
     //            lists.append(list)
     //        }
     //        return lists
@@ -63,7 +63,7 @@ class ListCoreDataManager {
     //        }
     //        return lists
     //    }
-    func saveList(_ taskList: ToDoTaskList) -> Bool? {
+    func saveList(_ taskList: ToDoTask) -> Bool? {
         let managedContext = persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "TDList", in: managedContext)!
         
@@ -80,7 +80,7 @@ class ListCoreDataManager {
             return false
         }
     }
-    func saveListWithGroup(_ list: ToDoTaskList,_ group: ToDoListGroup) -> Bool? {
+    func saveListWithGroup(_ list: ToDoTask,_ group: ToDoListGroup) -> Bool? {
         let managedContext = persistentContainer.viewContext
         
         //get list
@@ -95,9 +95,9 @@ class ListCoreDataManager {
                 
                 if let mGroup = fetchResults[0] as? TDGroup{
                     
-                    let entity = NSEntityDescription.entity(forEntityName: "TDList", in: managedContext)!
+                    let entity = NSEntityDescription.entity(forEntityName: "TDTask", in: managedContext)!
                     
-                    let managedList = TDList(entity: entity, insertInto: managedContext)
+                    let managedList = TDTask(entity: entity, insertInto: managedContext)
                     
                     managedList.setValue(list.name, forKeyPath: "name")
                     let uuid = UUID()
@@ -122,10 +122,10 @@ class ListCoreDataManager {
         return false
     }
 
-    func getLists() -> [ToDoTaskList]?{
+    func getLists() -> [ToDoTask]?{
         
         let managedContext = persistentContainer.viewContext
-        var lists: [ToDoTaskList]? = []
+        var lists: [ToDoTask]? = []
         guard let managedTasks = coreDataUtil.fetchListsFromCoreData() else {return nil}
         
 //        let listFetch = NSFetchRequest<NSManagedObject>(entityName: "TDList")
@@ -145,27 +145,27 @@ class ListCoreDataManager {
                     if let items = (object as AnyObject).value(forKey: "items") as? [AnyObject]{
                         
                         if let items = coreDataUtil.itemsFromManagedObject(items){
-                            let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: tasks,items: items,dateCreated: dateCreated)
+                            let list = ToDoTask(name: name, uuid: uuid as! UUID, date: dateCreated, items: items, subTasks: tasks)
                             lists?.append(list)
                             
                         }
                     }else{
-                        let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [],items: [],dateCreated:dateCreated)
+                        let list = ToDoTask(name: name, uuid: uuid as! UUID, date:dateCreated, items: [], subTasks: [])
                         lists?.append(list)
                         
                     }
                 }
                 }else{
-                    let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [],items: [],dateCreated:dateCreated)
+                    let list = ToDoTask(name: name, uuid: uuid as! UUID, date:dateCreated, items: [], subTasks: [])
                     lists?.append(list)
                 }
             }
             return lists
         }
-    func getListsByGroup(groupID:UUID) -> [ToDoTaskList]?{
+    func getListsByGroup(groupID:UUID) -> [ToDoTask]?{
         
         let managedContext = persistentContainer.viewContext
-        var lists: [ToDoTaskList]? = []
+        var lists: [ToDoTask]? = []
         guard let managedGroups = coreDataUtil.fetchGroupListsFromCoreData(groupID: groupID) as? [TDGroup] else {return nil}
         
 //        let groupFetch = NSFetchRequest<NSManagedObject>(entityName: "TDGroup")
@@ -183,7 +183,7 @@ class ListCoreDataManager {
                     guard let uuid = (mlist as AnyObject).value(forKey: "uuid") else{return nil}
                     guard let dateCreated = (mlist as AnyObject).value(forKey: "dateCreated") as? NSDate else{return nil}
 
-                    let list = ToDoTaskList(name: name, uuid: uuid as! UUID, toDoTasks: [],items: [],dateCreated:dateCreated)
+                    let list = ToDoTask(name: name, uuid: uuid as! UUID, date:dateCreated, items: [], subTasks: [])
                     lists?.append(list)
 
                 }
@@ -208,7 +208,7 @@ class ListCoreDataManager {
     func deleteList(_ listID: UUID) -> Bool? {
         let managedContext = persistentContainer.viewContext
         let listID = listID
-        let listFetch = NSFetchRequest<NSManagedObject>(entityName: "TDList")
+        let listFetch = NSFetchRequest<NSManagedObject>(entityName: "TDTask")
         
         listFetch.predicate = NSPredicate(format: "%K == %@", "uuid", listID as any CVarArg )
         

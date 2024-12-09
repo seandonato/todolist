@@ -90,14 +90,14 @@ class GroupCoreDataManager {
             guard let name = (object as AnyObject).value(forKey: "name") as? String else{return nil}
             guard let uuid = (object as AnyObject).value(forKey: "uuid") else{return nil}
 
-            var lists: [ToDoTaskList] = []
-            if let tdlists = (object as AnyObject).value(forKey: "lists") as? [TDList] {
+            var lists: [ToDoTask] = []
+            if let tdlists = (object as AnyObject).value(forKey: "lists") as? [TDTask] {
                 for list in tdlists
                 {
                     guard let name = (list as AnyObject).value(forKey: "name") as? String else{return nil}
                     guard let uuid = (list as AnyObject).value(forKey: "uuid") as? UUID else{return nil}
-                    guard let date = (list as AnyObject).value(forKey: "dateCreated") as? NSDate else{return nil}
-                    let list = ToDoTaskList(name: name, uuid: uuid, toDoTasks: [], items: [], dateCreated: date)
+                    guard let date = (list as AnyObject).value(forKey: "date") as? NSDate else{return nil}
+                    let list = ToDoTask(name: name, uuid: uuid, date: date, items: [], subTasks: [])
                     //guard let items = object
                 }
 

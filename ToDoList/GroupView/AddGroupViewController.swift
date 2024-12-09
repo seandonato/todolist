@@ -44,9 +44,9 @@ extension AddGroupViewController{
             entryField.translatesAutoresizingMaskIntoConstraints = false
             addButton.translatesAutoresizingMaskIntoConstraints = false
             
-            titleLabel.text = "To Do List Group"
+            titleLabel.text = "To Do List Project"
             titleLabel.font = .boldSystemFont(ofSize: 14)
-            addButton.setTitle("Add Group", for: .normal)
+            addButton.setTitle("Add Project", for: .normal)
             entryLabel.text = "List Name:"
             entryField.borderStyle = .line
             

@@ -20,6 +20,8 @@ struct ToDoTask{
     var note: String?
     var date: NSDate
     var expanded: Bool = false
-    var items: [ToDoTaskItem]? 
+//    var items: [ToDoTaskItem]?
+    var items: [ToDoItem]?
+    var subTasks: [ToDoTask]?
 }
 

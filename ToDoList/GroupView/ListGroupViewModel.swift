@@ -24,19 +24,18 @@ class ListGroupViewModel{
     }
     
     func fetchGroups(){
-        if let groups =  self.coreDataManager?.getGroups(){
+        if let groups = self.coreDataManager?.getGroups(){
             self.groups = groups
             delegate?.didFinishFetchingData()
         }
     }
+    
     func saveGroup(_ listGroupName:String){
         let uuid = UUID()
         let group = ToDoListGroup(name: listGroupName , uuid: uuid)
         //new
-            if let _ = coreDataManager?.saveGroup(group){
-                fetchGroups()
-            }
-        
+        if let _ = coreDataManager?.saveGroup(group){
+            fetchGroups()
+        }
     }
-    
 }

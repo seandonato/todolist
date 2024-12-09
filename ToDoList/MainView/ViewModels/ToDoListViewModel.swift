@@ -24,8 +24,12 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
     var items: [ToDoItem]?
 
     //new. this is the current list
-    var list: ToDoTaskList?
-    var lists: [ToDoTaskList]?
+//    var list: ToDoTaskList?
+//    var lists: [ToDoTaskList]?
+    
+    // list replaced with to do task
+    var list: ToDoTask?
+    var lists: [ToDoTask]?
 
     func changeStatusFor(_ task: ToDoTask,_ status: ToDoTaskStatus) {
         coreDataManager?.updateTaskStatus(task, status){result in
@@ -48,7 +52,7 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
     func fetchData() {
         // change to get list
         if let list = coreDataManager?.getList2(listID: list!.uuid){
-            self.tasks = list.toDoTasks
+            self.tasks = list.subTasks
             self.items = list.items
             toDoListViewModelDelegate?.didFinishFetchingData()
         }
@@ -56,7 +60,7 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
 //        if let lists = coreDataManager?.getLists(){
 //            self.lists = lists
 //
-//        }//        if let tasks = coreDataManager?.getTasks(){
+//        }//if let tasks = coreDataManager?.getTasks(){
 //            self.tasks = tasks
 //            toDoListViewModelDelegate?.didFinishFetchingData()
 //        }
@@ -81,7 +85,7 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
         let task = ToDoTask(name: toDoTaskName , uuid: uuid,date: NSDate())
         //new
         if let list = list{
-            if let _ = coreDataManager?.saveTaskWithList(task, list){
+            if let _ = coreDataManager?.saveTaskWithParent(task, list){
                  fetchData()
             }
         }
@@ -92,7 +96,10 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
     
     func saveList(_ toDoListName:String){
         let uuid = UUID()
-        let list = ToDoTaskList(name: toDoListName, uuid: uuid, toDoTasks: [],items: [],dateCreated: NSDate())
+        
+//        let list = ToDoTaskList(name: toDoListName, uuid: uuid, toDoTasks: [],items: [],dateCreated: NSDate())
+
+        let list = ToDoTask(name: toDoListName, uuid: uuid, date:  NSDate())
 
         //update to save list
         if let _ = coreDataManager?.saveList(list){
@@ -100,9 +107,10 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
         }
     }
     
-    func setList(list: ToDoTaskList){
+    func setList(list: ToDoTask){
         self.list = list
-        self.tasks = list.toDoTasks
+//        self.tasks = list.toDoTasks
+        self.tasks = list.subTasks
         toDoListViewModelDelegate?.didFinishFetchingData()
     }
     

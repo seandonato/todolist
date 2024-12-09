@@ -66,7 +66,7 @@ extension ToDoListViewController{
         groupSwitchButton.translatesAutoresizingMaskIntoConstraints = false
 
         titleLabel.text = viewModel.list?.name
-        dateLabel.text = viewModel.list?.dateCreated.description
+        dateLabel.text = viewModel.list?.date.description
 
         titleLabel.font = .boldSystemFont(ofSize: 24)
         addButton.setTitle("Add Task", for: .normal)
