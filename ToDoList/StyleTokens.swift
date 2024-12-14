@@ -9,9 +9,12 @@ import Foundation
 import UIKit
 
 struct StyleTokens{
+    
+    //button
     static var buttonCornerRadius = CGFloat(8.0)
     static var buttonFont = UIFont(name: "Arial", size: 22)
     
+    //status buttons
     static var readySelected = UIColor(hex: "#00d10cff")
     static var readyUnSelected = UIColor(hex: "#e2f8e4ff")
 
