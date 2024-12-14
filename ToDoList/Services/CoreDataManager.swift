@@ -710,7 +710,7 @@ class CoreDataManager {
             return nil
         }
         
-        
+        list.subTasks = list.subTasks?.sorted( by: {($0.date as Date) < ($1.date as Date)})
         return list
     }
 
