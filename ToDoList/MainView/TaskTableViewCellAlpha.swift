@@ -127,7 +127,7 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
 
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor,constant: 12),
-            titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant:16)
+            titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant:32)
         ])
         
         if let statusLabel{
@@ -159,7 +159,7 @@ class TaskTableViewCellAlpha: UITableViewCell,StatusUISwitcher,TaskCellDelegate{
         self.contentView.addSubview(dateLabel)
         NSLayoutConstraint.activate([
             dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 8),
-            dateLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant:16)
+            dateLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant:32)
         ])
 
         buttonStack.translatesAutoresizingMaskIntoConstraints = false

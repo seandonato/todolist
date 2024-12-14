@@ -142,7 +142,7 @@ extension ToDoListViewController{
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0{
-            return "Tasks"
+            return "Sub Tasks"
         }else{
             return "Items"
         }
