@@ -30,7 +30,7 @@ class ListViewControllerAlpha: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == lists.count {
             let cell = AddTaskCell()
-            cell.titleLabel.text = "+ Add Sub Task"
+            cell.titleLabel.text = "+ Add Task"
             cell.delegate = self
             return cell
         }else{
