@@ -13,15 +13,21 @@ enum ToDoTaskStatus: String{
     case done = "done"
     case blocked = "blocked"
 }
+
 struct ToDoTask{
+    
     var name: String
     var uuid: UUID
     var taskStatus: ToDoTaskStatus?
     var note: String?
     var date: NSDate
     var expanded: Bool = false
-//    var items: [ToDoTaskItem]?
     var items: [ToDoItem]?
     var subTasks: [ToDoTask]?
+    
+    //new for syncronization
+    var lastUpdatedLocally: NSDate?
+    var lastUpdatedFromRemote: NSDate?
+    
 }
 
