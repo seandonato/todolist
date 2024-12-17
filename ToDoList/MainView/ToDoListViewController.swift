@@ -155,7 +155,7 @@ extension ToDoListViewController: UITableViewDelegate{
         if indexPath.section == 0{
             if indexPath.row == viewModel.tasks?.count ?? 0{
                 let cell = AddTaskCell()
-                cell.titleLabel.text = "+ Add Task"
+                cell.titleLabel.text = "+ Add Sub Task"
                 cell.delegate = self
                 return cell
             }
