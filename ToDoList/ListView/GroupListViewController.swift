@@ -23,7 +23,7 @@ class GroupListViewController : UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == lists.count {
             let cell = AddTaskCell()
-            cell.titleLabel.text = "+ Add List"
+            cell.titleLabel.text = "+ Add Task"
             cell.delegate = self
             return cell
         }else{
@@ -41,11 +41,11 @@ class GroupListViewController : UIViewController, UITableViewDelegate, UITableVi
     var okButton: TDLButton = TDLButton()
     let viewModel: ToDoListViewModel
 
-    var lists: [ToDoTaskList]
+    var lists: [ToDoTask]
     let selectedIndex: Int
     let titleLabel: UILabel = UILabel()
     
-    init(_ viewModel:ToDoListViewModel,_ lists: [ToDoTaskList],_ selectedIndex: Int) {
+    init(_ viewModel:ToDoListViewModel,_ lists: [ToDoTask],_ selectedIndex: Int) {
         self.lists = lists
         self.selectedIndex = selectedIndex
         self.viewModel = viewModel
@@ -92,32 +92,33 @@ class GroupListViewController : UIViewController, UITableViewDelegate, UITableVi
         ])
         
         tableView.allowsSelection = true
-
-        
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-            return true
-        }
+        return true
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle:   UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if (editingStyle == .delete) {
-                lists.remove(at: indexPath.row)
-                //TODO: delete list from core data
-                tableView.beginUpdates()
-                tableView.deleteRows(at: [indexPath], with: .middle)
-                tableView.endUpdates()
-            }
+        if (editingStyle == .delete) {
+            lists.remove(at: indexPath.row)
+            //TODO: delete list from core data
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .middle)
+            tableView.endUpdates()
         }
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         newList(list: lists[indexPath.row])
         
     }
+    
     func backToTaskList(){
         
     }
-    func newList(list:ToDoTaskList){
+    
+    func newList(list:ToDoTask){
         viewModel.setList(list: list)
         viewModel.fetchData()
         self.dismiss(animated: true)

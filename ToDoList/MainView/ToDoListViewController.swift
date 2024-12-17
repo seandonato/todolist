@@ -24,7 +24,7 @@ class ToDoListViewController: UIViewController,UITextFieldDelegate, ToDoListView
     var addButton: TDLButton = TDLButton()
     var expandedRow: Int?
     //new for group
-    var groupSwitchButton: TDLButton = TDLButton()
+    //var groupSwitchButton: TDLButton = TDLButton()
 
     init(_ viewModel: ToDoListViewModel ) {
         self.viewModel = viewModel
@@ -55,18 +55,15 @@ extension ToDoListViewController{
 //        self.view.addSubview(entryField)
 //        self.view.addSubview(addButton)
 
-        //new
-        self.view.addSubview(groupSwitchButton)
 
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
 //        entryField.translatesAutoresizingMaskIntoConstraints = false
 //        addButton.translatesAutoresizingMaskIntoConstraints = false
 
-        groupSwitchButton.translatesAutoresizingMaskIntoConstraints = false
 
         titleLabel.text = viewModel.list?.name
-        dateLabel.text = viewModel.list?.dateCreated.description
+        dateLabel.text = viewModel.list?.date.description
 
         titleLabel.font = .boldSystemFont(ofSize: 24)
         addButton.setTitle("Add Task", for: .normal)
@@ -95,14 +92,6 @@ extension ToDoListViewController{
 //
 //        ])
         
-        //new
-        groupSwitchButton.setTitle("Switch Task Group", for: .normal)
-        NSLayoutConstraint.activate([
-
-            groupSwitchButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -20),
-            groupSwitchButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,constant: -20)
-        ])
-
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(tableView)
@@ -110,8 +99,9 @@ extension ToDoListViewController{
             tableView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: groupSwitchButton.topAnchor)
+            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
+        
 //        NSLayoutConstraint.activate([
 //            addButton.leadingAnchor.constraint(equalTo: entryField.trailingAnchor,constant:50),
 //            addButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -16),
@@ -130,19 +120,20 @@ extension ToDoListViewController{
         tableView.rowHeight = UITableView.automaticDimension
         tableView.allowsSelection = true
         addButton.addTarget(self, action: #selector(saveTask), for: .touchUpInside)
-        groupSwitchButton.addTarget(self, action: #selector(presentListViewController), for: .touchUpInside)
     }
     
     @objc func presentListViewController(){
         let vc = GroupListViewController(viewModel, viewModel.lists ?? [], 0)
         present(vc, animated: true)
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0{
-            return "Tasks"
+            return "Sub Tasks"
         }else{
             return "Items"
         }
@@ -164,7 +155,7 @@ extension ToDoListViewController: UITableViewDelegate{
         if indexPath.section == 0{
             if indexPath.row == viewModel.tasks?.count ?? 0{
                 let cell = AddTaskCell()
-                cell.titleLabel.text = "+ Add Task"
+                cell.titleLabel.text = "+ Add Sub Task"
                 cell.delegate = self
                 return cell
             }

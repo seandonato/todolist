@@ -12,12 +12,12 @@ import Foundation
 //    let uuid: UUID
 //    var toDoTasks: [ToDoTask]
 //}
-
-struct ToDoTaskList{
-    let name: String
-    let uuid: UUID
-    var toDoTasks: [ToDoTask]
-    var items: [ToDoItem]
-    let dateCreated: NSDate
-
-}
+//
+//struct ToDoTaskList{
+//    let name: String
+//    let uuid: UUID
+//    var toDoTasks: [ToDoTask]
+//    var items: [ToDoItem]
+//    let dateCreated: NSDate
+//
+//}

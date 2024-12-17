@@ -9,7 +9,7 @@ import Foundation
 struct ToDoListGroup{
     var name: String
     var uuid: UUID
-    var lists: [ToDoTaskList]?
+    var lists: [ToDoTask]?
     var items: [ToDoItem]?
     var tasks: [ToDoTask]?
 
