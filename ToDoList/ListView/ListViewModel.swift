@@ -35,7 +35,7 @@ class ListViewModel{
     }
     func saveList(_ toDoListName:String){
         let uuid = UUID()
-        let list = ToDoTask(name: toDoListName, uuid: uuid, date: NSDate(), items: [], subTasks: [])
+        let list = ToDoTask(id: uuid as! UUID,name: toDoListName, uuid: uuid, date: NSDate(), items: [], subTasks: [])
 
         //update to save list
         if let group{

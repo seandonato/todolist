@@ -82,7 +82,7 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
     }
     func saveTask(_ toDoTaskName:String){
         let uuid = UUID()
-        let task = ToDoTask(name: toDoTaskName , uuid: uuid,date: NSDate())
+        let task = ToDoTask(id: uuid, name: toDoTaskName , uuid: uuid,date: NSDate())
         //new
         if let list = list{
             if let _ = coreDataManager?.saveTaskWithParent(task, list){
@@ -99,7 +99,7 @@ class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
         
 //        let list = ToDoTaskList(name: toDoListName, uuid: uuid, toDoTasks: [],items: [],dateCreated: NSDate())
 
-        let list = ToDoTask(name: toDoListName, uuid: uuid, date:  NSDate())
+        let list = ToDoTask(id: uuid, name: toDoListName, uuid: uuid, date:  NSDate())
 
         //update to save list
         if let _ = coreDataManager?.saveList(list){

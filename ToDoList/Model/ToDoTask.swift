@@ -14,8 +14,8 @@ enum ToDoTaskStatus: String{
     case blocked = "blocked"
 }
 
-struct ToDoTask{
-    
+struct ToDoTask:Identifiable{
+    var id: UUID
     var name: String
     var uuid: UUID
     var taskStatus: ToDoTaskStatus?
