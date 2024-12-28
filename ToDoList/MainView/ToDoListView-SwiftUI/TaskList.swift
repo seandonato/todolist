@@ -8,14 +8,17 @@
 import Foundation
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct TaskList:View{
-    let viewModel: ToDoListViewModel
+    @State var viewModel: ToDoListViewModelObservable
 
-    var tasks: [ToDoTask]
+    @State var tasks: [ToDoTask]
     var body: some View{
-        List(tasks) { task in
-            
-            HStack{}
+        List{
+            ForEach(viewModel.tasks ?? []) { task in
+                TaskTableViewCellBasic(task: task)
+
+            }
         }
     }
 }

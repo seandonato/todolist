@@ -58,8 +58,9 @@
 		A9BAD43F2BAE502C00C9CBF1 /* TaskDetailVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BAD43E2BAE502C00C9CBF1 /* TaskDetailVCViewModel.swift */; };
 		A9BAD4452BB6FF4A00C9CBF1 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BAD4442BB6FF4A00C9CBF1 /* CoreDataService.swift */; };
 		A9BEC9312D122139002B46FA /* TaskTableViewCellBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BEC9302D122139002B46FA /* TaskTableViewCellBasic.swift */; };
-		A9BEC9342D2055BE002B46FA /* TaskListRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BEC9332D2055BE002B46FA /* TaskListRepresentable.swift */; };
+		A9BEC9342D2055BE002B46FA /* TaskListHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BEC9332D2055BE002B46FA /* TaskListHostingController.swift */; };
 		A9BEC9362D2056A4002B46FA /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BEC9352D2056A4002B46FA /* TaskList.swift */; };
+		A9BEC9382D2093B6002B46FA /* ToDoListViewModelObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BEC9372D2093B6002B46FA /* ToDoListViewModelObservable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,8 +136,9 @@
 		A9BAD43E2BAE502C00C9CBF1 /* TaskDetailVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailVCViewModel.swift; sourceTree = "<group>"; };
 		A9BAD4442BB6FF4A00C9CBF1 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		A9BEC9302D122139002B46FA /* TaskTableViewCellBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCellBasic.swift; sourceTree = "<group>"; };
-		A9BEC9332D2055BE002B46FA /* TaskListRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListRepresentable.swift; sourceTree = "<group>"; };
+		A9BEC9332D2055BE002B46FA /* TaskListHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListHostingController.swift; sourceTree = "<group>"; };
 		A9BEC9352D2056A4002B46FA /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
+		A9BEC9372D2093B6002B46FA /* ToDoListViewModelObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewModelObservable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -325,8 +327,9 @@
 			isa = PBXGroup;
 			children = (
 				A9BEC9302D122139002B46FA /* TaskTableViewCellBasic.swift */,
-				A9BEC9332D2055BE002B46FA /* TaskListRepresentable.swift */,
+				A9BEC9332D2055BE002B46FA /* TaskListHostingController.swift */,
 				A9BEC9352D2056A4002B46FA /* TaskList.swift */,
+				A9BEC9372D2093B6002B46FA /* ToDoListViewModelObservable.swift */,
 			);
 			path = "ToDoListView-SwiftUI";
 			sourceTree = "<group>";
@@ -486,7 +489,7 @@
 				A98136172BD96B15000B5AE2 /* AddListViewController.swift in Sources */,
 				A98136152BD0672C000B5AE2 /* AddTaskViewController.swift in Sources */,
 				A98136392BDD7446000B5AE2 /* ListTableViewCell.swift in Sources */,
-				A9BEC9342D2055BE002B46FA /* TaskListRepresentable.swift in Sources */,
+				A9BEC9342D2055BE002B46FA /* TaskListHostingController.swift in Sources */,
 				A91113B62C970FAE00783F1E /* ItemListCell.swift in Sources */,
 				A925449829BBC5CD00F38E7C /* TaskTableViewCell.swift in Sources */,
 				A9BAD4452BB6FF4A00C9CBF1 /* CoreDataService.swift in Sources */,
@@ -499,6 +502,7 @@
 				A925449629BBC50900F38E7C /* ToDoTask.swift in Sources */,
 				A98136112BD04630000B5AE2 /* GroupListViewController.swift in Sources */,
 				A91113CA2CA19EA700783F1E /* ListCoreDataManager.swift in Sources */,
+				A9BEC9382D2093B6002B46FA /* ToDoListViewModelObservable.swift in Sources */,
 				A91113C22CA19B5A00783F1E /* AddEntityCell.swift in Sources */,
 				A98BF9F62C94DE39004A3505 /* AddItemCell.swift in Sources */,
 				A925446329BBBD9D00F38E7C /* AppDelegate.swift in Sources */,

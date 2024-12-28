@@ -489,10 +489,8 @@ class CoreDataManager {
             let task = ToDoTask(id:uuid,name: name, uuid: uuid, date: date,items: itemArray)
                 return task
 
-
         }
         
-                    
         return nil
         
     }

@@ -1593,8 +1593,8 @@
             filePath = "ToDoList/MainView/ViewModels/ToDoListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "fetchData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1625,8 +1625,8 @@
             filePath = "ToDoList/MainView/ViewModels/ToDoListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "fetchData()"
             landmarkType = "7">
             <Locations>
@@ -1769,8 +1769,8 @@
             filePath = "ToDoList/MainView/ViewModels/ToDoListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "saveTask(_:)"
             landmarkType = "7">
             <Locations>
@@ -1907,8 +1907,8 @@
             filePath = "ToDoList/MainView/ViewModels/ToDoListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "saveTask(_:)"
             landmarkType = "7">
             <Locations>
@@ -2019,8 +2019,8 @@
             filePath = "ToDoList/MainView/ViewModels/ToDoListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "fetchData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2035,8 +2035,8 @@
             filePath = "ToDoList/MainView/ViewModels/ToDoListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "fetchData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2051,8 +2051,8 @@
             filePath = "ToDoList/MainView/ViewModels/ToDoListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "fetchData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3342,8 +3342,8 @@
             filePath = "ToDoList/MainView/ViewModels/ToDoListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "saveTask(_:)"
             landmarkType = "7">
             <Locations>
@@ -3598,8 +3598,8 @@
             filePath = "ToDoList/Services/CoreDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "506"
-            endingLineNumber = "506"
+            startingLineNumber = "504"
+            endingLineNumber = "504"
             landmarkName = "saveItemToTask(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3630,8 +3630,8 @@
             filePath = "ToDoList/Services/CoreDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "530"
-            endingLineNumber = "530"
+            startingLineNumber = "528"
+            endingLineNumber = "528"
             landmarkName = "saveItemToTask(_:_:)"
             landmarkType = "7">
             <Locations>
@@ -3693,8 +3693,8 @@
             filePath = "ToDoList/Services/CoreDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
+            startingLineNumber = "531"
+            endingLineNumber = "531"
             landmarkName = "saveItemToTask(_:_:)"
             landmarkType = "7">
             <Locations>
@@ -3756,8 +3756,8 @@
             filePath = "ToDoList/Services/CoreDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "529"
-            endingLineNumber = "529"
+            startingLineNumber = "527"
+            endingLineNumber = "527"
             landmarkName = "saveItemToTask(_:_:)"
             landmarkType = "7">
             <Locations>
@@ -3883,8 +3883,8 @@
             filePath = "ToDoList/Services/CoreDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "594"
-            endingLineNumber = "594"
+            startingLineNumber = "592"
+            endingLineNumber = "592"
             landmarkName = "fetchTask(task:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4106,8 +4106,8 @@
             filePath = "ToDoList/Services/CoreDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "496"
-            endingLineNumber = "496"
+            startingLineNumber = "494"
+            endingLineNumber = "494"
             landmarkName = "taskFromManagedObject(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5491,8 +5491,8 @@
             filePath = "ToDoList/MainView/ViewModels/ToDoListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "setList(list:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5507,8 +5507,8 @@
             filePath = "ToDoList/MainView/ViewModels/ToDoListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "setList(list:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5619,8 +5619,8 @@
             filePath = "ToDoList/MainView/ViewModels/ToDoListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "saveTask(_:)"
             landmarkType = "7">
             <Locations>
@@ -5655,6 +5655,229 @@
                   offsetFromSymbolStart = "568">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "882DE656-D12D-4396-AC82-F5F457D87FF0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoList/MainView/ToDoListView-SwiftUI/TaskListHostingController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "init(viewModel:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "79858B3E-DEDD-48D8-A429-61FF7971D4D0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoList/MainView/ToDoListView-SwiftUI/TaskListHostingController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "setupHostingVC()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "79858B3E-DEDD-48D8-A429-61FF7971D4D0 - e03ae425d1ba3f42"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoList.TaskListHostingController.viewDidLoad() -&gt; ()"
+                  moduleName = "ToDoList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seandonato/Downloads/ToDoList/ToDoList/MainView/ToDoListView-SwiftUI/TaskListHostingController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "96">
+               </Location>
+               <Location
+                  uuid = "79858B3E-DEDD-48D8-A429-61FF7971D4D0 - e03ae425d1ba3fe1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoList.TaskListHostingController.viewDidLoad() -&gt; ()"
+                  moduleName = "ToDoList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seandonato/Downloads/ToDoList/ToDoList/MainView/ToDoListView-SwiftUI/TaskListHostingController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "79858B3E-DEDD-48D8-A429-61FF7971D4D0 - 79932821d3f77932"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoList.TaskListHostingController.setupHostingVC() -&gt; ()"
+                  moduleName = "ToDoList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seandonato/Downloads/ToDoList/ToDoList/MainView/ToDoListView-SwiftUI/TaskListHostingController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "172">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8513F228-324F-4BFB-9C53-0E5BA2ABB94F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoList/MainView/ToDoListView-SwiftUI/TaskListHostingController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "setupHostingVC()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8513F228-324F-4BFB-9C53-0E5BA2ABB94F - e03ae425d1ba3155"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoList.TaskListHostingController.viewDidLoad() -&gt; ()"
+                  moduleName = "ToDoList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seandonato/Downloads/ToDoList/ToDoList/MainView/ToDoListView-SwiftUI/TaskListHostingController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "1384">
+               </Location>
+               <Location
+                  uuid = "8513F228-324F-4BFB-9C53-0E5BA2ABB94F - e03ae425d1ba3155"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoList.TaskListHostingController.viewDidLoad() -&gt; ()"
+                  moduleName = "ToDoList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seandonato/Downloads/ToDoList/ToDoList/MainView/ToDoListView-SwiftUI/TaskListHostingController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "848">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2A3E8B2F-5EEF-474B-9D8C-0DA7196DB320"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoList/MainView/ToDoListView-SwiftUI/TaskList.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "14A77615-9505-457E-A77C-286896E54D01"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoList/MainView/ToDoListView-SwiftUI/TaskListHostingController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "didFinishFetchingData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B3394BD7-3E0D-433D-9642-F9CA0F9B4CFE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoList/MainView/ToDoListView-SwiftUI/TaskListHostingController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "didFinishFetchingData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B3394BD7-3E0D-433D-9642-F9CA0F9B4CFE - 243af635ae405eeb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoList.TaskListHostingController.didFinishFetchingData() -&gt; ()"
+                  moduleName = "ToDoList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seandonato/Downloads/ToDoList/ToDoList/MainView/ToDoListView-SwiftUI/TaskListHostingController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "260">
+               </Location>
+               <Location
+                  uuid = "B3394BD7-3E0D-433D-9642-F9CA0F9B4CFE - 243af635ae405eeb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoList.TaskListHostingController.didFinishFetchingData() -&gt; ()"
+                  moduleName = "ToDoList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seandonato/Downloads/ToDoList/ToDoList/MainView/ToDoListView-SwiftUI/TaskListHostingController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "252">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D733C410-27E3-41C0-A73F-5E81E68460F4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoList/MainView/ToDoListView-SwiftUI/TaskListHostingController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "init(viewModel:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
