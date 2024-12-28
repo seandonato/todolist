@@ -129,7 +129,7 @@ class ListViewControllerAlpha: UIViewController, UITableViewDelegate, UITableVie
             if let persistantCon = self.viewModel.coreDataManager?.persistentContainer{
                 var coreDataMan = CoreDataManager(persistentContainer: persistantCon)
                 toDoListViewModel.list = coreDataMan.getList2(listID: list.uuid)
-    //            toDoListViewModel.list = list
+
                 toDoListViewModel.coreDataManager = coreDataMan
 
     //           old self.navigationController?.pushViewController(ToDoListViewController(toDoListViewModel), animated: true)

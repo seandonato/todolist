@@ -12,13 +12,16 @@ import SwiftUI
 struct TaskTableViewCellBasic: View {
     
     let task: ToDoTask
-    
+    @State var expanded = false
     var body: some View {
-        HStack{
-            statusBlock
-            Text(verbatim: task.name)
-               // .background(Color.gray)
-        }
+        VStack(alignment: .leading, content: {
+            HStack{
+                statusBlock
+                Text(verbatim: task.name)
+            }
+            statusButtons
+        })
+        
     }
     
     @ViewBuilder var statusBlock: some View{
@@ -27,28 +30,74 @@ struct TaskTableViewCellBasic: View {
             Rectangle()
                 .fill(Color(StyleTokens.readySelected ?? .green))
                 .frame(width: 24,height: 24)
+                .onTapGesture {
+                    withAnimation{                    expanded.toggle()
+                    }
+                }
         case .inProgress:
             Rectangle()
                 .fill(Color(StyleTokens.inProgressSelected ?? .purple))
                 .frame(width: 24,height: 24)
-
+                .onTapGesture {
+                    withAnimation{                    expanded.toggle()
+                    }
+                }
         case .done:
             Rectangle()
                 .fill(Color(StyleTokens.doneSelected ?? .blue))
                 .frame(width: 24,height: 24)
-
+                .onTapGesture {
+                    withAnimation{                    expanded.toggle()
+                    }
+                }
         case .blocked:
             Rectangle()
                 .fill(Color(StyleTokens.blockedSelected ?? .red))
                 .frame(width: 24,height: 24)
-
+                .onTapGesture {
+                    withAnimation{                    expanded.toggle()
+                    }
+                }
 
         default:
             Rectangle()
                 .fill(Color(StyleTokens.readySelected ?? .green))
                 .frame(width: 24,height: 24)
+                .onTapGesture {
+                    withAnimation{                    expanded.toggle()
+                    }
+                }
 
+        }
+    }
+    
+    @ViewBuilder var statusButtons: some View{
+        if(expanded == true){
+            HStack{
+                Button {
+                    
+                } label: {
+                    Text(verbatim: "Ready")
+                }.background(Color(StyleTokens.readySelected ?? .green))
+                Button {
+                    
+                } label: {
+                    Text(verbatim: "In Progress")
+                }.background(Color(StyleTokens.inProgressSelected ?? .green))
+                Button {
+                    
+                } label: {
+                    Text(verbatim: "Done")
+                }.background(Color(StyleTokens.doneSelected ?? .green))
+                Button {
+                    
+                } label: {
+                    Text(verbatim: "Blocked")
+                }.background(Color(StyleTokens.blockedSelected ?? .green))
 
+            }
+        }else{
+            EmptyView()
         }
     }
     
