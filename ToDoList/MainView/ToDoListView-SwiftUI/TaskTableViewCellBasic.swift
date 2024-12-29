@@ -74,26 +74,18 @@ struct TaskTableViewCellBasic: View {
     @ViewBuilder var statusButtons: some View{
         if(expanded == true){
             HStack{
-                Button {
+                StatusButtonUI(taskStatus: .ready, action: {
                     
-                } label: {
-                    Text(verbatim: "Ready")
-                }.background(Color(StyleTokens.readySelected ?? .green))
-                Button {
+                }, title: "ready")
+                StatusButtonUI(taskStatus: .inProgress, action: {
                     
-                } label: {
-                    Text(verbatim: "In Progress")
-                }.background(Color(StyleTokens.inProgressSelected ?? .green))
-                Button {
+                }, title: "in progress")
+                StatusButtonUI(taskStatus: .blocked, action: {
                     
-                } label: {
-                    Text(verbatim: "Done")
-                }.background(Color(StyleTokens.doneSelected ?? .green))
-                Button {
+                }, title: "blocked")
+                StatusButtonUI(taskStatus: .done, action: {
                     
-                } label: {
-                    Text(verbatim: "Blocked")
-                }.background(Color(StyleTokens.blockedSelected ?? .green))
+                }, title: "done")
 
             }
         }else{

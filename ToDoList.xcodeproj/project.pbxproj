@@ -61,6 +61,7 @@
 		A9BEC9342D2055BE002B46FA /* TaskListHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BEC9332D2055BE002B46FA /* TaskListHostingController.swift */; };
 		A9BEC9362D2056A4002B46FA /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BEC9352D2056A4002B46FA /* TaskList.swift */; };
 		A9BEC9382D2093B6002B46FA /* ToDoListViewModelObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BEC9372D2093B6002B46FA /* ToDoListViewModelObservable.swift */; };
+		A9BEC93A2D220B7B002B46FA /* StatusButtonUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BEC9392D220B7B002B46FA /* StatusButtonUI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,7 @@
 		A9BEC9332D2055BE002B46FA /* TaskListHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListHostingController.swift; sourceTree = "<group>"; };
 		A9BEC9352D2056A4002B46FA /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
 		A9BEC9372D2093B6002B46FA /* ToDoListViewModelObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewModelObservable.swift; sourceTree = "<group>"; };
+		A9BEC9392D220B7B002B46FA /* StatusButtonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusButtonUI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,6 +332,7 @@
 				A9BEC9332D2055BE002B46FA /* TaskListHostingController.swift */,
 				A9BEC9352D2056A4002B46FA /* TaskList.swift */,
 				A9BEC9372D2093B6002B46FA /* ToDoListViewModelObservable.swift */,
+				A9BEC9392D220B7B002B46FA /* StatusButtonUI.swift */,
 			);
 			path = "ToDoListView-SwiftUI";
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				A925446729BBBD9D00F38E7C /* ToDoListViewController.swift in Sources */,
 				A98BF9F82C94DFEE004A3505 /* AddItemViewController.swift in Sources */,
 				A94745DD2B9BD8E9002DE068 /* Protocols.swift in Sources */,
+				A9BEC93A2D220B7B002B46FA /* StatusButtonUI.swift in Sources */,
 				A91113C42CA19CB400783F1E /* ListGroupViewModel.swift in Sources */,
 				A9A070CD2B6C60EA005DB5E1 /* StatusSwitcher.swift in Sources */,
 				A98136132BD050B2000B5AE2 /* AddTaskCell.swift in Sources */,
