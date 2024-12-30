@@ -16,9 +16,15 @@ struct TaskList:View{
     var body: some View{
         List{
             ForEach(viewModel.tasks ?? []) { task in
-                TaskTableViewCellBasic(task: task)
+                TaskTableViewCellBasic(action: {status in
+                    changeStatus(status,task)
+                }, task: task)
 
             }
         }
+    }
+    func changeStatus(_ status:ToDoTaskStatus,_ task:ToDoTask){
+        viewModel.changeStatusFor(task, status)
+        viewModel.fetchData()
     }
 }

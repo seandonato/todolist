@@ -30,7 +30,7 @@ struct StatusButtonUI: View{
             .background(Color(StyleTokens.readySelected ?? .green))
             
             .cornerRadius(StyleTokens.buttonCornerRadius)
-                
+            .buttonStyle(.borderless)
         case .inProgress:
             Button(action: {
                 action()
@@ -42,6 +42,7 @@ struct StatusButtonUI: View{
             })
                 .background(Color(StyleTokens.inProgressSelected ?? .purple))
                 .cornerRadius(StyleTokens.buttonCornerRadius)
+                .buttonStyle(.borderless)
 
 
         case .done:
@@ -55,6 +56,7 @@ struct StatusButtonUI: View{
             })
                 .background(Color(StyleTokens.doneSelected ?? .blue))
                 .cornerRadius(StyleTokens.buttonCornerRadius)
+                .buttonStyle(.borderless)
 
 
         case .blocked:
@@ -68,6 +70,7 @@ struct StatusButtonUI: View{
             })
                 .background(Color(StyleTokens.blockedSelected ?? .red))
                 .cornerRadius(StyleTokens.buttonCornerRadius)
+                .buttonStyle(.borderless)
 
 
         default:
@@ -78,6 +81,7 @@ struct StatusButtonUI: View{
             })
                 .background(Color(StyleTokens.blockedSelected ?? .red))
                 .cornerRadius(StyleTokens.buttonCornerRadius)
+                .buttonStyle(.borderless)
 
         }
     }

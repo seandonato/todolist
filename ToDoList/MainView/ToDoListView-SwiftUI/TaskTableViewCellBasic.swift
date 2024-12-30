@@ -8,20 +8,26 @@
 import Foundation
 import SwiftUI
 
-
+@available(iOS 17.0, *)
 struct TaskTableViewCellBasic: View {
-    
+    var action: (_ status:ToDoTaskStatus) -> ()
+    //var navigateToDetailAction: (_ status:ToDoTaskStatus) -> ()
+
     let task: ToDoTask
+    
     @State var expanded = false
     var body: some View {
         VStack(alignment: .leading, content: {
             HStack{
                 statusBlock
-                Text(verbatim: task.name)
+                HStack{
+                    Text(verbatim: task.name)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                }
             }
             statusButtons
         })
-        
     }
     
     @ViewBuilder var statusBlock: some View{
@@ -75,16 +81,20 @@ struct TaskTableViewCellBasic: View {
         if(expanded == true){
             HStack{
                 StatusButtonUI(taskStatus: .ready, action: {
-                    
+                    self.action(.ready)
+
                 }, title: "ready")
                 StatusButtonUI(taskStatus: .inProgress, action: {
-                    
+                    self.action(.inProgress)
+
                 }, title: "in progress")
                 StatusButtonUI(taskStatus: .blocked, action: {
-                    
+                    self.action(.blocked)
+
                 }, title: "blocked")
                 StatusButtonUI(taskStatus: .done, action: {
-                    
+                    self.action(.done)
+
                 }, title: "done")
 
             }
