@@ -16,6 +16,7 @@ class TaskListHostingController: UIViewController,ToDoListViewModelDelegate{
         setupHostingVC()
     }
     
+//    var hostingController: UIHostingController<TaskList>?
     var hostingController: UIHostingController<TaskList>?
     var tasks: [ToDoTask] = []
     let viewModel: ToDoListViewModelObservable
@@ -33,22 +34,31 @@ class TaskListHostingController: UIViewController,ToDoListViewModelDelegate{
     }
         
     func setupHostingVC(){
-         hostingController = UIHostingController(rootView: TaskList(viewModel: viewModel, tasks: tasks ?? []))
-        
-        guard let hostingController = hostingController else{return}
-        hostingController.sizingOptions = .intrinsicContentSize
+        if let task = viewModel.list{
+            hostingController = UIHostingController(rootView: TaskList(viewModel: viewModel, task: task , tasks: tasks ?? []))
+//            hostingController = UIHostingController(rootView: NavigationStack(root: {
+//                TaskList(viewModel: viewModel, task: task , tasks: tasks ?? [])
+//            }))
 
-        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(hostingController.view)
-//        
-        NSLayoutConstraint.activate([
-            hostingController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            hostingController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            hostingController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            hostingController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            
 
-        ])
+            guard let hostingController = hostingController else{return}
+            hostingController.sizingOptions = .intrinsicContentSize
+
+            hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(hostingController.view)
+    //
+            NSLayoutConstraint.activate([
+                hostingController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+                hostingController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                hostingController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                hostingController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+
+            ])
+
+        }
         
+
         self.view.backgroundColor = .white
     }
     

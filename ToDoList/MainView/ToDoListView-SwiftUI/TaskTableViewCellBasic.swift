@@ -11,7 +11,7 @@ import SwiftUI
 @available(iOS 17.0, *)
 struct TaskTableViewCellBasic: View {
     var action: (_ status:ToDoTaskStatus) -> ()
-    //var navigateToDetailAction: (_ status:ToDoTaskStatus) -> ()
+    var navigateToDetailAction: (_ task:ToDoTask) -> ()
 
     let task: ToDoTask
     

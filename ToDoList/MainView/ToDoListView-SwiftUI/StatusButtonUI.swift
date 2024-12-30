@@ -25,10 +25,8 @@ struct StatusButtonUI: View{
                 Text(verbatim: title)
                     .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
                     .foregroundStyle(.white)
-
             })
             .background(Color(StyleTokens.readySelected ?? .green))
-            
             .cornerRadius(StyleTokens.buttonCornerRadius)
             .buttonStyle(.borderless)
         case .inProgress:
@@ -43,7 +41,6 @@ struct StatusButtonUI: View{
                 .background(Color(StyleTokens.inProgressSelected ?? .purple))
                 .cornerRadius(StyleTokens.buttonCornerRadius)
                 .buttonStyle(.borderless)
-
 
         case .done:
             Button(action: {
