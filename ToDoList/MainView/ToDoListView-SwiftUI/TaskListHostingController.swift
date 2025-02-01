@@ -11,13 +11,15 @@ import SwiftUI
 
 @available(iOS 17.0, *)
 class TaskListHostingController: UIViewController,ToDoListViewModelDelegate{
+    private let navigationModel = NavigationModel()
+
     func didFinishFetchingData() {
         tasks = viewModel.tasks ?? []
         setupHostingVC()
     }
     
 //    var hostingController: UIHostingController<TaskList>?
-    var hostingController: UIHostingController<TaskList>?
+    var hostingController: UIHostingController<TaskView>?
     var tasks: [ToDoTask] = []
     let viewModel: ToDoListViewModelObservable
     
@@ -34,12 +36,9 @@ class TaskListHostingController: UIViewController,ToDoListViewModelDelegate{
     }
         
     func setupHostingVC(){
+        navigationModel.navigationController = self.navigationController
         if let task = viewModel.list{
-            hostingController = UIHostingController(rootView: TaskList(viewModel: viewModel, task: task , tasks: tasks ?? []))
-//            hostingController = UIHostingController(rootView: NavigationStack(root: {
-//                TaskList(viewModel: viewModel, task: task , tasks: tasks ?? [])
-//            }))
-
+            hostingController = UIHostingController(rootView: TaskView(navigationModel: self.navigationModel, viewModel: viewModel, task: task , tasks: tasks ?? []))
             
 
             guard let hostingController = hostingController else{return}
