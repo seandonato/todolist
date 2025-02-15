@@ -47,6 +47,7 @@
 		A98751ED2D4E8B3D0067B019 /* NavigationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98751EC2D4E8B3D0067B019 /* NavigationModel.swift */; };
 		A98751F02D4EA0B30067B019 /* GroupTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98751EF2D4EA0B30067B019 /* GroupTasksView.swift */; };
 		A98751F22D4ED2CC0067B019 /* GroupTasksViewModelObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98751F12D4ED2CC0067B019 /* GroupTasksViewModelObservable.swift */; };
+		A98751F42D4EE90C0067B019 /* AddTaskToGroupSUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98751F32D4EE90C0067B019 /* AddTaskToGroupSUI.swift */; };
 		A98BF9EA2C6BFF51004A3505 /* TaskTableViewCellAlpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9E92C6BFF51004A3505 /* TaskTableViewCellAlpha.swift */; };
 		A98BF9EC2C6C4D56004A3505 /* StatusButtonStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9EB2C6C4D56004A3505 /* StatusButtonStack.swift */; };
 		A98BF9EE2C6D52DD004A3505 /* MoreButtonStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98BF9ED2C6D52DD004A3505 /* MoreButtonStack.swift */; };
@@ -131,6 +132,7 @@
 		A98751EC2D4E8B3D0067B019 /* NavigationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationModel.swift; sourceTree = "<group>"; };
 		A98751EF2D4EA0B30067B019 /* GroupTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTasksView.swift; sourceTree = "<group>"; };
 		A98751F12D4ED2CC0067B019 /* GroupTasksViewModelObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTasksViewModelObservable.swift; sourceTree = "<group>"; };
+		A98751F32D4EE90C0067B019 /* AddTaskToGroupSUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskToGroupSUI.swift; sourceTree = "<group>"; };
 		A98BF9E92C6BFF51004A3505 /* TaskTableViewCellAlpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCellAlpha.swift; sourceTree = "<group>"; };
 		A98BF9EB2C6C4D56004A3505 /* StatusButtonStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusButtonStack.swift; sourceTree = "<group>"; };
 		A98BF9ED2C6D52DD004A3505 /* MoreButtonStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreButtonStack.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 			children = (
 				A98751EF2D4EA0B30067B019 /* GroupTasksView.swift */,
 				A98751F12D4ED2CC0067B019 /* GroupTasksViewModelObservable.swift */,
+				A98751F32D4EE90C0067B019 /* AddTaskToGroupSUI.swift */,
 			);
 			path = GroupTasksView;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 				A98136112BD04630000B5AE2 /* GroupListViewController.swift in Sources */,
 				A91113CA2CA19EA700783F1E /* ListCoreDataManager.swift in Sources */,
 				A9BEC9382D2093B6002B46FA /* ToDoListViewModelObservable.swift in Sources */,
+				A98751F42D4EE90C0067B019 /* AddTaskToGroupSUI.swift in Sources */,
 				A91113C22CA19B5A00783F1E /* AddEntityCell.swift in Sources */,
 				A98BF9F62C94DE39004A3505 /* AddItemCell.swift in Sources */,
 				A925446329BBBD9D00F38E7C /* AppDelegate.swift in Sources */,

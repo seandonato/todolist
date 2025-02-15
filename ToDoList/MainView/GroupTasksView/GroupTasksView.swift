@@ -24,9 +24,9 @@ struct GroupTasksView: View{
                 Text(verbatim: "Group name:")
                 Text(verbatim: project.name)
                 Text(verbatim: "tasks:")
-
-            })
-
+                
+            }).padding()
+            
             List{
                 ForEach(viewModel.lists ?? []) { task in
                     TaskTableViewCellBasic(action: { status in
@@ -34,30 +34,42 @@ struct GroupTasksView: View{
                     }, navigateToDetailAction: { targetTask in
                         navigateToDetail(targetTask)
                     }, task: task)
-
-                    }
-            }.listStyle(.plain)
-            })
-        HStack{
-            Spacer()
-            Button("Add Sub Task") {
-                showPopover = true
-            }
-            .popover(isPresented: self.$showPopover,
-                             attachmentAnchor: .rect(.rect(CGRect(x: 0, y: 20,
-                                                    width: 160, height: 100))),
-                             arrowEdge: .top,
-                             content: {
-                            //AddTaskSUI(viewModel: viewModel, stringValue: "",isPresented: $showPopover)
+                    
+                }.onDelete(perform: { indexSet in
+                    delete(at: indexSet)
+                })
                 
-                    })
-            .padding(EdgeInsets(top: -100, leading: 0.0, bottom: 0.0, trailing: 20.0))
+            }.listStyle(.plain)
+            
+            
+            HStack{
+                Spacer()
+                Button("Add Task") {
+                    showPopover = true
+                }
+                .popover(isPresented: self.$showPopover,
+                         attachmentAnchor: .rect(.rect(CGRect(x: 0, y: 20,width: 160, height: 100))),
+                         arrowEdge: .top,
+                         content: {
+                    AddTaskToGroupSUI(viewModel: viewModel, stringValue: "", isPresented: $showPopover)
+                    
+                })
+                .padding(EdgeInsets(top: -100, leading: 0.0, bottom: 0.0, trailing: 20.0))
+            }
+        })
+    }
+    
+    func delete(at offsets: IndexSet) {
+        for index in offsets{
+            if let list = viewModel.lists?[index]{
+                viewModel.deleteList(list.uuid)
+            }
         }
-        
     }
     func changeStatus(_ status:ToDoTaskStatus,_ task:ToDoTask){
-      //  viewModel.changeStatusFor(task, status)
-        //viewModel.fetchData()
+        
+//        viewModel.changeStatusFor(task, status)
+//        viewModel.fetchData()
     }
     func navigateToDetail(_ targetTask: ToDoTask){
         var model = ToDoListViewModelObservable()
@@ -69,7 +81,6 @@ struct GroupTasksView: View{
             navigationModel.push{
                 taskView
             }
-
         }
     }
 }

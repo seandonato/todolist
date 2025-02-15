@@ -40,7 +40,12 @@ struct TaskView:View{
                     }, task: task)
 
                     }
+                .onDelete(perform: { indexSet in
+                    delete(at: indexSet)
+                })
+                
             }.listStyle(.plain)
+            
             })
         HStack{
             Spacer()
@@ -58,6 +63,13 @@ struct TaskView:View{
             .padding(EdgeInsets(top: -100, leading: 0.0, bottom: 0.0, trailing: 20.0))
         }
         
+    }
+    func delete(at offsets: IndexSet) {
+        for index in offsets{
+            if let task = viewModel.tasks?[index]{
+                viewModel.deleteTask(task)
+            }
+        }
     }
     func changeStatus(_ status:ToDoTaskStatus,_ task:ToDoTask){
         viewModel.changeStatusFor(task, status)
