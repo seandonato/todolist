@@ -124,14 +124,23 @@ class ListViewControllerAlpha: UIViewController, UITableViewDelegate, UITableVie
 //        viewModel.fetchData()
     }
     func navigateToToDoList(list:ToDoTask){
-        let toDoListViewModel = ToDoListViewModel()
-        if let persistantCon = self.viewModel.coreDataManager?.persistentContainer{
-            var coreDataMan = CoreDataManager(persistentContainer: persistantCon)
-            toDoListViewModel.list = coreDataMan.getList2(listID: list.uuid)
-//            toDoListViewModel.list = list
-            toDoListViewModel.coreDataManager = coreDataMan
+        if #available(iOS 17.0, *) {
+            let toDoListViewModel = ToDoListViewModelObservable()
+            if let persistantCon = self.viewModel.coreDataManager?.persistentContainer{
+                var coreDataMan = CoreDataManager(persistentContainer: persistantCon)
+                toDoListViewModel.list = coreDataMan.getList2(listID: list.uuid)
 
-            self.navigationController?.pushViewController(ToDoListViewController(toDoListViewModel), animated: true)
+                toDoListViewModel.coreDataManager = coreDataMan
+
+    //           old self.navigationController?.pushViewController(ToDoListViewController(toDoListViewModel), animated: true)
+                //new with hosting
+                self.navigationController?.pushViewController(TaskListHostingController(viewModel: toDoListViewModel), animated: true)
+                
+                
+                
+        } else {
+            // Fallback on earlier versions
+        }
 
         }
 

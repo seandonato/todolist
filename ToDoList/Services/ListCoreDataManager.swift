@@ -145,18 +145,18 @@ class ListCoreDataManager {
                     if let items = (object as AnyObject).value(forKey: "items") as? [AnyObject]{
                         
                         if let items = coreDataUtil.itemsFromManagedObject(items){
-                            let list = ToDoTask(name: name, uuid: uuid as! UUID, date: dateCreated, items: items, subTasks: tasks)
+                            let list = ToDoTask(id: uuid as! UUID,name: name, uuid: uuid as! UUID, date: dateCreated, items: items, subTasks: tasks)
                             lists?.append(list)
                             
                         }
                     }else{
-                        let list = ToDoTask(name: name, uuid: uuid as! UUID, date:dateCreated, items: [], subTasks: [])
+                        let list = ToDoTask(id: uuid as! UUID,name: name, uuid: uuid as! UUID, date:dateCreated, items: [], subTasks: [])
                         lists?.append(list)
                         
                     }
                 }
                 }else{
-                    let list = ToDoTask(name: name, uuid: uuid as! UUID, date:dateCreated, items: [], subTasks: [])
+                    let list = ToDoTask(id: uuid as! UUID,name: name, uuid: uuid as! UUID, date:dateCreated, items: [], subTasks: [])
                     lists?.append(list)
                 }
             }
@@ -183,7 +183,7 @@ class ListCoreDataManager {
                     guard let uuid = (mlist as AnyObject).value(forKey: "uuid") else{return nil}
                     guard let dateCreated = (mlist as AnyObject).value(forKey: "dateCreated") as? NSDate else{return nil}
 
-                    let list = ToDoTask(name: name, uuid: uuid as! UUID, date:dateCreated, items: [], subTasks: [])
+                    let list = ToDoTask(id: uuid as! UUID,name: name, uuid: uuid as! UUID, date:dateCreated, items: [], subTasks: [])
                     lists?.append(list)
 
                 }

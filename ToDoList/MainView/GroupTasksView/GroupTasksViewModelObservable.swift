@@ -1,17 +1,19 @@
 //
-//  ListViewModel.swift
+//  GroupTasksViewModelObservable.swift
 //  ToDoList
 //
-//  Created by Sean Donato on 9/24/24.
+//  Created by Sean Donato on 2/1/25.
 //
 
 import Foundation
 import UIKit
 
-protocol ListViewModelDelegate: AnyObject {
-    func didFinishFetchingData()
-}
-class ListViewModel{
+//protocol ListViewModelDelegate: AnyObject {
+//    func didFinishFetchingData()
+//}
+@available(iOS 17.0, *)
+@Observable
+class GroupTasksViewModelObservable{
     
     var delegate: ListGroupViewModelDelegate?
     var lists: [ToDoTask]?

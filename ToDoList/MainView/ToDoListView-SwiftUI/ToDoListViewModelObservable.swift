@@ -1,26 +1,14 @@
 //
-//  RootViewModel.swift
-//  ToDoList-MVC
+//  File.swift
+//  ToDoList
 //
-//  Created by Sean Donato on 3/21/24.
+//  Created by Sean Donato on 12/28/24.
 //
 
 import Foundation
-import SwiftUI
 
-protocol ToDoListViewModelDelegate: AnyObject {
-    func didFinishFetchingData()
-}
-
-protocol ToDoListViewModelProtocol: AnyObject{
-    var toDoListViewModelDelegate: ToDoListViewModelDelegate? { get set }
-    var coreDataManager: CoreDataManager? { get set }
-    func deleteTask(_ task: ToDoTask)
-    func saveTask(_ toDoTaskName:String)
-    func fetchData()
-    var tasks : [ToDoTask]? { get set }
-}
-class ToDoListViewModel: ToDoListViewModelProtocol, StatusPickerDelegate{
+@available(iOS 17.0, *)
+class ToDoListViewModelObservable: ToDoListViewModelProtocol, StatusPickerDelegate{
     var tasks: [ToDoTask]?
     var items: [ToDoItem]?
 

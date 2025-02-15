@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 struct StyleTokens{
     
@@ -26,6 +27,10 @@ struct StyleTokens{
     
     static var doneSelected =  UIColor(hex: "#007dd1ff")
     static var doneUnSelected = UIColor(hex: "#e1eff8ff")
+    
+    static var primaryButton = Color(uiColor: UIColor(hex: "#007dd1ff") ?? .clear)
+    static var primaryButtonClicked = Color(uiColor: UIColor(hex: "#e1eff8ff") ?? .clear)
+
 
 }
 extension UIColor {

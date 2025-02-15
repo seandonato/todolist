@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class GroupViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,AddEntityDelegate,ListGroupViewModelDelegate{
     func didFinishFetchingData() {
@@ -15,7 +16,6 @@ class GroupViewController: UIViewController,UITableViewDelegate, UITableViewData
             tableView.reloadData()
         }
     }
-    
     
     func addEntity() {
         let vc = AddGroupViewController (viewModel)
@@ -121,8 +121,32 @@ class GroupViewController: UIViewController,UITableViewDelegate, UITableViewData
                     let vm = ListViewModel(lists: [],coreDataManager: listCoreDataManager)
                     vm.group = group
                     if let lists = viewModel.groups?[indexPath.row].lists{
-                        let vc = ListViewControllerAlpha(vm, lists, 0)
-                        self.navigationController?.pushViewController(vc, animated: true)
+                       
+//                        let vc = ListViewControllerAlpha(vm, lists, 0)
+//                        
+//                        self.navigationController?.pushViewController(vc, animated: true)
+                        let navigationModel = NavigationModel()
+                        navigationModel.navigationController = navigationController
+                        
+                        if #available(iOS 17.0, *) {
+                            let model = GroupTasksViewModelObservable(lists: group.tasks)
+                            model.coreDataManager = listCoreDataManager
+                            model.delegate = self
+                            model.group = group
+                            model.fetchLists()
+
+                                let rootView = GroupTasksView(navigationModel: navigationModel, viewModel: model, project: group , tasks: group.lists ?? [])
+                                let hc = UIHostingController(rootView: rootView)
+                                    
+                                navigationController?.pushViewController(hc, animated: true)
+
+                        } else {
+                            // Fallback on earlier versions
+                        }
+
+                       
+
+                       // }
                     }
                 }
             }

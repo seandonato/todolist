@@ -59,10 +59,10 @@ class CoreDataUtil {
                 taskStatus = ToDoTaskStatus.done
             }
             if let note = (object as AnyObject).value(forKey: "note") as? String{
-                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: note,date: date)
+                let task = ToDoTask(id: uuid as! UUID,name: name, uuid: uuid as! UUID ,taskStatus: taskStatus, note: note,date: date)
                 tasks.append(task)
             }else{
-                let task = ToDoTask(name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
+                let task = ToDoTask(id: uuid as! UUID,name: name, uuid: uuid as! UUID ,taskStatus: taskStatus,date:date)
                 tasks.append(task)
             }
             
@@ -143,7 +143,7 @@ func taskItemsFromManagedObject(_ managedItems: [AnyObject]) -> [ToDoItem]?{
                     itemArray.append(item)
 
                 }
-                    let task = ToDoTask(name: name, uuid: uuid, date: date,items: itemArray)
+                    let task = ToDoTask(id: uuid as! UUID,name: name, uuid: uuid, date: date,items: itemArray)
                     return task
 
             }
