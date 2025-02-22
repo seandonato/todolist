@@ -86,7 +86,7 @@ extension AddListViewController{
 extension AddListViewController{
     @objc func saveList(){
         if let name = entryField.text{
-            viewModel.saveList(name)
+            viewModel.saveTask(name)
             self.dismiss(animated: true)
         }
     }

@@ -37,7 +37,7 @@ class TaskListHostingController: UIViewController,ToDoListViewModelDelegate{
         
     func setupHostingVC(){
         navigationModel.navigationController = self.navigationController
-        if let task = viewModel.list{
+        if let task = viewModel.toDoTask{
             hostingController = UIHostingController(rootView: TaskView(navigationModel: self.navigationModel, viewModel: viewModel, task: task , tasks: tasks ?? []))
             
 

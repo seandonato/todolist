@@ -32,13 +32,13 @@ class ListViewModel{
             delegate?.didFinishFetchingData()
         }
     }
-    func saveList(_ toDoListName:String){
+    func saveTask(_ toDoTaskName:String){
         let uuid = UUID()
-        let list = ToDoTask(id: uuid as! UUID,name: toDoListName, uuid: uuid, date: NSDate(), items: [], subTasks: [])
+        let task = ToDoTask(id: uuid as! UUID,name: toDoTaskName, uuid: uuid, date: NSDate(), items: [], subTasks: [])
 
         //update to save list
         if let group{
-            if let _ = coreDataManager?.saveListWithGroup(list, group){
+            if let _ = coreDataManager?.saveTaskWithGroup(task, group: group){
                 fetchLists()
             }
 

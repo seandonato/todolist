@@ -268,19 +268,8 @@
 		A94745E02B9BD910002DE068 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
-				A98751EE2D4EA0970067B019 /* GroupTasksView */,
-				A925446629BBBD9D00F38E7C /* ToDoListViewController.swift */,
-				A91113B52C970FAE00783F1E /* ItemListCell.swift */,
-				A91113B32C96430700783F1E /* AddListItemCell.swift */,
-				A94745E82BAB578D002DE068 /* ViewModels */,
-				A925449729BBC5CD00F38E7C /* TaskTableViewCell.swift */,
-				A98BF9E92C6BFF51004A3505 /* TaskTableViewCellAlpha.swift */,
-				A9BEC9322D170907002B46FA /* ToDoListView-SwiftUI */,
-				A98BF9EB2C6C4D56004A3505 /* StatusButtonStack.swift */,
-				A98BF9ED2C6D52DD004A3505 /* MoreButtonStack.swift */,
-				A98136122BD050B2000B5AE2 /* AddTaskCell.swift */,
-				A91113B12C963B6A00783F1E /* AddListItemViewController.swift */,
-				A91113B72C98EF2300783F1E /* CellCheckbox.swift */,
+				A970A61C2D63954900C2308B /* UIKit Deprecation */,
+				A970A61B2D6165F900C2308B /* SwiftUI */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -311,16 +300,44 @@
 		A94745E82BAB578D002DE068 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				A9BEC9372D2093B6002B46FA /* ToDoListViewModelObservable.swift */,
+				A98751F12D4ED2CC0067B019 /* GroupTasksViewModelObservable.swift */,
 				A9BAD43C2BAD2EBF00C9CBF1 /* ToDoListViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A970A61B2D6165F900C2308B /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				A94745E82BAB578D002DE068 /* ViewModels */,
+				A9BEC9322D170907002B46FA /* ToDoListView-SwiftUI */,
+				A98751EE2D4EA0970067B019 /* GroupTasksView */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		A970A61C2D63954900C2308B /* UIKit Deprecation */ = {
+			isa = PBXGroup;
+			children = (
+				A925446629BBBD9D00F38E7C /* ToDoListViewController.swift */,
+				A91113B52C970FAE00783F1E /* ItemListCell.swift */,
+				A91113B32C96430700783F1E /* AddListItemCell.swift */,
+				A925449729BBC5CD00F38E7C /* TaskTableViewCell.swift */,
+				A98BF9E92C6BFF51004A3505 /* TaskTableViewCellAlpha.swift */,
+				A98BF9EB2C6C4D56004A3505 /* StatusButtonStack.swift */,
+				A98BF9ED2C6D52DD004A3505 /* MoreButtonStack.swift */,
+				A98136122BD050B2000B5AE2 /* AddTaskCell.swift */,
+				A91113B12C963B6A00783F1E /* AddListItemViewController.swift */,
+				A91113B72C98EF2300783F1E /* CellCheckbox.swift */,
+			);
+			path = "UIKit Deprecation";
 			sourceTree = "<group>";
 		};
 		A98751EE2D4EA0970067B019 /* GroupTasksView */ = {
 			isa = PBXGroup;
 			children = (
 				A98751EF2D4EA0B30067B019 /* GroupTasksView.swift */,
-				A98751F12D4ED2CC0067B019 /* GroupTasksViewModelObservable.swift */,
 				A98751F32D4EE90C0067B019 /* AddTaskToGroupSUI.swift */,
 			);
 			path = GroupTasksView;
@@ -355,7 +372,6 @@
 				A98751EC2D4E8B3D0067B019 /* NavigationModel.swift */,
 				A9BEC9332D2055BE002B46FA /* TaskListHostingController.swift */,
 				A9BEC9352D2056A4002B46FA /* TaskView.swift */,
-				A9BEC9372D2093B6002B46FA /* ToDoListViewModelObservable.swift */,
 				A9BEC9392D220B7B002B46FA /* StatusButtonUI.swift */,
 				A9BEC93B2D399DC9002B46FA /* AddTaskSUI.swift */,
 				A98751EA2D4E78BA0067B019 /* TDSUIButton.swift */,

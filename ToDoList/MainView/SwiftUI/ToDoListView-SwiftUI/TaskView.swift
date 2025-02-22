@@ -73,7 +73,7 @@ struct TaskView:View{
     }
     func changeStatus(_ status:ToDoTaskStatus,_ task:ToDoTask){
         viewModel.changeStatusFor(task, status)
-        viewModel.fetchData()
+        //viewModel.fetchData()
     }
     func navigateToDetail(_ targetTask: ToDoTask){
         

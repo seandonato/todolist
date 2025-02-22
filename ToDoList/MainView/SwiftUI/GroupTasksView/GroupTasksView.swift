@@ -68,12 +68,12 @@ struct GroupTasksView: View{
     }
     func changeStatus(_ status:ToDoTaskStatus,_ task:ToDoTask){
         
-//        viewModel.changeStatusFor(task, status)
-//        viewModel.fetchData()
+        viewModel.changeStatusFor(task, status)
+        //viewModel.fetchLists()
     }
     func navigateToDetail(_ targetTask: ToDoTask){
         var model = ToDoListViewModelObservable()
-        model.list = targetTask
+        model.toDoTask = targetTask
         if let container = viewModel.coreDataManager?.persistentContainer{
             model.coreDataManager = CoreDataManager(persistentContainer:container)
             model.fetchData()

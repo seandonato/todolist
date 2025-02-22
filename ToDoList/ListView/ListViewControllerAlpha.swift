@@ -128,7 +128,7 @@ class ListViewControllerAlpha: UIViewController, UITableViewDelegate, UITableVie
             let toDoListViewModel = ToDoListViewModelObservable()
             if let persistantCon = self.viewModel.coreDataManager?.persistentContainer{
                 var coreDataMan = CoreDataManager(persistentContainer: persistantCon)
-                toDoListViewModel.list = coreDataMan.getList2(listID: list.uuid)
+                toDoListViewModel.toDoTask = coreDataMan.getList2(listID: list.uuid)
 
                 toDoListViewModel.coreDataManager = coreDataMan
 

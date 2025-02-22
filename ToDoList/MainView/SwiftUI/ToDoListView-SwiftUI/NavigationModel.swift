@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+//bridging between swiftui and uikit
 class NavigationModel {
     var navigationController: UINavigationController?
     

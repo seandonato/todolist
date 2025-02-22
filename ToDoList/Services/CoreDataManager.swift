@@ -103,18 +103,6 @@ class CoreDataManager {
         return tasks
     }
     
-    func fetchListsFromCoreData() -> [NSManagedObject]?{
-        let managedContext = persistentContainer.viewContext
-        let listsFetch = NSFetchRequest<NSManagedObject>(entityName: "TDList")
-        var lists : [NSManagedObject] = []
-        do {
-            lists = try managedContext.fetch(listsFetch)
-        } catch let error as NSError {
-            fatalError("Failed to fetch foods: \(error)")
-        }
-        return lists
-    }
-    
     func updateTaskStatus(_ task: ToDoTask,_ status: ToDoTaskStatus,completion: @escaping ((Result<Bool,Error>) -> ())) {
         
         print(task.name)
@@ -147,7 +135,6 @@ class CoreDataManager {
                     try managedContext.save()
                     completion(.success(true))
                 } catch let error as NSError {
-                    //print("Could not save. \(error), \(error.userInfo)")
                     completion(.failure(error))
                 }
             }
@@ -541,49 +528,6 @@ class CoreDataManager {
     }
 
 
-        
-        func saveItemToList(_ item: ToDoItem,_ list: ToDoTask) -> Bool? {
-            let managedContext = persistentContainer.viewContext
-            
-            //get list
-            print(list.name)
-            let listID = list.uuid
-            let taskFetch = NSFetchRequest<NSManagedObject>(entityName: "TDTask")
-            taskFetch.predicate = NSPredicate(format: "%K == %@", "uuid", listID as any CVarArg )
-            do{
-                let fetchResults = try managedContext.fetch(taskFetch)
-                if !fetchResults.isEmpty{
-                    
-                    let managedList = fetchResults[0]
-                    
-                    if let mList = fetchResults[0] as? TDList{
-                        
-                        let entity = NSEntityDescription.entity(forEntityName: "TDItem", in: managedContext)!
-                        
-                        let managedItem = TDItem(entity: entity, insertInto: managedContext)
-                        
-                        managedItem.setValue(item.name, forKeyPath: "name")
-                        let uuid = UUID()
-                        managedItem.setValue(uuid, forKeyPath: "uuid")
-                        managedItem.setValue(false, forKeyPath: "acquired")
-//                        managedItem.setValue(NSDate(), forKeyPath: "dateCreated")
-                        mList.addToItems(managedItem)
-                        do {
-                            try managedContext.save()
-                            return true
-                        } catch let error as NSError {
-                            print("Could not save. \(error), \(error.userInfo)")
-                            return false
-                        }
-                    }
-                    print(fetchResults)
-                }
-            }catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
-                return false
-            }
-            return false
-        }
     
     func fetchTask(task:ToDoTask) -> ToDoTask?{
         let managedContext = persistentContainer.viewContext
