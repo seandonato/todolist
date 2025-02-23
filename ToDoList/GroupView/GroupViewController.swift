@@ -131,6 +131,7 @@ class GroupViewController: UIViewController,UITableViewDelegate, UITableViewData
                         if #available(iOS 17.0, *) {
                             let model = GroupTasksViewModelObservable(lists: group.tasks)
                             model.coreDataManager = listCoreDataManager
+                            model.genCoreDataManager = CoreDataManager(persistentContainer: persistentContainer)
                             model.delegate = self
                             model.group = group
                             model.fetchLists()

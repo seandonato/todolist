@@ -22,7 +22,7 @@ struct AddTaskToGroupSUI: View{
                 .padding()
                 .border(.gray, width: 1)
             TDSUIButton(text:"add") {
-                viewModel.saveList(stringValue)
+                viewModel.saveTask(stringValue)
                 isPresented = false
             }
             TDSUIButton(text:"dismiss"){

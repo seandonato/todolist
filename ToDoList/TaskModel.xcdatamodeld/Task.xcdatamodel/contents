@@ -5,7 +5,7 @@
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="items" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TDItem" inverseName="group" inverseEntity="TDItem"/>
         <relationship name="lists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TDTask"/>
-        <relationship name="tasks" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TDTask" inverseName="group" inverseEntity="TDTask"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TDTask" inverseName="group" inverseEntity="TDTask"/>
     </entity>
     <entity name="TDItem" representedClassName="TDItem" syncable="YES" codeGenerationType="class">
         <attribute name="acquired" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -14,15 +14,6 @@
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TDGroup" inverseName="items" inverseEntity="TDGroup"/>
-        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TDList" inverseName="items" inverseEntity="TDList"/>
-    </entity>
-    <entity name="TDList" representedClassName="TDList" syncable="YES" codeGenerationType="class">
-        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TDGroup"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TDItem" inverseName="list" inverseEntity="TDItem"/>
-        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TDTask" inverseName="list" inverseEntity="TDTask"/>
     </entity>
     <entity name="TDTask" representedClassName="TDTask" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -33,7 +24,6 @@
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TDGroup" inverseName="tasks" inverseEntity="TDGroup"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TDItem"/>
-        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TDList" inverseName="tasks" inverseEntity="TDList"/>
         <relationship name="parentTask" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TDTask"/>
         <relationship name="subTasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TDTask"/>
     </entity>

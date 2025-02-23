@@ -14,7 +14,16 @@ enum ToDoTaskStatus: String{
     case blocked = "blocked"
 }
 
-struct ToDoTask:Identifiable{
+struct ToDoTask:Identifiable, Comparable{
+    static func < (lhs: ToDoTask, rhs: ToDoTask) -> Bool {
+        return lhs.uuid.hashValue < rhs.uuid.hashValue
+    }
+    
+    static func == (lhs: ToDoTask, rhs: ToDoTask) -> Bool {
+        return lhs.uuid == rhs.uuid
+
+    }
+    
     var id: UUID
     var name: String
     var uuid: UUID
