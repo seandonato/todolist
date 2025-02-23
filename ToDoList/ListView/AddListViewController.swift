@@ -78,13 +78,13 @@ extension AddListViewController{
                 addButton.widthAnchor.constraint(equalToConstant: 44)
             ])
             
-            addButton.addTarget(self, action: #selector(saveList), for: .touchUpInside)
+            addButton.addTarget(self, action: #selector(saveTask), for: .touchUpInside)
 
         }
         
     }
 extension AddListViewController{
-    @objc func saveList(){
+    @objc func saveTask(){
         if let name = entryField.text{
             viewModel.saveTask(name)
             self.dismiss(animated: true)
