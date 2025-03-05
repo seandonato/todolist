@@ -60,21 +60,19 @@ class ListCoreDataManager {
         return false
     }
 
-    func getListsByGroup(groupID:UUID) -> [ToDoTask]?{
+    func getTasksByGroup(groupID:UUID) -> [ToDoTask]?{
         
         let managedContext = persistentContainer.viewContext
-        var lists: [ToDoTask]? = []
+        var tasks: [ToDoTask]? = []
         guard let managedGroups = coreDataUtil.fetchGroupListsFromCoreData(groupID: groupID) as? [TDGroup] else {return nil}
         
-
-
         for object in managedGroups{
 
-            if let mlists = object.tasks {
-                for mlist in mlists{
-                    guard let name = (mlist as AnyObject).value(forKey: "name") as? String else{return nil}
-                    guard let uuid = (mlist as AnyObject).value(forKey: "uuid") else{return nil}
-                    let status = (mlist as AnyObject).value(forKey: "status") as? String ?? "ready"
+            if let mTasks = object.tasks {
+                for mTask in mTasks{
+                    guard let name = (mTask as AnyObject).value(forKey: "name") as? String else{return nil}
+                    guard let uuid = (mTask as AnyObject).value(forKey: "uuid") else{return nil}
+                    let status = (mTask as AnyObject).value(forKey: "status") as? String ?? "ready"
 //
                     var taskStatus = ToDoTaskStatus.ready
                     if status == "in progress"{
@@ -84,17 +82,17 @@ class ListCoreDataManager {
                     }else if status == "blocked"{
                         taskStatus = ToDoTaskStatus.blocked
                     }
-                    guard let dateCreated = (mlist as AnyObject).value(forKey: "dateCreated") as? NSDate else{return nil}
+                    guard let dateCreated = (mTask as AnyObject).value(forKey: "dateCreated") as? NSDate else{return nil}
 
                    // let list = ToDoTask(id: uuid as! UUID,name: name, uuid: uuid as! UUID, date:dateCreated, items: [], subTasks: [])
-                    let list = ToDoTask(id: uuid as! UUID,name: name, uuid: uuid as! UUID,taskStatus: taskStatus, date:dateCreated, items: [], subTasks: [])
-                    lists?.append(list)
+                    let task = ToDoTask(id: uuid as! UUID,name: name, uuid: uuid as! UUID,taskStatus: taskStatus, date:dateCreated, items: [], subTasks: [])
+                    tasks?.append(task)
 
                 }
             }
 
             }
-            return lists
+            return tasks
         }
 
     func fetchListFromCoreData() -> [NSManagedObject]?{

@@ -4443,7 +4443,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
             endingLineNumber = "45"
-            landmarkName = "saveListWithGroup(_:_:)"
+            landmarkName = "saveTaskWithGroup(_:group:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -5026,9 +5026,9 @@
             filePath = "ToDoList/Services/ListCoreDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "getListsByGroup(groupID:)"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "getTasksByGroup(groupID:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -5090,9 +5090,9 @@
             filePath = "ToDoList/Services/ListCoreDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "getListsByGroup(groupID:)"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "getTasksByGroup(groupID:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -5234,7 +5234,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
             endingLineNumber = "35"
-            landmarkName = "saveList(_:)"
+            landmarkName = "saveTask(_:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -5282,7 +5282,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"
             endingLineNumber = "36"
-            landmarkName = "saveList(_:)"
+            landmarkName = "saveTask(_:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -5330,7 +5330,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
             endingLineNumber = "21"
-            landmarkName = "saveListWithGroup(_:_:)"
+            landmarkName = "saveTaskWithGroup(_:group:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -5378,7 +5378,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
             endingLineNumber = "28"
-            landmarkName = "saveListWithGroup(_:_:)"
+            landmarkName = "saveTaskWithGroup(_:group:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -5426,7 +5426,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
             endingLineNumber = "26"
-            landmarkName = "saveListWithGroup(_:_:)"
+            landmarkName = "saveTaskWithGroup(_:group:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -6380,9 +6380,9 @@
             filePath = "ToDoList/Services/ListCoreDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "getListsByGroup(groupID:)"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "getTasksByGroup(groupID:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -6620,9 +6620,9 @@
             filePath = "ToDoList/Services/ListCoreDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "getListsByGroup(groupID:)"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "getTasksByGroup(groupID:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -6728,9 +6728,9 @@
             filePath = "ToDoList/Services/ListCoreDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "getListsByGroup(groupID:)"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "getTasksByGroup(groupID:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -6857,7 +6857,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
             endingLineNumber = "43"
-            landmarkName = "saveListWithGroup(_:_:)"
+            landmarkName = "saveTaskWithGroup(_:group:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -6873,7 +6873,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
             endingLineNumber = "47"
-            landmarkName = "saveListWithGroup(_:_:)"
+            landmarkName = "saveTaskWithGroup(_:group:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7096,6 +7096,54 @@
                   startingLineNumber = "61"
                   endingLineNumber = "61"
                   offsetFromSymbolStart = "1388">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A545A1ED-3209-4F48-B5AF-2AB02C1CD367"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoList/MainView/SwiftUI/GroupTasksView/GroupTasksView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "A545A1ED-3209-4F48-B5AF-2AB02C1CD367 - 45cfc9e30a252872"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (ToDoList.ToDoTask) -&gt; ToDoList.TaskTableViewCellBasic in closure #2 () -&gt; &lt;&lt;opaque return type of SwiftUI.DynamicViewContent.onDelete(perform: Swift.Optional&lt;(Foundation.IndexSet) -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.listStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ListStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.EdgeInsets) -&gt; some&gt;&gt;.0)&gt;&gt;)&gt; in ToDoList.GroupTasksView.body.getter : some"
+                  moduleName = "ToDoList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seandonato/Downloads/ToDoList/ToDoList/MainView/SwiftUI/GroupTasksView/GroupTasksView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "332">
+               </Location>
+               <Location
+                  uuid = "A545A1ED-3209-4F48-B5AF-2AB02C1CD367 - 2a8742d7b622a41e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (ToDoList.ToDoTaskStatus) -&gt; () in closure #1 (ToDoList.ToDoTask) -&gt; ToDoList.TaskTableViewCellBasic in closure #2 () -&gt; &lt;&lt;opaque return type of SwiftUI.DynamicViewContent.onDelete(perform: Swift.Optional&lt;(Foundation.IndexSet) -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.listStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ListStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.EdgeInsets) -&gt; some&gt;&gt;.0)&gt;&gt;)&gt; in ToDoList.GroupTasksView.body.getter : some"
+                  moduleName = "ToDoList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seandonato/Downloads/ToDoList/ToDoList/MainView/SwiftUI/GroupTasksView/GroupTasksView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "60">
                </Location>
             </Locations>
          </BreakpointContent>

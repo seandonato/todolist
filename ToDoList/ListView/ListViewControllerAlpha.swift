@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ListViewControllerAlpha: UIViewController, UITableViewDelegate, UITableViewDataSource,AddTaskDelegate,ListGroupViewModelDelegate{
+class ListViewControllerAlpha: UIViewController, UITableViewDelegate, UITableViewDataSource,AddTaskDelegate,TaskGroupViewModelDelegate{
     func didFinishFetchingData() {
         if let lists = viewModel.lists{
             self.lists = lists
