@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-protocol ListGroupViewModelDelegate: AnyObject {
+protocol TaskGroupViewModelDelegate: AnyObject {
     func didFinishFetchingData()
 }
 class ListGroupViewModel{
     
-    var delegate: ListGroupViewModelDelegate?
+    var delegate: TaskGroupViewModelDelegate?
     var groups: [ToDoListGroup]?
 
     var coreDataManager: GroupCoreDataManager?

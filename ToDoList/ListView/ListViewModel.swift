@@ -13,7 +13,7 @@ protocol ListViewModelDelegate: AnyObject {
 }
 class ListViewModel{
     
-    var delegate: ListGroupViewModelDelegate?
+    var delegate: TaskGroupViewModelDelegate?
     var lists: [ToDoTask]?
     
     var group: ToDoListGroup?
@@ -27,7 +27,7 @@ class ListViewModel{
     
     func fetchLists(){
         guard let groupID = self.group?.uuid else { return }
-        if let lists =  self.coreDataManager?.getListsByGroup(groupID: groupID ){
+        if let lists =  self.coreDataManager?.getTasksByGroup(groupID: groupID ){
             self.lists = lists
             delegate?.didFinishFetchingData()
         }

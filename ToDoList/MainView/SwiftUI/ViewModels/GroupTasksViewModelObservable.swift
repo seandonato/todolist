@@ -15,7 +15,7 @@ import UIKit
 @Observable
 class GroupTasksViewModelObservable{
     
-    var delegate: ListGroupViewModelDelegate?
+    var delegate: TaskGroupViewModelDelegate?
     var lists: [ToDoTask]?
     
     var group: ToDoListGroup?
@@ -30,7 +30,7 @@ class GroupTasksViewModelObservable{
     
     func fetchLists(){
         guard let groupID = self.group?.uuid else { return }
-        if let lists =  self.coreDataManager?.getListsByGroup(groupID: groupID ){
+        if let lists =  self.coreDataManager?.getTasksByGroup(groupID: groupID ){
             self.lists = lists.sorted()
             delegate?.didFinishFetchingData()
         }

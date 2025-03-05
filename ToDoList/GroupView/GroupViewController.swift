@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
-class GroupViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,AddEntityDelegate,ListGroupViewModelDelegate{
+class GroupViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,AddEntityDelegate,TaskGroupViewModelDelegate{
     func didFinishFetchingData() {
         if let vmGroups = viewModel.groups{
             self.groups = vmGroups
