@@ -83,12 +83,9 @@ class ToDoListViewModelObservable: ToDoListViewModelProtocol, StatusPickerDelega
 
     //new
     //todo- what to do on first launch
-    
     func saveList(_ toDoListName:String){
         let uuid = UUID()
         
-//        let list = ToDoTaskList(name: toDoListName, uuid: uuid, toDoTasks: [],items: [],dateCreated: NSDate())
-
         let list = ToDoTask(id: uuid, name: toDoListName, uuid: uuid, date:  NSDate())
 
         //update to save list

@@ -16,7 +16,6 @@ class CoreDataManager {
     init(persistentContainer: NSPersistentContainer) {
         self.persistentContainer = persistentContainer
     }
-    
 
     //new
     func saveTaskWithParent(_ task: ToDoTask,_ parent: ToDoTask) -> Bool? {
