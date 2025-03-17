@@ -38,6 +38,8 @@ struct TaskTableViewCellBasic: View {
             Rectangle()
                 .fill(Color(StyleTokens.readySelected ?? .green))
                 .frame(width: 24,height: 24)
+                .cornerRadius(StyleTokens.buttonCornerRadius)
+                .shadow(color:.gray,radius: 1,x: -2,y:2)
                 .onTapGesture {
                     withAnimation{   
                         expanded.toggle()
@@ -47,6 +49,9 @@ struct TaskTableViewCellBasic: View {
             Rectangle()
                 .fill(Color(StyleTokens.inProgressSelected ?? .purple))
                 .frame(width: 24,height: 24)
+                .cornerRadius(StyleTokens.buttonCornerRadius)
+                .shadow(color:.gray,radius: 1,x: -2,y:2)
+
                 .onTapGesture {
                     withAnimation{          
                         expanded.toggle()
@@ -56,6 +61,9 @@ struct TaskTableViewCellBasic: View {
             Rectangle()
                 .fill(Color(StyleTokens.doneSelected ?? .blue))
                 .frame(width: 24,height: 24)
+                .cornerRadius(StyleTokens.buttonCornerRadius)
+                .shadow(color:.gray,radius: 1,x: -2,y:2)
+
                 .onTapGesture {
                     withAnimation{         
                         expanded.toggle()
@@ -65,6 +73,9 @@ struct TaskTableViewCellBasic: View {
             Rectangle()
                 .fill(Color(StyleTokens.blockedSelected ?? .red))
                 .frame(width: 24,height: 24)
+                .cornerRadius(StyleTokens.buttonCornerRadius)
+                .shadow(color:.gray,radius: 1,x: -2,y:2)
+
                 .onTapGesture {
                     withAnimation{           
                         expanded.toggle()
@@ -75,6 +86,9 @@ struct TaskTableViewCellBasic: View {
             Rectangle()
                 .fill(Color(StyleTokens.readySelected ?? .green))
                 .frame(width: 24,height: 24)
+                .cornerRadius(StyleTokens.buttonCornerRadius)
+                .shadow(color:.gray,radius: 1,x: -2,y:2)
+
                 .onTapGesture {
                     withAnimation{       
                         expanded.toggle()

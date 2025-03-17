@@ -34,6 +34,8 @@
 		A925449829BBC5CD00F38E7C /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925449729BBC5CD00F38E7C /* TaskTableViewCell.swift */; };
 		A925449A29BBCBCE00F38E7C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925449929BBCBCE00F38E7C /* CoreDataManager.swift */; };
 		A94745DD2B9BD8E9002DE068 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94745DC2B9BD8E9002DE068 /* Protocols.swift */; };
+		A9766D932D87BD82004E5EE2 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A90EB9BA2D7F903300BFCB9D /* Lato-Regular.ttf */; };
+		A9766D942D87BD86004E5EE2 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A90EB9BB2D7F903900BFCB9D /* Lato-Light.ttf */; };
 		A981360B2BD01434000B5AE2 /* TaskModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A925449229BBBE3300F38E7C /* TaskModel.xcdatamodeld */; };
 		A981360D2BD027B0000B5AE2 /* ToDoTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981360C2BD027B0000B5AE2 /* ToDoTaskList.swift */; };
 		A981360F2BD02868000B5AE2 /* GroupCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981360E2BD02868000B5AE2 /* GroupCoreDataManager.swift */; };
@@ -88,6 +90,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A90EB9BA2D7F903300BFCB9D /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		A90EB9BB2D7F903900BFCB9D /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		A90EB9BC2D7F904800BFCB9D /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		A91113B12C963B6A00783F1E /* AddListItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListItemViewController.swift; sourceTree = "<group>"; };
 		A91113B32C96430700783F1E /* AddListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListItemCell.swift; sourceTree = "<group>"; };
 		A91113B52C970FAE00783F1E /* ItemListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListCell.swift; sourceTree = "<group>"; };
@@ -180,6 +185,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A90EB9B82D7F901F00BFCB9D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A90EB9B92D7F902700BFCB9D /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A90EB9B92D7F902700BFCB9D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A90EB9BC2D7F904800BFCB9D /* Lato-Bold.ttf */,
+				A90EB9BB2D7F903900BFCB9D /* Lato-Light.ttf */,
+				A90EB9BA2D7F903300BFCB9D /* Lato-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		A91113BB2C9F6FBF00783F1E /* GroupView */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +249,7 @@
 		A925446129BBBD9D00F38E7C /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				A90EB9B82D7F901F00BFCB9D /* Resources */,
 				A91113BB2C9F6FBF00783F1E /* GroupView */,
 				A94745E02B9BD910002DE068 /* MainView */,
 				A94745E42B9BD939002DE068 /* DetailView */,
@@ -483,9 +507,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9766D942D87BD86004E5EE2 /* Lato-Light.ttf in Resources */,
 				A925446F29BBBD9F00F38E7C /* LaunchScreen.storyboard in Resources */,
 				A925446C29BBBD9F00F38E7C /* Assets.xcassets in Resources */,
 				A925446A29BBBD9D00F38E7C /* Main.storyboard in Resources */,
+				A9766D932D87BD82004E5EE2 /* Lato-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
