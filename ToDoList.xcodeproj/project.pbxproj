@@ -36,6 +36,7 @@
 		A94745DD2B9BD8E9002DE068 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94745DC2B9BD8E9002DE068 /* Protocols.swift */; };
 		A9766D932D87BD82004E5EE2 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A90EB9BA2D7F903300BFCB9D /* Lato-Regular.ttf */; };
 		A9766D942D87BD86004E5EE2 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A90EB9BB2D7F903900BFCB9D /* Lato-Light.ttf */; };
+		A9766D962D885FB9004E5EE2 /* NTAddEntityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9766D952D885FB8004E5EE2 /* NTAddEntityCell.swift */; };
 		A981360B2BD01434000B5AE2 /* TaskModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A925449229BBBE3300F38E7C /* TaskModel.xcdatamodeld */; };
 		A981360D2BD027B0000B5AE2 /* ToDoTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981360C2BD027B0000B5AE2 /* ToDoTaskList.swift */; };
 		A981360F2BD02868000B5AE2 /* GroupCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981360E2BD02868000B5AE2 /* GroupCoreDataManager.swift */; };
@@ -125,6 +126,7 @@
 		A925449729BBC5CD00F38E7C /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		A925449929BBCBCE00F38E7C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		A94745DC2B9BD8E9002DE068 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		A9766D952D885FB8004E5EE2 /* NTAddEntityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTAddEntityCell.swift; sourceTree = "<group>"; };
 		A981360C2BD027B0000B5AE2 /* ToDoTaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTaskList.swift; sourceTree = "<group>"; };
 		A981360E2BD02868000B5AE2 /* GroupCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCoreDataManager.swift; sourceTree = "<group>"; };
 		A98136102BD04630000B5AE2 /* GroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListViewController.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				A94745E82BAB578D002DE068 /* ViewModels */,
 				A9BEC9322D170907002B46FA /* ToDoListView-SwiftUI */,
 				A98751EE2D4EA0970067B019 /* GroupTasksView */,
+				A9766D952D885FB8004E5EE2 /* NTAddEntityCell.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 				A91113BD2C9F77A600783F1E /* GroupViewController.swift in Sources */,
 				A981363B2BF4FC69000B5AE2 /* StatusPicker.swift in Sources */,
 				A925449629BBC50900F38E7C /* ToDoTask.swift in Sources */,
+				A9766D962D885FB9004E5EE2 /* NTAddEntityCell.swift in Sources */,
 				A98136112BD04630000B5AE2 /* GroupListViewController.swift in Sources */,
 				A91113CA2CA19EA700783F1E /* ListCoreDataManager.swift in Sources */,
 				A9BEC9382D2093B6002B46FA /* ToDoListViewModelObservable.swift in Sources */,

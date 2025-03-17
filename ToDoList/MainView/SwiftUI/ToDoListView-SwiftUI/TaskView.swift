@@ -43,42 +43,14 @@ struct TaskView:View{
                 .onDelete(perform: { indexSet in
                     delete(at: indexSet)
                 })
-                HStack{
-                    Spacer()
-
-                    Button("+ Add Sub Task") {
-                        showPopover = true
-                    }
-                    .popover(isPresented: self.$showPopover,
-                             attachmentAnchor: .rect(.rect(CGRect(x: 0, y: 20,
-                                                                  width: 160, height: 100))),
-                             arrowEdge: .top,
-                             content: {
-                        AddTaskSUI(viewModel: viewModel, stringValue: "",isPresented: $showPopover)
-                        
-                    })
-                    .padding(EdgeInsets(top: 16, leading: 0.0, bottom: 0.0, trailing: 24))
-                    }
+                NTAddEntityCell(title: "+ Add Sub Task", showPopover: $showPopover) {
+                    AddTaskSUI(viewModel: viewModel, stringValue: "",isPresented: $showPopover)
                 }
+            }
                 
                 .listStyle(.plain)
             
             })
-//        HStack{
-//            Spacer()
-//            Button("Add Sub Task") {
-//                showPopover = true
-//            }
-//            .popover(isPresented: self.$showPopover,
-//                             attachmentAnchor: .rect(.rect(CGRect(x: 0, y: 20,
-//                                                    width: 160, height: 100))),
-//                             arrowEdge: .top,
-//                             content: {
-//                            AddTaskSUI(viewModel: viewModel, stringValue: "",isPresented: $showPopover)
-//                
-//                    })
-//            .padding(EdgeInsets(top: -100, leading: 0.0, bottom: 0.0, trailing: 20.0))
-//        }
         
     }
     func delete(at offsets: IndexSet) {

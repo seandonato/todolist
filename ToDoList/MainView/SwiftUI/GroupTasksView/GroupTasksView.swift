@@ -38,24 +38,11 @@ struct GroupTasksView: View{
                 }.onDelete(perform: { indexSet in
                     delete(at: indexSet)
                 })
-                HStack{
-                    Spacer()
-                    Button("+ Add Task") {
-                        showPopover = true
-                    }
-                    .popover(isPresented: self.$showPopover,
-                             attachmentAnchor: .rect(.rect(CGRect(x: 0, y: 20,width: 160, height: 100))),
-                             arrowEdge: .top,
-                             content: {
-                        AddTaskToGroupSUI(viewModel: viewModel, stringValue: "", isPresented: $showPopover)
-                        
-                    })
-                    .padding(EdgeInsets(top: 16, leading: 0.0, bottom: 0.0, trailing: 24))
+                NTAddEntityCell(title: "+ Add Task", showPopover: $showPopover) {
+                    AddTaskToGroupSUI(viewModel: viewModel, stringValue: "", isPresented: $showPopover)
                 }
-
             }.listStyle(.plain)
-            
-            
+
         })
     }
     
