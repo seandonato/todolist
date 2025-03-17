@@ -38,30 +38,47 @@ struct TaskView:View{
                     }, navigateToDetailAction: { targetTask in
                         navigateToDetail(targetTask)
                     }, task: task)
-
-                    }
+                    
+                }
                 .onDelete(perform: { indexSet in
                     delete(at: indexSet)
                 })
-                
-            }.listStyle(.plain)
-            
-            })
-        HStack{
-            Spacer()
-            Button("Add Sub Task") {
-                showPopover = true
-            }
-            .popover(isPresented: self.$showPopover,
+                HStack{
+                    Spacer()
+
+                    Button("+ Add Sub Task") {
+                        showPopover = true
+                    }
+                    .popover(isPresented: self.$showPopover,
                              attachmentAnchor: .rect(.rect(CGRect(x: 0, y: 20,
-                                                    width: 160, height: 100))),
+                                                                  width: 160, height: 100))),
                              arrowEdge: .top,
                              content: {
-                            AddTaskSUI(viewModel: viewModel, stringValue: "",isPresented: $showPopover)
-                
+                        AddTaskSUI(viewModel: viewModel, stringValue: "",isPresented: $showPopover)
+                        
                     })
-            .padding(EdgeInsets(top: -100, leading: 0.0, bottom: 0.0, trailing: 20.0))
-        }
+                    .padding(EdgeInsets(top: 16, leading: 0.0, bottom: 0.0, trailing: 24))
+                    }
+                }
+                
+                .listStyle(.plain)
+            
+            })
+//        HStack{
+//            Spacer()
+//            Button("Add Sub Task") {
+//                showPopover = true
+//            }
+//            .popover(isPresented: self.$showPopover,
+//                             attachmentAnchor: .rect(.rect(CGRect(x: 0, y: 20,
+//                                                    width: 160, height: 100))),
+//                             arrowEdge: .top,
+//                             content: {
+//                            AddTaskSUI(viewModel: viewModel, stringValue: "",isPresented: $showPopover)
+//                
+//                    })
+//            .padding(EdgeInsets(top: -100, leading: 0.0, bottom: 0.0, trailing: 20.0))
+//        }
         
     }
     func delete(at offsets: IndexSet) {
