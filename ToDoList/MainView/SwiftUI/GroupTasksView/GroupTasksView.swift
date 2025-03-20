@@ -11,6 +11,19 @@ import SwiftUI
 @available(iOS 17.0, *)
 struct GroupTasksView: View{
 
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
+    var btnBack : some View { Button(action: {
+        self.presentationMode.wrappedValue.dismiss()
+        }) {
+            HStack(spacing: 4) {
+                Image(systemName: "chevron.left")
+                .aspectRatio(contentMode: .fit)
+                Text( "projects")
+            }
+        }
+    }
+
     let navigationModel: NavigationModel
 
     @State var viewModel: GroupTasksViewModelObservable
@@ -20,13 +33,9 @@ struct GroupTasksView: View{
 
     var body: some View{
         VStack(alignment: .leading,content:{
-            VStack(alignment: .leading, spacing:12, content: {
-                Text(verbatim: "Group name:")
-                Text(verbatim: project.name)
-                Text(verbatim: "tasks:")
-                
-            }).padding()
-            
+          
+            NTListHeader(headerTitle: "project:", entityName: project.name, subEntityName: "tasks:")
+
             List{
                 ForEach(viewModel.lists ?? []) { task in
                     TaskTableViewCellBasic(action: { status in
@@ -38,25 +47,20 @@ struct GroupTasksView: View{
                 }.onDelete(perform: { indexSet in
                     delete(at: indexSet)
                 })
-                
-            }.listStyle(.plain)
-            
-            
-            HStack{
-                Spacer()
-                Button("Add Task") {
-                    showPopover = true
-                }
-                .popover(isPresented: self.$showPopover,
-                         attachmentAnchor: .rect(.rect(CGRect(x: 0, y: 20,width: 160, height: 100))),
-                         arrowEdge: .top,
-                         content: {
+                NTAddEntityCell(title: "+ Add Task", showPopover: $showPopover) {
                     AddTaskToGroupSUI(viewModel: viewModel, stringValue: "", isPresented: $showPopover)
-                    
-                })
-                .padding(EdgeInsets(top: -100, leading: 0.0, bottom: 0.0, trailing: 20.0))
-            }
+                }
+            }.listStyle(.plain)
+                .padding(EdgeInsets(top: 0.0, leading: 48, bottom: 0.0, trailing: 0.0))
+
         })
+        .navigationBarBackButtonHidden(true)
+        .toolbar(content: {
+                ToolbarItem(placement: .topBarLeading) {
+                    btnBack
+                }
+            })
+
     }
     
     func delete(at offsets: IndexSet) {
@@ -77,7 +81,7 @@ struct GroupTasksView: View{
         if let container = viewModel.coreDataManager?.persistentContainer{
             model.coreDataManager = CoreDataManager(persistentContainer:container)
             model.fetchData()
-            var taskView = TaskView(navigationModel: navigationModel, viewModel: model, task: targetTask, tasks: targetTask.subTasks ?? [])
+            var taskView = TaskView(navigationModel: navigationModel, parentView: project.name, viewModel: model, task: targetTask, tasks: targetTask.subTasks ?? [])
             navigationModel.push{
                 taskView
             }

@@ -49,7 +49,8 @@ class GroupViewController: UIViewController,UITableViewDelegate, UITableViewData
 
     var groups: [ToDoListGroup]?
     let titleLabel: UILabel = UILabel()
-    
+    let appNameLabel: UILabel = UILabel()
+
     init(_ viewModel:ListGroupViewModel) {
         self.viewModel = viewModel
 //        if let groups = viewModel.fetchGroups(){
@@ -76,12 +77,29 @@ class GroupViewController: UIViewController,UITableViewDelegate, UITableViewData
     }
     
     func setupUI(){
-        titleLabel.text = "Projects"
+        appNameLabel.text = "neto"
+        appNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        guard let customFont = UIFont(name: "Lato-Regular", size: UIFont.labelFontSize) else {
+            fatalError("""
+                Failed to load the "CustomFont-Light" font.
+                Make sure the font file is included in the project and the font name is spelled correctly.
+                """
+            )
+        }
+        appNameLabel.font = UIFontMetrics.default.scaledFont(for: customFont)
+        self.view.addSubview(appNameLabel)
+
+        titleLabel.text = "projects"
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.font = UIFontMetrics.default.scaledFont(for: customFont)
+
         self.view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 64),
-            titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+            appNameLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            appNameLabel.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 50),
+
+            titleLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 16),
+            titleLabel.topAnchor.constraint(equalTo: appNameLabel.bottomAnchor,constant: 12)
         ])
         
         tableView.translatesAutoresizingMaskIntoConstraints = false

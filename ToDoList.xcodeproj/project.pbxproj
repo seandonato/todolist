@@ -34,6 +34,12 @@
 		A925449829BBC5CD00F38E7C /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925449729BBC5CD00F38E7C /* TaskTableViewCell.swift */; };
 		A925449A29BBCBCE00F38E7C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925449929BBCBCE00F38E7C /* CoreDataManager.swift */; };
 		A94745DD2B9BD8E9002DE068 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94745DC2B9BD8E9002DE068 /* Protocols.swift */; };
+		A9766D932D87BD82004E5EE2 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A90EB9BA2D7F903300BFCB9D /* Lato-Regular.ttf */; };
+		A9766D942D87BD86004E5EE2 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A90EB9BB2D7F903900BFCB9D /* Lato-Light.ttf */; };
+		A9766D962D885FB9004E5EE2 /* NTAddEntityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9766D952D885FB8004E5EE2 /* NTAddEntityCell.swift */; };
+		A9766D982D886C16004E5EE2 /* NTText.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9766D972D886C16004E5EE2 /* NTText.swift */; };
+		A9766D9A2D88720F004E5EE2 /* NTListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9766D992D88720F004E5EE2 /* NTListHeader.swift */; };
+		A9766D9C2D88782F004E5EE2 /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9766D9B2D88782F004E5EE2 /* ProjectListView.swift */; };
 		A981360B2BD01434000B5AE2 /* TaskModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A925449229BBBE3300F38E7C /* TaskModel.xcdatamodeld */; };
 		A981360D2BD027B0000B5AE2 /* ToDoTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981360C2BD027B0000B5AE2 /* ToDoTaskList.swift */; };
 		A981360F2BD02868000B5AE2 /* GroupCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981360E2BD02868000B5AE2 /* GroupCoreDataManager.swift */; };
@@ -88,6 +94,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A90EB9BA2D7F903300BFCB9D /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		A90EB9BB2D7F903900BFCB9D /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		A90EB9BC2D7F904800BFCB9D /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		A91113B12C963B6A00783F1E /* AddListItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListItemViewController.swift; sourceTree = "<group>"; };
 		A91113B32C96430700783F1E /* AddListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListItemCell.swift; sourceTree = "<group>"; };
 		A91113B52C970FAE00783F1E /* ItemListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListCell.swift; sourceTree = "<group>"; };
@@ -120,6 +129,10 @@
 		A925449729BBC5CD00F38E7C /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		A925449929BBCBCE00F38E7C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		A94745DC2B9BD8E9002DE068 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		A9766D952D885FB8004E5EE2 /* NTAddEntityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTAddEntityCell.swift; sourceTree = "<group>"; };
+		A9766D972D886C16004E5EE2 /* NTText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTText.swift; sourceTree = "<group>"; };
+		A9766D992D88720F004E5EE2 /* NTListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTListHeader.swift; sourceTree = "<group>"; };
+		A9766D9B2D88782F004E5EE2 /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		A981360C2BD027B0000B5AE2 /* ToDoTaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTaskList.swift; sourceTree = "<group>"; };
 		A981360E2BD02868000B5AE2 /* GroupCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCoreDataManager.swift; sourceTree = "<group>"; };
 		A98136102BD04630000B5AE2 /* GroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +193,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A90EB9B82D7F901F00BFCB9D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A90EB9B92D7F902700BFCB9D /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A90EB9B92D7F902700BFCB9D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A90EB9BC2D7F904800BFCB9D /* Lato-Bold.ttf */,
+				A90EB9BB2D7F903900BFCB9D /* Lato-Light.ttf */,
+				A90EB9BA2D7F903300BFCB9D /* Lato-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		A91113BB2C9F6FBF00783F1E /* GroupView */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +218,7 @@
 				A91113BE2C9F77B600783F1E /* AddGroupViewController.swift */,
 				A91113C12CA19B5A00783F1E /* AddEntityCell.swift */,
 				A91113C32CA19CB400783F1E /* ListGroupViewModel.swift */,
+				A9766D9B2D88782F004E5EE2 /* ProjectListView.swift */,
 			);
 			path = GroupView;
 			sourceTree = "<group>";
@@ -226,6 +258,7 @@
 		A925446129BBBD9D00F38E7C /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				A90EB9B82D7F901F00BFCB9D /* Resources */,
 				A91113BB2C9F6FBF00783F1E /* GroupView */,
 				A94745E02B9BD910002DE068 /* MainView */,
 				A94745E42B9BD939002DE068 /* DetailView */,
@@ -313,6 +346,9 @@
 				A94745E82BAB578D002DE068 /* ViewModels */,
 				A9BEC9322D170907002B46FA /* ToDoListView-SwiftUI */,
 				A98751EE2D4EA0970067B019 /* GroupTasksView */,
+				A9766D952D885FB8004E5EE2 /* NTAddEntityCell.swift */,
+				A9766D972D886C16004E5EE2 /* NTText.swift */,
+				A9766D992D88720F004E5EE2 /* NTListHeader.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -483,9 +519,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9766D942D87BD86004E5EE2 /* Lato-Light.ttf in Resources */,
 				A925446F29BBBD9F00F38E7C /* LaunchScreen.storyboard in Resources */,
 				A925446C29BBBD9F00F38E7C /* Assets.xcassets in Resources */,
 				A925446A29BBBD9D00F38E7C /* Main.storyboard in Resources */,
+				A9766D932D87BD82004E5EE2 /* Lato-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +555,7 @@
 				A9BEC9362D2056A4002B46FA /* TaskView.swift in Sources */,
 				A981360F2BD02868000B5AE2 /* GroupCoreDataManager.swift in Sources */,
 				A91113B42C96430700783F1E /* AddListItemCell.swift in Sources */,
+				A9766D982D886C16004E5EE2 /* NTText.swift in Sources */,
 				A925446729BBBD9D00F38E7C /* ToDoListViewController.swift in Sources */,
 				A98BF9F82C94DFEE004A3505 /* AddItemViewController.swift in Sources */,
 				A94745DD2B9BD8E9002DE068 /* Protocols.swift in Sources */,
@@ -533,10 +572,12 @@
 				A91579F52B444F1D00AB6BC6 /* TDLButton.swift in Sources */,
 				A91113BA2C9F6B3B00783F1E /* ToDoListGroup.swift in Sources */,
 				A98BF9F02C6F81C3004A3505 /* StyleTokens.swift in Sources */,
+				A9766D9A2D88720F004E5EE2 /* NTListHeader.swift in Sources */,
 				A981360B2BD01434000B5AE2 /* TaskModel.xcdatamodeld in Sources */,
 				A98136172BD96B15000B5AE2 /* AddListViewController.swift in Sources */,
 				A98751EB2D4E78BA0067B019 /* TDSUIButton.swift in Sources */,
 				A98751F22D4ED2CC0067B019 /* GroupTasksViewModelObservable.swift in Sources */,
+				A9766D9C2D88782F004E5EE2 /* ProjectListView.swift in Sources */,
 				A98136152BD0672C000B5AE2 /* AddTaskViewController.swift in Sources */,
 				A98136392BDD7446000B5AE2 /* ListTableViewCell.swift in Sources */,
 				A9BEC9342D2055BE002B46FA /* TaskListHostingController.swift in Sources */,
@@ -550,6 +591,7 @@
 				A91113BD2C9F77A600783F1E /* GroupViewController.swift in Sources */,
 				A981363B2BF4FC69000B5AE2 /* StatusPicker.swift in Sources */,
 				A925449629BBC50900F38E7C /* ToDoTask.swift in Sources */,
+				A9766D962D885FB9004E5EE2 /* NTAddEntityCell.swift in Sources */,
 				A98136112BD04630000B5AE2 /* GroupListViewController.swift in Sources */,
 				A91113CA2CA19EA700783F1E /* ListCoreDataManager.swift in Sources */,
 				A9BEC9382D2093B6002B46FA /* ToDoListViewModelObservable.swift in Sources */,

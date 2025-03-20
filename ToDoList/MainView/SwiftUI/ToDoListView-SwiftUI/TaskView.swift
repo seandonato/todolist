@@ -9,11 +9,25 @@ import Foundation
 import SwiftUI
 
 @available(iOS 17.0, *)
-//struct TaskList:View{
+
 struct TaskView:View{
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
+    var btnBack : some View { Button(action: {
+        self.presentationMode.wrappedValue.dismiss()
+        }) {
+            HStack(spacing: 4) {
+                Image(systemName: "chevron.left")
+                .aspectRatio(contentMode: .fit)
+                Text( parentView)
+            }
+        }
+    }
+    
 
     let navigationModel: NavigationModel
 
+    var parentView: String
     @State var viewModel: ToDoListViewModelObservable
     @State var task: ToDoTask
     @State var tasks: [ToDoTask]
@@ -21,16 +35,7 @@ struct TaskView:View{
     
     var body: some View{
         VStack(alignment: .leading,content:{
-            VStack(alignment: .leading, content: {
-                Text(verbatim: "Task name:")
-                    .padding()
-                Text(verbatim: task.name)
-                    .padding()
-                Text(verbatim: "subtasks:")
-                    .padding()
-
-            })
-
+            NTListHeader(headerTitle: "task", entityName: task.name, subEntityName: "subtasks:")
             List{
                 ForEach(viewModel.tasks ?? []) { task in
                     TaskTableViewCellBasic(action: { status in
@@ -38,31 +43,23 @@ struct TaskView:View{
                     }, navigateToDetailAction: { targetTask in
                         navigateToDetail(targetTask)
                     }, task: task)
-
-                    }
+                }
                 .onDelete(perform: { indexSet in
                     delete(at: indexSet)
                 })
-                
-            }.listStyle(.plain)
-            
-            })
-        HStack{
-            Spacer()
-            Button("Add Sub Task") {
-                showPopover = true
+                NTAddEntityCell(title: "+ Add Sub Task", showPopover: $showPopover) {
+                    AddTaskSUI(viewModel: viewModel, stringValue: "",isPresented: $showPopover)
+                }
             }
-            .popover(isPresented: self.$showPopover,
-                             attachmentAnchor: .rect(.rect(CGRect(x: 0, y: 20,
-                                                    width: 160, height: 100))),
-                             arrowEdge: .top,
-                             content: {
-                            AddTaskSUI(viewModel: viewModel, stringValue: "",isPresented: $showPopover)
-                
-                    })
-            .padding(EdgeInsets(top: -100, leading: 0.0, bottom: 0.0, trailing: 20.0))
-        }
-        
+            .listStyle(.plain)
+            .padding(EdgeInsets(top: 0.0, leading: 48, bottom: 0.0, trailing: 0.0))
+        })
+        .navigationBarBackButtonHidden(true)
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarLeading) {
+                btnBack
+            }
+        })
     }
     func delete(at offsets: IndexSet) {
         for index in offsets{
@@ -73,7 +70,6 @@ struct TaskView:View{
     }
     func changeStatus(_ status:ToDoTaskStatus,_ task:ToDoTask){
         viewModel.changeStatusFor(task, status)
-        //viewModel.fetchData()
     }
     func navigateToDetail(_ targetTask: ToDoTask){
         
