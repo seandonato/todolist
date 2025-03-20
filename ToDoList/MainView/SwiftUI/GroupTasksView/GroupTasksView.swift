@@ -20,13 +20,9 @@ struct GroupTasksView: View{
 
     var body: some View{
         VStack(alignment: .leading,content:{
-            VStack(alignment: .leading, spacing:12, content: {
-                Text(verbatim: "Group name:")
-                Text(verbatim: project.name)
-                Text(verbatim: "tasks:")
-                
-            }).padding()
-            
+          
+            NTListHeader(headerTitle: "project:", entityName: project.name, subEntityName: "tasks:")
+
             List{
                 ForEach(viewModel.lists ?? []) { task in
                     TaskTableViewCellBasic(action: { status in
@@ -42,6 +38,7 @@ struct GroupTasksView: View{
                     AddTaskToGroupSUI(viewModel: viewModel, stringValue: "", isPresented: $showPopover)
                 }
             }.listStyle(.plain)
+                .padding(EdgeInsets(top: 0.0, leading: 48, bottom: 0.0, trailing: 0.0))
 
         })
     }
@@ -64,7 +61,7 @@ struct GroupTasksView: View{
         if let container = viewModel.coreDataManager?.persistentContainer{
             model.coreDataManager = CoreDataManager(persistentContainer:container)
             model.fetchData()
-            var taskView = TaskView(navigationModel: navigationModel, viewModel: model, task: targetTask, tasks: targetTask.subTasks ?? [])
+            var taskView = TaskView(navigationModel: navigationModel, parentView: project.name, viewModel: model, task: targetTask, tasks: targetTask.subTasks ?? [])
             navigationModel.push{
                 taskView
             }
