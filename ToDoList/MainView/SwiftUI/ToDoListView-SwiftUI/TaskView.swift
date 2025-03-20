@@ -17,7 +17,7 @@ struct TaskView:View{
         self.presentationMode.wrappedValue.dismiss()
         }) {
             HStack(spacing: 4) {
-                Image(systemName: "arrow.left")
+                Image(systemName: "chevron.left")
                 .aspectRatio(contentMode: .fit)
                 Text( parentView)
             }
@@ -35,7 +35,7 @@ struct TaskView:View{
     
     var body: some View{
         VStack(alignment: .leading,content:{
-            NTListHeader(entityName: task.name, subEntityName: "subtasks:")
+            NTListHeader(headerTitle: "task", entityName: task.name, subEntityName: "subtasks:")
             List{
                 ForEach(viewModel.tasks ?? []) { task in
                     TaskTableViewCellBasic(action: { status in

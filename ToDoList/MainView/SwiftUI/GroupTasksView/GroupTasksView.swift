@@ -11,6 +11,19 @@ import SwiftUI
 @available(iOS 17.0, *)
 struct GroupTasksView: View{
 
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
+    var btnBack : some View { Button(action: {
+        self.presentationMode.wrappedValue.dismiss()
+        }) {
+            HStack(spacing: 4) {
+                Image(systemName: "chevron.left")
+                .aspectRatio(contentMode: .fit)
+                Text( "projects")
+            }
+        }
+    }
+
     let navigationModel: NavigationModel
 
     @State var viewModel: GroupTasksViewModelObservable
@@ -41,6 +54,13 @@ struct GroupTasksView: View{
                 .padding(EdgeInsets(top: 0.0, leading: 48, bottom: 0.0, trailing: 0.0))
 
         })
+        .navigationBarBackButtonHidden(true)
+        .toolbar(content: {
+                ToolbarItem(placement: .topBarLeading) {
+                    btnBack
+                }
+            })
+
     }
     
     func delete(at offsets: IndexSet) {
