@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+@available(iOS 17.0, *)
 class AddGroupViewController: UIViewController{
 
     let viewModel: ListGroupViewModel
@@ -28,6 +29,7 @@ class AddGroupViewController: UIViewController{
         fatalError("init(coder:) has not been implemented")
     }
 }
+@available(iOS 17.0, *)
 extension AddGroupViewController{
     
         func setup(){
@@ -80,6 +82,7 @@ extension AddGroupViewController{
         }
         
     }
+@available(iOS 17.0, *)
 extension AddGroupViewController{
     @objc func saveGroup(){
         if let name = entryField.text{

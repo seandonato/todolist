@@ -20,6 +20,7 @@ struct TaskView:View{
                 Image(systemName: "chevron.left")
                 .aspectRatio(contentMode: .fit)
                 Text( parentView)
+                    .font(.custom(NTTextSyle.light.rawValue, size: 16))
             }
         }
     }
@@ -60,6 +61,8 @@ struct TaskView:View{
                 btnBack
             }
         })
+        .navigationBarTitle("planspark").font(.custom(NTTextSyle.light.rawValue, size: 16))
+
     }
     func delete(at offsets: IndexSet) {
         for index in offsets{

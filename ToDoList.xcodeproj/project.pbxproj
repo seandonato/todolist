@@ -40,6 +40,9 @@
 		A9766D982D886C16004E5EE2 /* NTText.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9766D972D886C16004E5EE2 /* NTText.swift */; };
 		A9766D9A2D88720F004E5EE2 /* NTListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9766D992D88720F004E5EE2 /* NTListHeader.swift */; };
 		A9766D9C2D88782F004E5EE2 /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9766D9B2D88782F004E5EE2 /* ProjectListView.swift */; };
+		A9766D9F2D8D9B65004E5EE2 /* ProjectListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9766D9E2D8D9B65004E5EE2 /* ProjectListCellView.swift */; };
+		A9766DA12D8DAAAB004E5EE2 /* TaskCountBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9766DA02D8DAAAB004E5EE2 /* TaskCountBubble.swift */; };
+		A9766DA32D8DF28A004E5EE2 /* AddProjectSUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9766DA22D8DF28A004E5EE2 /* AddProjectSUI.swift */; };
 		A981360B2BD01434000B5AE2 /* TaskModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A925449229BBBE3300F38E7C /* TaskModel.xcdatamodeld */; };
 		A981360D2BD027B0000B5AE2 /* ToDoTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981360C2BD027B0000B5AE2 /* ToDoTaskList.swift */; };
 		A981360F2BD02868000B5AE2 /* GroupCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A981360E2BD02868000B5AE2 /* GroupCoreDataManager.swift */; };
@@ -133,6 +136,9 @@
 		A9766D972D886C16004E5EE2 /* NTText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTText.swift; sourceTree = "<group>"; };
 		A9766D992D88720F004E5EE2 /* NTListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTListHeader.swift; sourceTree = "<group>"; };
 		A9766D9B2D88782F004E5EE2 /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
+		A9766D9E2D8D9B65004E5EE2 /* ProjectListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListCellView.swift; sourceTree = "<group>"; };
+		A9766DA02D8DAAAB004E5EE2 /* TaskCountBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCountBubble.swift; sourceTree = "<group>"; };
+		A9766DA22D8DF28A004E5EE2 /* AddProjectSUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectSUI.swift; sourceTree = "<group>"; };
 		A981360C2BD027B0000B5AE2 /* ToDoTaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTaskList.swift; sourceTree = "<group>"; };
 		A981360E2BD02868000B5AE2 /* GroupCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCoreDataManager.swift; sourceTree = "<group>"; };
 		A98136102BD04630000B5AE2 /* GroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListViewController.swift; sourceTree = "<group>"; };
@@ -218,7 +224,7 @@
 				A91113BE2C9F77B600783F1E /* AddGroupViewController.swift */,
 				A91113C12CA19B5A00783F1E /* AddEntityCell.swift */,
 				A91113C32CA19CB400783F1E /* ListGroupViewModel.swift */,
-				A9766D9B2D88782F004E5EE2 /* ProjectListView.swift */,
+				A9766D9D2D8D9B52004E5EE2 /* SwiftUI */,
 			);
 			path = GroupView;
 			sourceTree = "<group>";
@@ -368,6 +374,17 @@
 				A91113B72C98EF2300783F1E /* CellCheckbox.swift */,
 			);
 			path = "UIKit Deprecation";
+			sourceTree = "<group>";
+		};
+		A9766D9D2D8D9B52004E5EE2 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				A9766DA02D8DAAAB004E5EE2 /* TaskCountBubble.swift */,
+				A9766D9B2D88782F004E5EE2 /* ProjectListView.swift */,
+				A9766D9E2D8D9B65004E5EE2 /* ProjectListCellView.swift */,
+				A9766DA22D8DF28A004E5EE2 /* AddProjectSUI.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		A98751EE2D4EA0970067B019 /* GroupTasksView */ = {
@@ -565,6 +582,7 @@
 				A9A070CD2B6C60EA005DB5E1 /* StatusSwitcher.swift in Sources */,
 				A98136132BD050B2000B5AE2 /* AddTaskCell.swift in Sources */,
 				A91113B22C963B6A00783F1E /* AddListItemViewController.swift in Sources */,
+				A9766DA32D8DF28A004E5EE2 /* AddProjectSUI.swift in Sources */,
 				A981360D2BD027B0000B5AE2 /* ToDoTaskList.swift in Sources */,
 				A9BEC93C2D399DC9002B46FA /* AddTaskSUI.swift in Sources */,
 				A91113CF2CA35ED600783F1E /* CoreDataUtil.swift in Sources */,
@@ -588,6 +606,7 @@
 				A98BF9EE2C6D52DD004A3505 /* MoreButtonStack.swift in Sources */,
 				A98BF9EC2C6C4D56004A3505 /* StatusButtonStack.swift in Sources */,
 				A91113D12CA43EF400783F1E /* ListViewControllerAlpha.swift in Sources */,
+				A9766DA12D8DAAAB004E5EE2 /* TaskCountBubble.swift in Sources */,
 				A91113BD2C9F77A600783F1E /* GroupViewController.swift in Sources */,
 				A981363B2BF4FC69000B5AE2 /* StatusPicker.swift in Sources */,
 				A925449629BBC50900F38E7C /* ToDoTask.swift in Sources */,
@@ -598,6 +617,7 @@
 				A98751F42D4EE90C0067B019 /* AddTaskToGroupSUI.swift in Sources */,
 				A91113C22CA19B5A00783F1E /* AddEntityCell.swift in Sources */,
 				A98BF9F62C94DE39004A3505 /* AddItemCell.swift in Sources */,
+				A9766D9F2D8D9B65004E5EE2 /* ProjectListCellView.swift in Sources */,
 				A925446329BBBD9D00F38E7C /* AppDelegate.swift in Sources */,
 				A9BEC9312D122139002B46FA /* TaskTableViewCellBasic.swift in Sources */,
 				A925449A29BBCBCE00F38E7C /* CoreDataManager.swift in Sources */,

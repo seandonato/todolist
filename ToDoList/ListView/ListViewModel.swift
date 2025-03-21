@@ -16,7 +16,7 @@ class ListViewModel{
     var delegate: TaskGroupViewModelDelegate?
     var lists: [ToDoTask]?
     
-    var group: ToDoListGroup?
+    var group: ToDoListProject?
 
     var coreDataManager: ListCoreDataManager?
 

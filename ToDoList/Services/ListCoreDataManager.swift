@@ -17,7 +17,7 @@ class ListCoreDataManager {
         coreDataUtil = CoreDataUtil(persistentContainer: persistentContainer)
 
     }
-    func saveTaskWithGroup(_ task: ToDoTask,group: ToDoListGroup) -> Bool? {
+    func saveTaskWithGroup(_ task: ToDoTask,group: ToDoListProject) -> Bool? {
         let managedContext = persistentContainer.viewContext
         
         //get list

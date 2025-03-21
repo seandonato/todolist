@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
+@available(iOS 17.0, *)
 class GroupViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,AddEntityDelegate,TaskGroupViewModelDelegate{
     func didFinishFetchingData() {
         if let vmGroups = viewModel.groups{
@@ -47,7 +48,7 @@ class GroupViewController: UIViewController,UITableViewDelegate, UITableViewData
 
     let viewModel: ListGroupViewModel
 
-    var groups: [ToDoListGroup]?
+    var groups: [ToDoListProject]?
     let titleLabel: UILabel = UILabel()
     let appNameLabel: UILabel = UILabel()
 
@@ -138,7 +139,7 @@ class GroupViewController: UIViewController,UITableViewDelegate, UITableViewData
                     let listCoreDataManager = ListCoreDataManager(persistentContainer: persistentContainer)
                     let vm = ListViewModel(lists: [],coreDataManager: listCoreDataManager)
                     vm.group = group
-                    if let lists = viewModel.groups?[indexPath.row].lists{
+                    if let lists = viewModel.groups?[indexPath.row].tasks{
                        
 //                        let vc = ListViewControllerAlpha(vm, lists, 0)
 //                        
@@ -154,7 +155,7 @@ class GroupViewController: UIViewController,UITableViewDelegate, UITableViewData
                             model.group = group
                             model.fetchLists()
 
-                                let rootView = GroupTasksView(navigationModel: navigationModel, viewModel: model, project: group , tasks: group.lists ?? [])
+                                let rootView = GroupTasksView(navigationModel: navigationModel, viewModel: model, project: group , tasks: group.tasks ?? [])
                                 let hc = UIHostingController(rootView: rootView)
                                     
                                 navigationController?.pushViewController(hc, animated: true)

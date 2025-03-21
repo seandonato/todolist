@@ -20,6 +20,7 @@ struct GroupTasksView: View{
                 Image(systemName: "chevron.left")
                 .aspectRatio(contentMode: .fit)
                 Text( "projects")
+                    .font(.custom(NTTextSyle.light.rawValue, size: 16))
             }
         }
     }
@@ -27,7 +28,7 @@ struct GroupTasksView: View{
     let navigationModel: NavigationModel
 
     @State var viewModel: GroupTasksViewModelObservable
-    @State var project: ToDoListGroup
+    @State var project: ToDoListProject
     @State var tasks: [ToDoTask]
     @State var showPopover: Bool = false
 
@@ -37,7 +38,7 @@ struct GroupTasksView: View{
             NTListHeader(headerTitle: "project:", entityName: project.name, subEntityName: "tasks:")
 
             List{
-                ForEach(viewModel.lists ?? []) { task in
+                ForEach(viewModel.tasks ?? []) { task in
                     TaskTableViewCellBasic(action: { status in
                         changeStatus(status, task)
                     }, navigateToDetailAction: { targetTask in
@@ -60,12 +61,13 @@ struct GroupTasksView: View{
                     btnBack
                 }
             })
+        .navigationBarTitle("planspark").font(.custom(NTTextSyle.light.rawValue, size: 16))
 
     }
     
     func delete(at offsets: IndexSet) {
         for index in offsets{
-            if let list = viewModel.lists?[index]{
+            if let list = viewModel.tasks?[index]{
                 viewModel.deleteList(list.uuid)
             }
         }

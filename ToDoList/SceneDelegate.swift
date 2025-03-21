@@ -6,7 +6,9 @@
 //
 
 import UIKit
+import SwiftUI
 
+@available(iOS 17.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -55,21 +57,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             UserDefaults.standard.set(true, forKey: "launchedBefore")
             let coreDataService = CoreDataService(containerName: "TaskModel")
             let coreDataManager = GroupCoreDataManager(persistentContainer: coreDataService.persistentContainer)
-            
+
             let viewModel = ListGroupViewModel()
             viewModel.coreDataManager = coreDataManager
-           // if let groups = coreDataManager.getGroups(){
-                var vc = GroupViewController(viewModel)
-                let nav = UINavigationController(rootViewController: vc)
-                self.window!.rootViewController = nav
 
-                self.window!.makeKeyAndVisible()
-                guard scene is UIWindowScene else { return }
-                guard let _ = (scene as? UIWindowScene) else { return }
+            viewModel.fetchGroups()
 
-           // }
+            let navigationModel = NavigationModel()
 
-  //      }
+            let rootView = ProjectListView( viewModel: viewModel, navigationModel: navigationModel)
+
+
+            let hc = UIHostingController(rootView: rootView)
+
+            let nav = UINavigationController(rootViewController: hc)
+
+            navigationModel.navigationController = nav
+
+
+            self.window!.rootViewController = nav
+
+            self.window!.makeKeyAndVisible()
+            guard scene is UIWindowScene else { return }
+            guard let _ = (scene as? UIWindowScene) else { return }
 
         
     }

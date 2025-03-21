@@ -16,22 +16,22 @@ import UIKit
 class GroupTasksViewModelObservable{
     
     var delegate: TaskGroupViewModelDelegate?
-    var lists: [ToDoTask]?
+    var tasks: [ToDoTask]?
     
-    var group: ToDoListGroup?
+    var group: ToDoListProject?
 
     var coreDataManager: ListCoreDataManager?
     var genCoreDataManager: CoreDataManager?
 
     init(lists: [ToDoTask]? = nil, coreDataManager: ListCoreDataManager? = nil) {
-        self.lists = lists
+        self.tasks = lists
         self.coreDataManager = coreDataManager
     }
     
     func fetchLists(){
         guard let groupID = self.group?.uuid else { return }
-        if let lists =  self.coreDataManager?.getTasksByGroup(groupID: groupID ){
-            self.lists = lists.sorted()
+        if let tasks =  self.coreDataManager?.getTasksByGroup(groupID: groupID ){
+            self.tasks = tasks.sorted()
             delegate?.didFinishFetchingData()
         }
     }
